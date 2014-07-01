@@ -1,8 +1,0 @@
-﻿<Window x:Class="Perfume.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" >
-    <Canvas x:Name="layoutCanvas">
-        
-    </Canvas>
-</Window>
