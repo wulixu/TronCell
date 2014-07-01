@@ -1,0 +1,76 @@
+﻿<Window x:Class="OpenClooVision.WpfTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OpenClooVision - WPF Test" Height="650" Width="800" WindowState="Maximized" Activated="Window_Activated">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label>Compute Device:</Label>
+            <ComboBox Name="comboBoxDevices" VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="comboBoxDevices_SelectionChanged">
+                <ComboBoxItem>(please select)</ComboBoxItem>
+            </ComboBox>
+            <CheckBox Margin="10,0,0,0" VerticalAlignment="Center" Name="checkBoxEnableWebCam" Content="Enable WebCam" Checked="checkBoxEnableWebCam_Checked" Unchecked="checkBoxEnableWebCam_Checked" />
+            <Button Margin="10,0,0,0" VerticalAlignment="Center" Name="buttonBrowse" Content="Browse..." Padding="5,0,5,0" Click="buttonBrowse_Click" />
+        </StackPanel>
+        <Grid Grid.Row="1" Background="Black">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Image Name="image1" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/OpenClooVision.WpfTest;component/Images/facestest.jpg">
+                </Image>
+                <Label Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Image Name="image2" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label2" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Image Name="image3" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label3" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Image Name="image4" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label4" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Image Name="image5" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label5" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Image Name="image6" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label6" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Image Name="image7" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label7" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Image Name="image8" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label8" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="2">
+                <Image Name="image9" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Image>
+                <Label Name="label9" HorizontalAlignment="Left" VerticalAlignment="Top" Content="? ms" Foreground="White" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
