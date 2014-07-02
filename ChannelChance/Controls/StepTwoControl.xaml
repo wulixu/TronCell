@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="ChannelChance.Controls.StepTwoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             Height="1080" Width="1920" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image Source="/ChannelChance;component/Imgs/cut.png"  Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button x:Name="btnLeft" Content="左挥手"  Width="100" Height="40" Click="btnLeft_Click" />
+        <Button x:Name="btnRight" Content="右挥手" Grid.Column="1"  Width="100" Height="40" Click="btnRight_Click"/>
+    </Grid>
+</UserControl>

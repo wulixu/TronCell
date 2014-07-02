@@ -53,6 +53,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\StepFourControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StepOneControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StepThreeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StepTwoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,6 +76,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Appconfig.cs" />
+    <Compile Include="Controls\StepFourControl.xaml.cs">
+      <DependentUpon>StepFourControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StepOneControl.xaml.cs">
+      <DependentUpon>StepOneControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StepThreeControl.xaml.cs">
+      <DependentUpon>StepThreeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StepTwoControl.xaml.cs">
+      <DependentUpon>StepTwoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -92,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\cut.png" />
+    <Resource Include="Imgs\ground.png" />
+    <Resource Include="Imgs\seesaw.png" />
+    <Resource Include="Imgs\wallpaper-IA.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
