@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ImageAnimControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StepFourControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,6 +82,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\Appconfig.cs" />
+    <Compile Include="Common\ImageHelper.cs" />
+    <Compile Include="Controls\ImageAnimControl.xaml.cs">
+      <DependentUpon>ImageAnimControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\StepFourControl.xaml.cs">
       <DependentUpon>StepFourControl.xaml</DependentUpon>
     </Compile>
