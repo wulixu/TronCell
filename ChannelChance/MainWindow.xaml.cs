@@ -22,9 +22,9 @@ namespace ChannelChance
     public partial class MainWindow : Window
     {
         StepOneControl ctrOne = new StepOneControl();
-        StepTwoControl ctrTwo = new StepTwoControl();
-        StepThreeControl ctrThree = new StepThreeControl();
-        StepFourControl ctrFour = new StepFourControl();
+        StepTwoControl ctrTwo = new StepTwoControl() { Visibility = Visibility.Collapsed };
+        StepThreeControl ctrThree = new StepThreeControl() { Visibility = Visibility.Collapsed };
+        StepFourControl ctrFour = new StepFourControl() { Visibility = Visibility.Collapsed };
 
         public MainWindow()
         {
@@ -35,17 +35,17 @@ namespace ChannelChance
             ctrOne.LayoutTransform = ctrTwo.LayoutTransform = ctrThree.LayoutTransform = ctrFour.LayoutTransform = this.LayoutTransform =
                 new ScaleTransform(SystemParameters.PrimaryScreenWidth / 1920.0d, SystemParameters.PrimaryScreenHeight / 1080d);
             layoutGrid.Children.Add(ctrOne);
+            layoutGrid.Children.Add(ctrTwo);
+            layoutGrid.Children.Add(ctrThree);
+            layoutGrid.Children.Add(ctrFour);
         }
 
         void OnSceneOver(object sender, EventArgs e)
         {
-            layoutGrid.Children.Clear();
-            if (sender is StepOneControl)
-                layoutGrid.Children.Add(ctrTwo);
-            else if (sender is StepTwoControl)
-                layoutGrid.Children.Add(ctrThree);
-            else if (sender is StepThreeControl)
-                layoutGrid.Children.Add(ctrFour);
+            ctrOne.Visibility = Visibility.Collapsed;
+            ctrTwo.Visibility = sender as StepOneControl != null ? Visibility.Visible : Visibility.Collapsed;
+            ctrThree.Visibility = sender as StepTwoControl != null ? Visibility.Visible : Visibility.Collapsed;
+            ctrFour.Visibility = sender as StepThreeControl != null ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
