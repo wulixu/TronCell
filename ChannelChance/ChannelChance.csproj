@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\EllipseAnimControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ImageAnimControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -83,6 +87,9 @@
     </Compile>
     <Compile Include="Common\Appconfig.cs" />
     <Compile Include="Common\ImageHelper.cs" />
+    <Compile Include="Controls\EllipseAnimControl.xaml.cs">
+      <DependentUpon>EllipseAnimControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageAnimControl.xaml.cs">
       <DependentUpon>ImageAnimControl.xaml</DependentUpon>
     </Compile>
