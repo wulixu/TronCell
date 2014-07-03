@@ -68,15 +68,15 @@ namespace ChannelChance.Controls
 
                 if (_isRight)
                 {
+                    _currentIndex++;
                     var currentImage = _bitmapImages[_currentIndex];
                     ElementImage.Source = currentImage;
-                    _currentIndex++;
                 }
                 else
                 {
+                    _currentIndex--;
                     var currentImage = _bitmapImages[_currentIndex];
                     ElementImage.Source = currentImage;
-                    _currentIndex--;
                 }
             }
         }
