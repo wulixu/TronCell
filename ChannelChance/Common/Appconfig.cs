@@ -23,5 +23,9 @@ namespace ChannelChance.Common
         public static readonly string II_B_MP4 = Path.Combine(Mp3Path, "II_B.mp4");
 
         public static readonly string II_A_MP4 = Path.Combine(Mp3Path, "II_A.mp4");
+
+        public static readonly string CutImagesDirName = "CutImages";
+        public static readonly string TiltImagesDirName = "TiltImages";
+        public static readonly string GroundImagesDirName = "GroundImages";
     }
 }

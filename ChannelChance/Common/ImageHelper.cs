@@ -13,7 +13,7 @@ namespace ChannelChance.Common
             List<BitmapImage> bitmapImages = new List<BitmapImage>();
             if (Directory.Exists(dir))
             {
-                var files = Directory.GetFiles(dir).OrderByDescending(x => x);
+                var files = Directory.GetFiles(dir).OrderBy(x => x);
                 foreach (var file in files)
                 {
                     var bitmapImage = LoadImage(file);

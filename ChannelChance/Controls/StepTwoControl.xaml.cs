@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using ChannelChance.Common;
 
 namespace ChannelChance.Controls
 {
@@ -20,9 +22,29 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepTwoControl : UserControl
     {
+        private DispatcherTimer timer;
         public StepTwoControl()
         {
             InitializeComponent();
+            ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
+            ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
+            ElementAnimControl.Initial(Appconfig.CutImagesDirName);
+            ElementAnimControl.PlayRightNextPage += i =>
+            {
+                OnSceneOver(this, null);
+            };
+            ElementAnimControl.PlayLeftNextPage += i =>
+            {
+                OnSceneOver(this, null);
+            };
+
+            //timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromSeconds(3);
+            //timer.Tick += (o, args) =>
+            //{
+            //    ElementAnimControl.HandUpAndDown(Hand.Right);
+            //    timer.Stop();
+            //};
         }
 
         public event EventHandler SceneOver;
@@ -34,12 +56,24 @@ namespace ChannelChance.Controls
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
         {
-            OnSceneOver(this, e);
+            for (int i = 0; i < 5; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(1);
+            }
+            // OnSceneOver(this, e);
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
         {
-            OnSceneOver(this, e);
+            //ElementAnimControl.HandUpAndDown(Hand.Right);
+            for (int i = 0; i < 5; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(1);
+            }
+
+            //timer.Start();
+
+            // OnSceneOver(this, e);
         }
     }
 }
