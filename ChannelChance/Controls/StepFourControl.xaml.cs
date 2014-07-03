@@ -38,7 +38,10 @@ namespace ChannelChance.Controls
                 MessageBox.Show("The End!");
             }
             else
+            {
+                img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
                 media.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)

@@ -30,5 +30,6 @@ namespace ChannelChance.Common
         public static readonly string CutImagesDirName = "CutImages";
         public static readonly string TiltImagesDirName = "TiltImages";
         public static readonly string GroundImagesDirName = "GroundImages";
+        public static readonly string Seesawimages = "Seesawimages";
     }
 }

@@ -74,6 +74,14 @@ namespace ChannelChance.Common
                 return _LeftHandTimes >= MaxCount || _RightHandTimes >= MaxCount;
             }
         }
+        
+        public string CurrentImg
+        {
+            get
+            {
+                return Path.Combine(Environment.CurrentDirectory, Appconfig.Seesawimages, string.Format("IV_L{0}_R{1}_{2}.png", _LeftHandTimes, _RightHandTimes, _HandDirection.ToString()));
+            }
+        }
     }
 
     public enum HandDirection
