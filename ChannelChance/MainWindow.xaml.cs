@@ -32,6 +32,7 @@ namespace ChannelChance
             ctrOne.SceneOver += OnSceneOver;
             ctrTwo.SceneOver += OnSceneOver;
             ctrThree.SceneOver += OnSceneOver;
+            ctrFour.SceneOver += OnSceneOver;
             ctrOne.LayoutTransform = ctrTwo.LayoutTransform = ctrThree.LayoutTransform = ctrFour.LayoutTransform = this.LayoutTransform =
                 new ScaleTransform(SystemParameters.PrimaryScreenWidth / 1920.0d, SystemParameters.PrimaryScreenHeight / 1080d);
             layoutGrid.Children.Add(ctrOne);
@@ -42,7 +43,7 @@ namespace ChannelChance
 
         void OnSceneOver(object sender, EventArgs e)
         {
-            ctrOne.Visibility = Visibility.Collapsed;
+            ctrOne.Visibility = sender as StepFourControl != null ? Visibility.Visible : Visibility.Collapsed;
             ctrTwo.Visibility = sender as StepOneControl != null ? Visibility.Visible : Visibility.Collapsed;
             ctrThree.Visibility = sender as StepTwoControl != null ? Visibility.Visible : Visibility.Collapsed;
             ctrFour.Visibility = sender as StepThreeControl != null ? Visibility.Visible : Visibility.Collapsed;

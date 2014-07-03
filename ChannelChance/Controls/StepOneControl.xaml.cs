@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChannelChance.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,23 +24,31 @@ namespace ChannelChance.Controls
         public StepOneControl()
         {
             InitializeComponent();
+            media.MediaEnded += OnSceneOver;
         }
 
         public event EventHandler SceneOver;
-        private void OnSceneOver(object s,EventArgs e)
+
+        private void OnSceneOver(object s, EventArgs e)
         {
             if (SceneOver != null)
-                SceneOver(s, e);
+                SceneOver(this, e);
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
         {
-            OnSceneOver(this, e);
+            ShowMedia(Appconfig.I_B_MP4);
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
         {
-            OnSceneOver(this, e);
+            ShowMedia(Appconfig.I_A_MP4);
+        }
+
+        private void ShowMedia(string mediaUri)
+        {
+            media.Visibility = Visibility.Visible;
+            media.Source = new Uri(mediaUri);
         }
     }
 }
