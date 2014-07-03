@@ -4,8 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="me">
+    <UserControl.Resources>
+        <Storyboard x:Key="sb1" FillBehavior="HoldEnd">
+            <ThicknessAnimation 
+                Storyboard.TargetName="e8"
+                Storyboard.TargetProperty="Margin"
+                From="{Binding ElementName=me, Path=From}" To="{Binding ElementName=me, Path=To}" Duration="0:0:0.2"
+                FillBehavior="HoldEnd">
+
+            </ThicknessAnimation>
+        </Storyboard>
+        <Storyboard x:Key="sb2"  Duration="0:0:4" RepeatBehavior="Forever">
+            <DoubleAnimation  Storyboard.TargetName="e8" 
+                Storyboard.TargetProperty="Opacity"
+                From="0" To="1" BeginTime="0:0:0" Duration="0:0:1"
+                >
+                <DoubleAnimation.EasingFunction>
+                    <ElasticEase EasingMode="EaseInOut"></ElasticEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation 
+                Storyboard.TargetName="e8"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0" To="364,0,0,0" BeginTime="0:0:1"  Duration="0:0:3"
+                >
+                <ThicknessAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseInOut"></CircleEase>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid.OpacityMask>
+
+                <LinearGradientBrush EndPoint="1,0.5" SpreadMethod="Reflect">
+
+                    <GradientStop Offset="0" Color="#FFFF0000"></GradientStop>
+
+                    <GradientStop Offset="1" Color="#00000000"></GradientStop>
+
+                </LinearGradientBrush>
+
+            </Grid.OpacityMask>
+
+            <StackPanel Orientation="Horizontal">
+                <Ellipse x:Name="e0" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e1" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e2" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e3" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e4" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e5" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e6" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+                <Ellipse x:Name="e7" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
+            </StackPanel>
+            <Ellipse x:Name="e8" Width="30" Height="30" Stroke="Black"  Fill="White" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+        </Grid>
     </Grid>
 </UserControl>

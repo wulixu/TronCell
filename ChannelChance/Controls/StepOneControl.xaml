@@ -16,7 +16,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--<Image Source="/ChannelChance;component/Imgs/wallpaper-IA.jpg"  Grid.ColumnSpan="2" Grid.RowSpan="2"/>-->
-        <controls:ImageAnimControl x:Name="ElementAnimControl" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <controls:ImageAnimControl x:Name="ElementAnimControl"  Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <controls:EllipseAnimControl x:Name="rightEllipseAnimControl" Grid.Row="1" Grid.Column="1"></controls:EllipseAnimControl>
+        <controls:EllipseAnimControl x:Name="leftEllipseAnimControl" Grid.Row="1" Grid.Column="0" RenderTransformOrigin="0.5,0.5">
+            <controls:EllipseAnimControl.RenderTransform>
+                <ScaleTransform ScaleX="-1" ScaleY="1"></ScaleTransform>
+            </controls:EllipseAnimControl.RenderTransform>
+        </controls:EllipseAnimControl>
         <Button x:Name="btnLeft" Content="左挥手"  Width="100" Height="40" Click="btnLeft_Click" />
         <Button x:Name="btnRight" Content="右挥手" Grid.Column="1"  Width="100" Height="40" Click="btnRight_Click"/>
     </Grid>

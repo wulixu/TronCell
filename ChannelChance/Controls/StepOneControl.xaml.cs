@@ -49,6 +49,7 @@ namespace ChannelChance.Controls
             for (int i = 0; i < 5; i++)
             {
                 ElementAnimControl.ChangeLeftIndex(1);
+                leftEllipseAnimControl.MoveToNext();
             }
         }
 
@@ -57,6 +58,7 @@ namespace ChannelChance.Controls
             for (int i = 0; i < 5; i++)
             {
                 ElementAnimControl.ChangeRightIndex(1);
+                rightEllipseAnimControl.MoveToNext();
             }
         }
     }
