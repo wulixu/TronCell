@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChannelChance.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,20 +25,23 @@ namespace ChannelChance.Controls
         public StepOneControl()
         {
             InitializeComponent();
+            media.MediaEnded += OnSceneOver;
+
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 2 };
             ElementAnimControl.RightCount = new int[5] { 2, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.TiltImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
-                OnSceneOver(this, null);
+                ShowMedia(Appconfig.I_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
-                OnSceneOver(this, null);
+                ShowMedia(Appconfig.I_B_MP4);
             };
         }
 
         public event EventHandler SceneOver;
+
         private void OnSceneOver(object s, EventArgs e)
         {
             if (SceneOver != null)
@@ -60,6 +64,12 @@ namespace ChannelChance.Controls
                 ElementAnimControl.ChangeRightIndex(1);
                 rightEllipseAnimControl.MoveToNext();
             }
+        }
+
+        private void ShowMedia(string mediaUri)
+        {
+            media.Visibility = Visibility.Visible;
+            media.Source = new Uri(mediaUri);
         }
     }
 }

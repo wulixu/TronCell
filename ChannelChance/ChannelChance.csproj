@@ -90,6 +90,7 @@
     <Compile Include="Controls\EllipseAnimControl.xaml.cs">
       <DependentUpon>EllipseAnimControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\SeesawManager.cs" />
     <Compile Include="Controls\ImageAnimControl.xaml.cs">
       <DependentUpon>ImageAnimControl.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChannelChance.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,16 +27,17 @@ namespace ChannelChance.Controls
         public StepTwoControl()
         {
             InitializeComponent();
+            media.MediaEnded += OnSceneOver;
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
-                OnSceneOver(this, null);
+                ShowMedia(Appconfig.II_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
-                OnSceneOver(this, null);
+                ShowMedia(Appconfig.II_B_MP4);
             };
 
             //timer = new DispatcherTimer();
@@ -48,10 +50,11 @@ namespace ChannelChance.Controls
         }
 
         public event EventHandler SceneOver;
+
         private void OnSceneOver(object s, EventArgs e)
         {
             if (SceneOver != null)
-                SceneOver(s, e);
+                SceneOver(this, e);
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
@@ -60,20 +63,22 @@ namespace ChannelChance.Controls
             {
                 ElementAnimControl.ChangeLeftIndex(1);
             }
-            // OnSceneOver(this, e);
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
         {
-            //ElementAnimControl.HandUpAndDown(Hand.Right);
             for (int i = 0; i < 5; i++)
             {
                 ElementAnimControl.ChangeRightIndex(1);
             }
 
             //timer.Start();
+        }
 
-            // OnSceneOver(this, e);
+        private void ShowMedia(string mediaUri)
+        {
+            media.Visibility = Visibility.Visible;
+            media.Source = new Uri(mediaUri);
         }
     }
 }

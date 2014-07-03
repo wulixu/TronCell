@@ -14,9 +14,9 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <!--<Image Source="/ChannelChance;component/Imgs/ground.png"  Grid.ColumnSpan="2" Grid.RowSpan="2"/>-->
         <controls:ImageAnimControl x:Name="ElementAnimControl" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Button x:Name="btnLeft" Content="左挥手"  Width="100" Height="40" Click="btnLeft_Click" />
-        <Button x:Name="btnRight" Content="右挥手" Grid.Column="1"  Width="100" Height="40" Click="btnRight_Click"/>
+        <Button x:Name="btnLeft" Content="左手下压"  Width="100" Height="40" Click="btnLeft_Click" />
+        <Button x:Name="btnRight" Content="右手下压" Grid.Column="1"  Width="100" Height="40" Click="btnRight_Click"/>
+        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed"/>
     </Grid>
 </UserControl>
