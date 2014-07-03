@@ -45,7 +45,7 @@ namespace ChannelChance.Controls
         private void OnSceneOver(object s, EventArgs e)
         {
             if (SceneOver != null)
-                SceneOver(s, e);
+                SceneOver(this, e);
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
