@@ -1,5 +1,4 @@
-﻿using ChannelChance.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChannelChance.Common;
 
 namespace ChannelChance.Controls
 {
@@ -25,6 +25,17 @@ namespace ChannelChance.Controls
         {
             InitializeComponent();
             media.MediaEnded += OnSceneOver;
+            ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
+            ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
+            ElementAnimControl.Initial(Appconfig.GroundImagesDirName);
+            ElementAnimControl.PlayRightNextPage += i =>
+            {
+                ShowMedia(Appconfig.III_A_MP4);
+            };
+            ElementAnimControl.PlayLeftNextPage += i =>
+            {
+                ShowMedia(Appconfig.III_B_MP4);
+            };
         }
 
         public event EventHandler SceneOver;
@@ -37,12 +48,18 @@ namespace ChannelChance.Controls
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
         {
-            ShowMedia(Appconfig.III_B_MP4);
+            for (int i = 0; i < 5; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(1);
+            }
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
         {
-            ShowMedia(Appconfig.III_A_MP4);
+            for (int i = 0; i < 5; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(1);
+            }
         }
 
         private void ShowMedia(string mediaUri)
