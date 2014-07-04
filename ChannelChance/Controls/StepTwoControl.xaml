@@ -17,14 +17,18 @@
         <controls:ImageAnimControl x:Name="ElementAnimControl" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <controls:EllipseAnimControl x:Name="rightEllipseAnimControl" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
             <controls:EllipseAnimControl.RenderTransform>
-                <RotateTransform Angle="45"></RotateTransform>
+                <TransformGroup>
+                <RotateTransform Angle="50"></RotateTransform>
+                    <TranslateTransform X="-150" Y="-450"></TranslateTransform>
+                </TransformGroup>
             </controls:EllipseAnimControl.RenderTransform>
         </controls:EllipseAnimControl>
         <controls:EllipseAnimControl x:Name="leftEllipseAnimControl" Grid.Row="1" Grid.Column="0" RenderTransformOrigin="0.5,0.5">
             <controls:EllipseAnimControl.RenderTransform>
                 <TransformGroup>
                 <ScaleTransform ScaleX="-1" ScaleY="1"></ScaleTransform>
-                    <RotateTransform Angle="-45"></RotateTransform>
+                    <RotateTransform Angle="-50"></RotateTransform>
+                    <TranslateTransform X="150" Y="-450"></TranslateTransform>
                 </TransformGroup>
             </controls:EllipseAnimControl.RenderTransform>
         </controls:EllipseAnimControl>
