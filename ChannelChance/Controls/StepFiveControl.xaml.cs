@@ -19,7 +19,7 @@ namespace ChannelChance.Controls
     /// <summary>
     /// StepFiveControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StepFiveControl : UserControl
+    public partial class StepFiveControl : UserControl, IDirectionMove
     {
         public StepFiveControl(MainWindow window)
         {
@@ -35,6 +35,7 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            _IsMediaPlaying = false;
             Window.Play();
         }
 
@@ -50,6 +51,7 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
+            _IsMediaPlaying = true;
             Window.Pause();
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
@@ -57,12 +59,49 @@ namespace ChannelChance.Controls
 
         public void Init()
         {
-            btnLeft.Visibility = imgLeft.Visibility = SeesawManager.Instance.HandDirection == HandDirection.L ? Visibility.Visible : Visibility.Collapsed;
-            btnRight.Visibility = imgRight.Visibility = SeesawManager.Instance.HandDirection == HandDirection.R ? Visibility.Visible : Visibility.Collapsed;
+            imgLeft.Visibility = SeesawManager.Instance.HandDirection == HandDirection.L ? Visibility.Visible : Visibility.Collapsed;
+            imgRight.Visibility = SeesawManager.Instance.HandDirection == HandDirection.R ? Visibility.Visible : Visibility.Collapsed;
             SeesawManager.Instance.HandDirection = HandDirection.None;
             SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
         }
 
         public MainWindow Window { get; set; }
+
+        public void LeftHandMove(int count)
+        {
+            
+        }
+
+        public void RightHandMove(int count)
+        {
+            
+        }
+
+        public void LeftHandUp(int count)
+        {
+            
+        }
+
+        public void RightHandUp(int count)
+        {
+            
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            if(count<0)
+                ShowMedia(Appconfig.V_A_MP4);
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+            if(count>0)
+                ShowMedia(Appconfig.V_B_MP4);
+        }
+        private bool _IsMediaPlaying;
+        public bool IsMediaPlaying
+        {
+            get { return _IsMediaPlaying; }
+        }
     }
 }
