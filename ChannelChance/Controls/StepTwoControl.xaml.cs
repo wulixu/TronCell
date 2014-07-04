@@ -21,7 +21,7 @@ namespace ChannelChance.Controls
     /// <summary>
     /// StepTwoControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StepTwoControl : UserControl
+    public partial class StepTwoControl : UserControl, IDirectionMove
     {
         private DispatcherTimer timer;
         public StepTwoControl()
@@ -40,13 +40,6 @@ namespace ChannelChance.Controls
                 ShowMedia(Appconfig.II_B_MP4);
             };
 
-            //timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromSeconds(3);
-            //timer.Tick += (o, args) =>
-            //{
-            //    ElementAnimControl.HandUpAndDown(Hand.Right);
-            //    timer.Stop();
-            //};
         }
 
         public event EventHandler SceneOver;
@@ -57,28 +50,38 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
         }
 
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(1);
-            }
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeRightIndex(1);
-            }
-
-            //timer.Start();
-        }
-
         private void ShowMedia(string mediaUri)
         {
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
+        }
+
+        public void LeftHandMove(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(1);
+            }
+
+        }
+
+        public void RightHandMove(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(1);
+            }
+
+        }
+
+        public void LeftHandUp(int count)
+        {
+            ElementAnimControl.HandUpAndDown(HandDirection.L);
+        }
+
+        public void RightHandUp(int count)
+        {
+            ElementAnimControl.HandUpAndDown(HandDirection.R);
         }
     }
 }

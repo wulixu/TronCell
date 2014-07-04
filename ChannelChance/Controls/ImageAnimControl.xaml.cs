@@ -149,15 +149,15 @@ namespace ChannelChance.Controls
         /// <summary>
         /// 手举起来或者放下
         /// </summary>
-        public void HandUpAndDown(Hand hand)
+        public void HandUpAndDown(HandDirection hand)
         {
             _ischanging = true;
             switch (hand)
             {
-                case Hand.Right:
+                case HandDirection.R:
                     _rightImgIndex = 0;
                     break;
-                case Hand.Left:
+                case HandDirection.L:
                     _leftImgIndex = LeftCount.Length;
                     break;
             }
@@ -184,9 +184,5 @@ namespace ChannelChance.Controls
 
     }
 
-    public enum Hand
-    {
-        Left,
-        Right
-    }
+  
 }

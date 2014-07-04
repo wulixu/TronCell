@@ -19,7 +19,7 @@ namespace ChannelChance.Controls
     /// <summary>
     /// StepThreeControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StepThreeControl : UserControl
+    public partial class StepThreeControl : UserControl, IDirectionMove
     {
         public StepThreeControl()
         {
@@ -46,26 +46,38 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
         }
 
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(1);
-            }
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeRightIndex(1);
-            }
-        }
-
         private void ShowMedia(string mediaUri)
         {
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
+        }
+
+        public void LeftHandMove(int count)
+        {
+           // ElementAnimControl.ChangeLeftIndex(1);
+        }
+
+        public void RightHandMove(int count)
+        {
+           // ElementAnimControl.ChangeRightIndex(1);
+        }
+
+        public void LeftHandUp(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(1);
+            }
+           // ElementAnimControl.HandUpAndDown(HandDirection.L);
+        }
+
+        public void RightHandUp(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(1);
+            }
+            //ElementAnimControl.HandUpAndDown(HandDirection.R);
         }
     }
 }

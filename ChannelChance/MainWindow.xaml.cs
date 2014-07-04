@@ -1,4 +1,5 @@
-﻿using ChannelChance.Controls;
+﻿using ChannelChance.Common;
+using ChannelChance.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChannelChance.Kinect;
+using Microsoft.Samples.Kinect.WpfViewers;
 
 namespace ChannelChance
 {
@@ -21,14 +24,20 @@ namespace ChannelChance
     /// </summary>
     public partial class MainWindow : Window
     {
+        KinectGestureControl gestureControl = new KinectGestureControl();
         StepOneControl ctrOne = new StepOneControl();
         StepTwoControl ctrTwo = new StepTwoControl() { Visibility = Visibility.Collapsed };
         StepThreeControl ctrThree = new StepThreeControl() { Visibility = Visibility.Collapsed };
         StepFourControl ctrFour = new StepFourControl() { Visibility = Visibility.Collapsed };
+        private List<UserControl> controls = new List<UserControl>();
+        private IDirectionMove _currentControl;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            gestureControl.OnKinectGestureDetected += gestureControl_OnKinectGestureDetected;
+
             ctrOne.SceneOver += OnSceneOver;
             ctrTwo.SceneOver += OnSceneOver;
             ctrThree.SceneOver += OnSceneOver;
@@ -39,14 +48,77 @@ namespace ChannelChance
             layoutGrid.Children.Add(ctrTwo);
             layoutGrid.Children.Add(ctrThree);
             layoutGrid.Children.Add(ctrFour);
+
+            controls.Add(ctrOne);
+            controls.Add(ctrTwo);
+            controls.Add(ctrThree);
+            controls.Add(ctrFour);
+
+            _currentControl = ctrOne;
+
+
+            //显示kinect可视窗口
+            KinectColorViewer kc = new KinectColorViewer();
+            kc.Width = 160d;
+            kc.Height = 120d;
+            kc.HorizontalAlignment = HorizontalAlignment.Right;
+            kc.VerticalAlignment = VerticalAlignment.Top;
+            kc.Margin = new Thickness(50);
+            kc.KinectSensorManager = gestureControl.KinectSensorManager;
+            this.layoutGrid.Children.Add(kc);
+        }
+        void gestureControl_OnKinectGestureDetected(object sender, KinectGestureEventArgs e)
+        {
+            if (_currentControl == null)
+                return;
+
+            switch (e.GestureType)
+            {
+                case KinectGestureType.LeftHandsUP:
+                    Console.WriteLine("LeftHandsUp:");
+                    _currentControl.LeftHandUp(e.ActionStep);
+                    break;
+                case KinectGestureType.LeftHandsMove:
+                    Console.WriteLine("LeftHandsMove Disteance:" + e.Distance);
+                    Console.WriteLine("LeftHandsMove ActionStep:" + e.ActionStep);
+                    _currentControl.LeftHandMove(e.ActionStep);
+                    break;
+                case KinectGestureType.RightHandsUP:
+                    Console.WriteLine("RightHandsUp:");
+                    _currentControl.RightHandUp(e.ActionStep);
+                    break;
+                case KinectGestureType.RightHandsMove:
+                    Console.WriteLine("RightHandsMove Disteance:" + e.Distance);
+                    Console.WriteLine("RightHandsMove ActionStep:" + e.ActionStep);
+                    _currentControl.RightHandMove(e.ActionStep);
+                    break;
+            }
         }
 
         void OnSceneOver(object sender, EventArgs e)
         {
-            ctrOne.Visibility = sender as StepFourControl != null ? Visibility.Visible : Visibility.Collapsed;
-            ctrTwo.Visibility = sender as StepOneControl != null ? Visibility.Visible : Visibility.Collapsed;
-            ctrThree.Visibility = sender as StepTwoControl != null ? Visibility.Visible : Visibility.Collapsed;
-            ctrFour.Visibility = sender as StepThreeControl != null ? Visibility.Visible : Visibility.Collapsed;
+            var userControl = sender as UserControl;
+            if (userControl != null)
+            {
+                userControl.Visibility = Visibility.Collapsed;
+                var index = controls.IndexOf(userControl);
+                index++;
+                var i = index % 4;
+                var control = controls[i];
+                control.Visibility = Visibility.Visible;
+                _currentControl = control as IDirectionMove;
+            }
+
+            //ctrOne.Visibility = sender as StepFourControl != null ? Visibility.Visible : Visibility.Collapsed;
+            //ctrTwo.Visibility = sender as StepOneControl != null ? Visibility.Visible : Visibility.Collapsed;
+            //ctrThree.Visibility = sender as StepTwoControl != null ? Visibility.Visible : Visibility.Collapsed;
+            //ctrFour.Visibility = sender as StepThreeControl != null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            gestureControl.Stop();
         }
     }
 }
