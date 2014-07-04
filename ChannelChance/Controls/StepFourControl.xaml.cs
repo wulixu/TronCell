@@ -19,7 +19,7 @@ namespace ChannelChance.Controls
     /// <summary>
     /// StepFourControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StepFourControl : UserControl
+    public partial class StepFourControl : UserControl, IDirectionMove
     {
         public StepFourControl(MainWindow window)
         {
@@ -42,23 +42,8 @@ namespace ChannelChance.Controls
                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
                 media.Visibility = Visibility.Collapsed;
             }
+            _isMediaPlaying = false;
             Window.Play();
-        }
-
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            SeesawManager.Instance.HandDirection = HandDirection.L;
-            SeesawManager.Instance.LeftHandTimes++;
-            if (SeesawManager.Instance.CanPlayMP4)
-                ShowMedia();
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            SeesawManager.Instance.HandDirection = HandDirection.R;
-            SeesawManager.Instance.RightHandTimes++;
-            if (SeesawManager.Instance.CanPlayMP4)
-                ShowMedia();
         }
 
         private void ShowMedia()
@@ -66,6 +51,50 @@ namespace ChannelChance.Controls
             Window.Pause();
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
+        }
+
+        public void LeftHandMove(int count)
+        {
+
+        }
+
+        public void RightHandMove(int count)
+        {
+
+        }
+
+        public void LeftHandUp(int count)
+        {
+            
+        }
+
+        public void RightHandUp(int count)
+        {
+           
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            _isMediaPlaying = true;
+            SeesawManager.Instance.HandDirection = HandDirection.L;
+            SeesawManager.Instance.LeftHandTimes++;
+            if (SeesawManager.Instance.CanPlayMP4)
+                ShowMedia();
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+            _isMediaPlaying = true;
+            SeesawManager.Instance.HandDirection = HandDirection.R;
+            SeesawManager.Instance.RightHandTimes++;
+            if (SeesawManager.Instance.CanPlayMP4)
+                ShowMedia();
+        }
+
+        private bool _isMediaPlaying;
+        public bool IsMediaPlaying
+        {
+            get { return _isMediaPlaying; }
         }
 
         public MainWindow Window { get; set; }

@@ -20,8 +20,10 @@ namespace ChannelChance.Controls
     /// <summary>
     /// StepOneControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StepOneControl : UserControl
+    public partial class StepOneControl : UserControl, IDirectionMove
     {
+        private bool _isMediaPlaying;
+
         public StepOneControl(MainWindow window)
         {
             InitializeComponent();
@@ -33,11 +35,13 @@ namespace ChannelChance.Controls
             ElementAnimControl.PlayRightNextPage += i =>
             {
                 window.Pause();
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.I_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
                 window.Pause();
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.I_B_MP4);
             };
         }
@@ -48,25 +52,9 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            media.Visibility = Visibility.Collapsed;
+            _isMediaPlaying = false;
             Window.Play();
-        }
-
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(1);
-                leftEllipseAnimControl.MoveToNext();
-            }
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeRightIndex(1);
-                rightEllipseAnimControl.MoveToNext();
-            }
         }
 
         private void ShowMedia(string mediaUri)
@@ -75,6 +63,52 @@ namespace ChannelChance.Controls
             media.Source = new Uri(mediaUri);
         }
 
+        public void LeftHandMove(int count)
+        {
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(Appconfig.ToRorL(count));
+                leftEllipseAnimControl.MoveToNext();
+            }
+        }
+
+        public void RightHandMove(int count)
+        {
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(Appconfig.ToRorL(count));
+                rightEllipseAnimControl.MoveToNext();
+            }
+
+        }
+
+        public void LeftHandUp(int count)
+        {
+            ElementAnimControl.HandUpAndDown(HandDirection.L);
+        }
+
         public MainWindow Window { get; set; }
+
+        public void RightHandUp(int count)
+        {
+            ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+            
+        }
+
+        public bool IsMediaPlaying
+        {
+            get { return _isMediaPlaying; }
+        }
     }
 }

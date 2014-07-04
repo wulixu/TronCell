@@ -19,7 +19,7 @@ namespace ChannelChance.Controls
     /// <summary>
     /// StepThreeControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StepThreeControl : UserControl
+    public partial class StepThreeControl : UserControl, IDirectionMove
     {
         public StepThreeControl(MainWindow window)
         {
@@ -32,11 +32,13 @@ namespace ChannelChance.Controls
             ElementAnimControl.PlayRightNextPage += i =>
             {
                 window.Pause();
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.III_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
                 window.Pause();
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.III_B_MP4);
             };
         }
@@ -47,29 +49,63 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            media.Visibility = Visibility.Collapsed;
+            _isMediaPlaying = false;
             Window.Play();
-        }
-
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(1);
-            }
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ElementAnimControl.ChangeRightIndex(1);
-            }
         }
 
         private void ShowMedia(string mediaUri)
         {
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
+        }
+
+        public void LeftHandMove(int count)
+        {
+
+        }
+
+        public void RightHandMove(int count)
+        {
+
+        }
+
+        public void LeftHandUp(int count)
+        {
+            ElementAnimControl.HandUpAndDown(HandDirection.L);
+        }
+
+        public void RightHandUp(int count)
+        {
+            ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            if (count > 0)
+                return;
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(1);
+            }
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+            if (count > 0)
+                return;
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(1);
+            }
+        }
+
+        private bool _isMediaPlaying;
+        public bool IsMediaPlaying
+        {
+            get { return _isMediaPlaying; }
         }
 
         public MainWindow Window { get; set; }

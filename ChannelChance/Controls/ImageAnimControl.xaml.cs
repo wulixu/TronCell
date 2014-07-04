@@ -51,16 +51,20 @@ namespace ChannelChance.Controls
 
                 if (count == 0)
                 {
-                    _ischanging = false;
+
                     if (_leftImgIndex == 0)
                     {
+                        _ischanging = false;
                         if (PlayLeftNextPage != null)
                             PlayLeftNextPage.Invoke(1);
+                        Reset();
                     }
                     if (_rightImgIndex == RightCount.Length)
                     {
+                        _ischanging = false;
                         if (PlayRightNextPage != null)
                             PlayRightNextPage.Invoke(1);
+                        Reset();
                     }
 
                     return;
@@ -100,24 +104,35 @@ namespace ChannelChance.Controls
         /// <param name="index"></param>
         public void ChangeRightIndex(int index)
         {
+            Console.WriteLine("ChangeRightIndex:" + index);
             if (index > 0)
             {
                 var count = _rightImgIndex + index;
                 if (count >= RightCount.Length)
                 {
-                    _rightImgIndex = count;
+                    _rightImgIndex = RightCount.Length;
                     return;
                 }
                 _rightImgIndex = count;
-                _nextIndex += RightCount[_rightImgIndex];
+                if (RightCount.Length > _rightImgIndex)
+                {
+                    _nextIndex += RightCount[_rightImgIndex];
+                }
             }
             else
             {
                 var count = _rightImgIndex + index;
                 if (count < 0)
+                {
+                    _rightImgIndex = 0;
                     return;
-                _nextIndex -= RightCount[_rightImgIndex];
-                _rightImgIndex = _rightImgIndex + index;
+                }
+                if (RightCount.Length > _rightImgIndex)
+                {
+                    _nextIndex -= RightCount[_rightImgIndex];
+                    _rightImgIndex = _rightImgIndex + index;
+                }
+
             }
             _ischanging = true;
         }
@@ -131,17 +146,31 @@ namespace ChannelChance.Controls
             {
                 var count = _leftImgIndex - index;
                 if (count < 0)
+                {
+                    _leftImgIndex = 0;
                     return;
+                }
                 _leftImgIndex = count;
-                _nextIndex -= LeftCount[_leftImgIndex];
+                if (LeftCount.Length > _leftImgIndex)
+                {
+                    _nextIndex -= LeftCount[_leftImgIndex];
+                }
+
             }
             else
             {
                 var count = _leftImgIndex - index;
                 if (count >= LeftCount.Length)
+                {
+                    _leftImgIndex = LeftCount.Length;
                     return;
+                }
                 _leftImgIndex = count;
-                _nextIndex += LeftCount[_leftImgIndex];
+                if (LeftCount.Length > _leftImgIndex)
+                {
+                    _nextIndex += LeftCount[_leftImgIndex];
+                }
+
             }
             _ischanging = true;
         }
@@ -149,15 +178,15 @@ namespace ChannelChance.Controls
         /// <summary>
         /// 手举起来或者放下
         /// </summary>
-        public void HandUpAndDown(Hand hand)
+        public void HandUpAndDown(HandDirection hand)
         {
             _ischanging = true;
             switch (hand)
             {
-                case Hand.Right:
+                case HandDirection.R:
                     _rightImgIndex = 0;
                     break;
-                case Hand.Left:
+                case HandDirection.L:
                     _leftImgIndex = LeftCount.Length;
                     break;
             }
@@ -174,6 +203,14 @@ namespace ChannelChance.Controls
             _bitmapImages.AddRange(bitmapImages);
         }
 
+        private void Reset()
+        {
+            _leftImgIndex = LeftCount.Length;
+            _rightImgIndex = 0;
+            _nextIndex = _midCount;
+        }
+
+
         public void Dispose()
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
@@ -184,9 +221,5 @@ namespace ChannelChance.Controls
 
     }
 
-    public enum Hand
-    {
-        Left,
-        Right
-    }
+
 }

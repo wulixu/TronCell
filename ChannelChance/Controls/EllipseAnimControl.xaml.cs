@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ChannelChance.Controls
 {
@@ -25,6 +26,8 @@ namespace ChannelChance.Controls
         private const double deltaX = 52d;
         private const int ellipseCount = 8;
         private int bigEllipseIndex = 0;
+        private bool isAutoComplted = true;
+        private DispatcherTimer timer = null;
         public static readonly DependencyProperty FromProperty = DependencyProperty.Register(
     "From", typeof(Thickness), typeof(EllipseAnimControl), new PropertyMetadata(new Thickness(0, 0, 0, 0)));
         public static readonly DependencyProperty ToProperty = DependencyProperty.Register(
@@ -44,22 +47,35 @@ namespace ChannelChance.Controls
         public EllipseAnimControl()
         {
             InitializeComponent();
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 10);
+            timer.Tick += timer_Tick; timer.Start();
             sbMannual = this.FindResource("sb1") as Storyboard;
             sbAuto = this.FindResource("sb2") as Storyboard;
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            BeginAutoMove();
         }
 
         public void BeginAutoMove()
         {
             sbAuto.Begin(e8, true);
+            isAutoComplted = false;
         }
         public void StopAutoMove()
         {
             sbAuto.Remove(e8);
             e8.Margin = new Thickness(0, 0, 0, 0);
             e8.Opacity = 1;
+            isAutoComplted = true;
         }
         public void MoveToLast()
         {
+            if (!isAutoComplted) StopAutoMove();
+            this.timer.Stop();
+            this.timer.Start();
             if (bigEllipseIndex <= 0) return;
             bigEllipseIndex--;
             sbMannual.Remove(e8);
@@ -70,6 +86,9 @@ namespace ChannelChance.Controls
         }
         public void MoveToNext()
         {
+            if (!isAutoComplted) StopAutoMove();
+            this.timer.Stop();
+            this.timer.Start();
             if (bigEllipseIndex >= ellipseCount - 1) return;
             bigEllipseIndex++;
             sbMannual.Remove(e8);
