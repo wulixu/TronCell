@@ -100,7 +100,11 @@ namespace ChannelChance.Controls
         public void Reset()
         {
             sbMannual.Remove(e8);
+            sbAuto.Remove(e8);
+            e8.Margin = new Thickness(0, 0, 0, 0);
+            e8.Opacity = 1;
             From = new Thickness(0, 0, 0, 0);
+            isAutoComplted = true;
         }
     }
 }
