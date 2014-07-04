@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
         <Image Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="imgLeft" Source="/ChannelChance;component/Imgs/end_A.png"/>
         <Image Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="imgRight" Source="/ChannelChance;component/Imgs/end_B.png"/>
-        <Button x:Name="btnLeft" Content="下落"  Width="100" Height="40" Click="btnLeft_Click" />
-        <Button x:Name="btnRight" Content="上升" Grid.Column="1"  Width="100" Height="40" Click="btnRight_Click"/>
+        <!--<Button x:Name="btnLeft" Content="下落"  Width="100" Height="40" Click="btnLeft_Click" />
+        <Button x:Name="btnRight" Content="上升" Grid.Column="1"  Width="100" Height="40" Click="btnRight_Click"/>-->
         <Image Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="imgCode" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="300"/>
         <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed"/>
     </Grid>
