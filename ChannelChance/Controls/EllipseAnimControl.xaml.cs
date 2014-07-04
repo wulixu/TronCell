@@ -56,7 +56,8 @@ namespace ChannelChance.Controls
 
         void timer_Tick(object sender, EventArgs e)
         {
-            BeginAutoMove();
+            if(isAutoComplted)
+                BeginAutoMove();
         }
 
         public void BeginAutoMove()
