@@ -65,6 +65,16 @@ namespace ChannelChance.Controls
 
         public void LeftHandUp(int count)
         {
+            
+        }
+
+        public void RightHandUp(int count)
+        {
+           
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
             _isMediaPlaying = true;
             SeesawManager.Instance.HandDirection = HandDirection.L;
             SeesawManager.Instance.LeftHandTimes++;
@@ -72,23 +82,13 @@ namespace ChannelChance.Controls
                 ShowMedia();
         }
 
-        public void RightHandUp(int count)
+        public void RightHandsMoveY(int count)
         {
             _isMediaPlaying = true;
             SeesawManager.Instance.HandDirection = HandDirection.R;
             SeesawManager.Instance.RightHandTimes++;
             if (SeesawManager.Instance.CanPlayMP4)
                 ShowMedia();
-        }
-
-        public void LeftHandsMoveY(int count)
-        {
-            
-        }
-
-        public void RightHandsMoveY(int count)
-        {
-            
         }
 
         private bool _isMediaPlaying;
