@@ -40,7 +40,10 @@ namespace ChannelChance.Common
         /// </summary>
         /// <param name="count"></param>
         void RightHandsMoveY(int count);
-
+        /// <summary>
+        /// 重置
+        /// </summary>
+        void Reset();
         bool IsMediaPlaying { get; }
     }
 }

@@ -126,6 +126,8 @@ namespace ChannelChance
             if (userControl != null)
             {
                 userControl.Visibility = Visibility.Collapsed;
+                var lastControl = userControl as IDirectionMove;
+                if (lastControl != null) lastControl.Reset();
                 var index = controls.IndexOf(userControl);
                 index++;
                 var i = index % 5;

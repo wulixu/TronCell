@@ -98,6 +98,10 @@ namespace ChannelChance.Controls
             if(count>0)
                 ShowMedia(Appconfig.V_B_MP4);
         }
+
+        public void Reset()
+        {
+        }
         private bool _IsMediaPlaying;
         public bool IsMediaPlaying
         {
