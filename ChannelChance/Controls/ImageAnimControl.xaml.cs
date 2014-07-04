@@ -51,14 +51,16 @@ namespace ChannelChance.Controls
 
                 if (count == 0)
                 {
-                    _ischanging = false;
+
                     if (_leftImgIndex == 0)
                     {
+                        _ischanging = false;
                         if (PlayLeftNextPage != null)
                             PlayLeftNextPage.Invoke(1);
                     }
                     if (_rightImgIndex == RightCount.Length)
                     {
+                        _ischanging = false;
                         if (PlayRightNextPage != null)
                             PlayRightNextPage.Invoke(1);
                     }
@@ -100,24 +102,35 @@ namespace ChannelChance.Controls
         /// <param name="index"></param>
         public void ChangeRightIndex(int index)
         {
+            Console.WriteLine("ChangeRightIndex:" + index);
             if (index > 0)
             {
                 var count = _rightImgIndex + index;
                 if (count >= RightCount.Length)
                 {
-                    _rightImgIndex = count;
+                    _rightImgIndex = RightCount.Length;
                     return;
                 }
                 _rightImgIndex = count;
-                _nextIndex += RightCount[_rightImgIndex];
+                if (RightCount.Length > _rightImgIndex)
+                {
+                    _nextIndex += RightCount[_rightImgIndex];
+                }
             }
             else
             {
                 var count = _rightImgIndex + index;
                 if (count < 0)
+                {
+                    _rightImgIndex = 0;
                     return;
-                _nextIndex -= RightCount[_rightImgIndex];
-                _rightImgIndex = _rightImgIndex + index;
+                }
+                if (RightCount.Length > _rightImgIndex)
+                {
+                    _nextIndex -= RightCount[_rightImgIndex];
+                    _rightImgIndex = _rightImgIndex + index;
+                }
+
             }
             _ischanging = true;
         }
@@ -131,17 +144,31 @@ namespace ChannelChance.Controls
             {
                 var count = _leftImgIndex - index;
                 if (count < 0)
+                {
+                    _leftImgIndex = 0;
                     return;
+                }
                 _leftImgIndex = count;
-                _nextIndex -= LeftCount[_leftImgIndex];
+                if (LeftCount.Length > _leftImgIndex)
+                {
+                    _nextIndex -= LeftCount[_leftImgIndex];
+                }
+
             }
             else
             {
                 var count = _leftImgIndex - index;
                 if (count >= LeftCount.Length)
+                {
+                    _leftImgIndex = LeftCount.Length;
                     return;
+                }
                 _leftImgIndex = count;
-                _nextIndex += LeftCount[_leftImgIndex];
+                if (LeftCount.Length > _leftImgIndex)
+                {
+                    _nextIndex += LeftCount[_leftImgIndex];
+                }
+
             }
             _ischanging = true;
         }
@@ -184,5 +211,5 @@ namespace ChannelChance.Controls
 
     }
 
-  
+
 }

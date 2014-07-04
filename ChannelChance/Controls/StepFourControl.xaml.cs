@@ -27,7 +27,6 @@ namespace ChannelChance.Controls
             media.MediaEnded += OnSceneOver;
         }
 
-        private bool _isMediaPalying;
         public event EventHandler SceneOver;
 
         private void OnSceneOver(object s, EventArgs e)
@@ -36,13 +35,15 @@ namespace ChannelChance.Controls
             {
                 SeesawManager.Instance.HandDirection = HandDirection.None;
                 SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
+                if (SceneOver != null)
+                    SceneOver(this, e);
             }
             else
             {
                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
                 media.Visibility = Visibility.Collapsed;
             }
-            _isMediaPalying = false;
+            _isMediaPlaying = false;
         }
 
         private void ShowMedia()
@@ -63,9 +64,7 @@ namespace ChannelChance.Controls
 
         public void LeftHandUp(int count)
         {
-            if (_isMediaPalying)
-                return;
-            _isMediaPalying = true;
+            _isMediaPlaying = true;
             SeesawManager.Instance.HandDirection = HandDirection.L;
             SeesawManager.Instance.LeftHandTimes++;
             if (SeesawManager.Instance.CanPlayMP4)
@@ -74,13 +73,17 @@ namespace ChannelChance.Controls
 
         public void RightHandUp(int count)
         {
-            if (_isMediaPalying)
-                return;
-            _isMediaPalying = true;
+            _isMediaPlaying = true;
             SeesawManager.Instance.HandDirection = HandDirection.R;
             SeesawManager.Instance.RightHandTimes++;
             if (SeesawManager.Instance.CanPlayMP4)
                 ShowMedia();
+        }
+
+        private bool _isMediaPlaying;
+        public bool IsMediaPlaying
+        {
+            get { return _isMediaPlaying; }
         }
     }
 }

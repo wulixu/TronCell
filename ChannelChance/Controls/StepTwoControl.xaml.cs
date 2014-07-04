@@ -23,7 +23,7 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepTwoControl : UserControl, IDirectionMove
     {
-        private DispatcherTimer timer;
+        private bool _isMediaPlaying;
         public StepTwoControl()
         {
             InitializeComponent();
@@ -33,10 +33,12 @@ namespace ChannelChance.Controls
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.II_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.II_B_MP4);
             };
 
@@ -48,6 +50,7 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            _isMediaPlaying = false;
         }
 
         private void ShowMedia(string mediaUri)
@@ -58,18 +61,20 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
-            for (int i = 0; i < count; i++)
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
             {
-                ElementAnimControl.ChangeLeftIndex(1);
+                ElementAnimControl.ChangeLeftIndex(Appconfig.ToRorL(count));
             }
 
         }
 
         public void RightHandMove(int count)
         {
-            for (int i = 0; i < count; i++)
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
             {
-                ElementAnimControl.ChangeRightIndex(1);
+                ElementAnimControl.ChangeRightIndex(Appconfig.ToRorL(count));
             }
 
         }
@@ -82,6 +87,11 @@ namespace ChannelChance.Controls
         public void RightHandUp(int count)
         {
             ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        public bool IsMediaPlaying
+        {
+            get { return _isMediaPlaying; }
         }
     }
 }

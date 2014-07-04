@@ -69,13 +69,13 @@ namespace ChannelChance
         }
         void gestureControl_OnKinectGestureDetected(object sender, KinectGestureEventArgs e)
         {
-            if (_currentControl == null)
+            if (_currentControl == null || _currentControl.IsMediaPlaying)
                 return;
 
             switch (e.GestureType)
             {
                 case KinectGestureType.LeftHandsUP:
-                    Console.WriteLine("LeftHandsUp:");
+                    Console.WriteLine("LeftHandsUp ActionStep:" + e.ActionStep);
                     _currentControl.LeftHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.LeftHandsMove:
@@ -84,7 +84,7 @@ namespace ChannelChance
                     _currentControl.LeftHandMove(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsUP:
-                    Console.WriteLine("RightHandsUp:");
+                    Console.WriteLine("RightHandsUp ActionStep:" + e.ActionStep);
                     _currentControl.RightHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsMove:

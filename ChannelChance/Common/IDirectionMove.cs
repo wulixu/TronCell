@@ -30,5 +30,7 @@ namespace ChannelChance.Common
         /// </summary>
         /// <param name="count"></param>
         void RightHandUp(int count);
+
+        bool IsMediaPlaying { get; }
     }
 }
