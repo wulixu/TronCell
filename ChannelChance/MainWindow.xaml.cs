@@ -79,18 +79,24 @@ namespace ChannelChance
                     _currentControl.LeftHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.LeftHandsMove:
-                    Console.WriteLine("LeftHandsMove Disteance:" + e.Distance);
                     Console.WriteLine("LeftHandsMove ActionStep:" + e.ActionStep);
                     _currentControl.LeftHandMove(e.ActionStep);
+                    break;
+                case KinectGestureType.LeftHandsMoveY:
+                    Console.WriteLine("LeftHandsMoveY " + e.ActionStep);
+                    _currentControl.LeftHandsMoveY(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsUP:
                     Console.WriteLine("RightHandsUp ActionStep:" + e.ActionStep);
                     _currentControl.RightHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsMove:
-                    Console.WriteLine("RightHandsMove Disteance:" + e.Distance);
                     Console.WriteLine("RightHandsMove ActionStep:" + e.ActionStep);
                     _currentControl.RightHandMove(e.ActionStep);
+                    break;
+                case KinectGestureType.RightHandsMoveY:
+                    Console.WriteLine("RightHandsMoveY " + e.ActionStep);
+                    _currentControl.RightHandsMoveY(e.ActionStep);
                     break;
             }
         }
@@ -107,12 +113,9 @@ namespace ChannelChance
                 var control = controls[i];
                 control.Visibility = Visibility.Visible;
                 _currentControl = control as IDirectionMove;
+                Console.WriteLine("NextPage:" + i);
             }
-
-            //ctrOne.Visibility = sender as StepFourControl != null ? Visibility.Visible : Visibility.Collapsed;
-            //ctrTwo.Visibility = sender as StepOneControl != null ? Visibility.Visible : Visibility.Collapsed;
-            //ctrThree.Visibility = sender as StepTwoControl != null ? Visibility.Visible : Visibility.Collapsed;
-            //ctrFour.Visibility = sender as StepThreeControl != null ? Visibility.Visible : Visibility.Collapsed;
+            
         }
 
         protected override void OnClosed(EventArgs e)

@@ -46,6 +46,7 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            media.Visibility = Visibility.Collapsed;
             _isMediaPlaying = false;
         }
 
@@ -57,35 +58,46 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
-           // ElementAnimControl.ChangeLeftIndex(1);
+
         }
 
         public void RightHandMove(int count)
         {
-           // ElementAnimControl.ChangeRightIndex(1);
+
         }
 
         public void LeftHandUp(int count)
         {
-            count = 5;
-            var length = Math.Abs(count);
-            for (int i = 0; i < length; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(Appconfig.ToRorL(count));
-            }
-           // ElementAnimControl.HandUpAndDown(HandDirection.L);
+            ElementAnimControl.HandUpAndDown(HandDirection.L);
         }
 
         public void RightHandUp(int count)
         {
-            count = 5;
+            ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            if (count > 0)
+                return;
             var length = Math.Abs(count);
             for (int i = 0; i < length; i++)
             {
-                ElementAnimControl.ChangeRightIndex(Appconfig.ToRorL(count));
+                ElementAnimControl.ChangeLeftIndex(1);
             }
-            //ElementAnimControl.HandUpAndDown(HandDirection.R);
         }
+
+        public void RightHandsMoveY(int count)
+        {
+            if (count > 0)
+                return;
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(1);
+            }
+        }
+
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {

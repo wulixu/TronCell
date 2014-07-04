@@ -37,6 +37,7 @@ namespace ChannelChance.Controls
                 SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
                 if (SceneOver != null)
                     SceneOver(this, e);
+                media.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -78,6 +79,16 @@ namespace ChannelChance.Controls
             SeesawManager.Instance.RightHandTimes++;
             if (SeesawManager.Instance.CanPlayMP4)
                 ShowMedia();
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+            
         }
 
         private bool _isMediaPlaying;

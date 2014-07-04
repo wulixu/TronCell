@@ -50,6 +50,7 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            media.Visibility = Visibility.Collapsed;
             _isMediaPlaying = false;
         }
 
@@ -87,6 +88,16 @@ namespace ChannelChance.Controls
         public void RightHandUp(int count)
         {
             ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+          
         }
 
         public bool IsMediaPlaying
