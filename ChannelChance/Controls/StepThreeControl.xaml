@@ -19,7 +19,7 @@
             <controls:EllipseAnimControl.RenderTransform>
                 <TransformGroup>
                     <RotateTransform Angle="90"></RotateTransform>
-                    <TranslateTransform Y="400"></TranslateTransform>
+                    <TranslateTransform Y="300" X="60"></TranslateTransform>
                 </TransformGroup>
             </controls:EllipseAnimControl.RenderTransform>
         </controls:EllipseAnimControl>
@@ -28,7 +28,7 @@
                 <TransformGroup>
                 <ScaleTransform ScaleX="-1" ScaleY="1"></ScaleTransform>
                     <RotateTransform Angle="-90"></RotateTransform>
-                    <TranslateTransform Y="400"></TranslateTransform>
+                    <TranslateTransform Y="300"  X="60"></TranslateTransform>
                 </TransformGroup>
             </controls:EllipseAnimControl.RenderTransform>
         </controls:EllipseAnimControl>
