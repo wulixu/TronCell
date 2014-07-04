@@ -24,21 +24,23 @@ namespace ChannelChance.Controls
     {
         private bool _isMediaPlaying;
 
-        public StepOneControl()
+        public StepOneControl(MainWindow window)
         {
             InitializeComponent();
             media.MediaEnded += OnSceneOver;
-
+            Window = window;
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 2 };
             ElementAnimControl.RightCount = new int[5] { 2, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.TiltImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                window.Pause();
                 _isMediaPlaying = true;
                 ShowMedia(Appconfig.I_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                window.Pause();
                 _isMediaPlaying = true;
                 ShowMedia(Appconfig.I_B_MP4);
             };
@@ -52,6 +54,7 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
             media.Visibility = Visibility.Collapsed;
             _isMediaPlaying = false;
+            Window.Play();
         }
 
         private void ShowMedia(string mediaUri)
@@ -93,6 +96,8 @@ namespace ChannelChance.Controls
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
         }
+
+        public MainWindow Window { get; set; }
 
         public void RightHandUp(int count)
         {

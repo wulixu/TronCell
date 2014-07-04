@@ -24,20 +24,23 @@ namespace ChannelChance.Controls
     public partial class StepTwoControl : UserControl, IDirectionMove
     {
         private bool _isMediaPlaying;
-        public StepTwoControl()
+        public StepTwoControl(MainWindow window)
         {
             InitializeComponent();
+            Window = window;
             media.MediaEnded += OnSceneOver;
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                window.Pause();
                 _isMediaPlaying = true;
                 ShowMedia(Appconfig.II_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                window.Pause();
                 _isMediaPlaying = true;
                 ShowMedia(Appconfig.II_B_MP4);
             };
@@ -52,6 +55,7 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
             media.Visibility = Visibility.Collapsed;
             _isMediaPlaying = false;
+            Window.Play();
         }
 
         private void ShowMedia(string mediaUri)
@@ -84,6 +88,8 @@ namespace ChannelChance.Controls
         {
             ElementAnimControl.HandUpAndDown(HandDirection.L);
         }
+
+        public MainWindow Window { get; set; }
 
         public void RightHandUp(int count)
         {

@@ -21,20 +21,23 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepThreeControl : UserControl, IDirectionMove
     {
-        public StepThreeControl()
+        public StepThreeControl(MainWindow window)
         {
             InitializeComponent();
             media.MediaEnded += OnSceneOver;
+            Window = window;
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.GroundImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                window.Pause();
                 _isMediaPlaying = true;
                 ShowMedia(Appconfig.III_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                window.Pause();
                 _isMediaPlaying = true;
                 ShowMedia(Appconfig.III_B_MP4);
             };
@@ -48,6 +51,7 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
             media.Visibility = Visibility.Collapsed;
             _isMediaPlaying = false;
+            Window.Play();
         }
 
         private void ShowMedia(string mediaUri)
@@ -103,5 +107,7 @@ namespace ChannelChance.Controls
         {
             get { return _isMediaPlaying; }
         }
+
+        public MainWindow Window { get; set; }
     }
 }
