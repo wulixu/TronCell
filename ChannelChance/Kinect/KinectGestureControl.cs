@@ -88,8 +88,8 @@ namespace ChannelChance.Kinect
 
 
         #region Kinect Skeleton processing
-        float stepDistance = 0.03f;//每次操作的1个单位
-        float minDistance = 1.5f;//人离kinect最近距离
+        float stepDistance = 0.05f;//每次操作的1个单位
+        float minDistance = 1.3f;//人离kinect最近距离
 
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
         {
