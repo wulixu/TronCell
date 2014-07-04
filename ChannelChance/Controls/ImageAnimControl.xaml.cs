@@ -208,6 +208,7 @@ namespace ChannelChance.Controls
             _leftImgIndex = LeftCount.Length;
             _rightImgIndex = 0;
             _nextIndex = _midCount;
+            ElementImage.Source = _bitmapImages[_midCount];
         }
 
 
