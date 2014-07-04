@@ -73,8 +73,8 @@ namespace ChannelChance
             controls.Add(ctrThree);
             controls.Add(ctrFour);
             controls.Add(ctrFive);
-            _currentControl = ctrOne;
 
+            _currentControl = ctrOne;
 
             //显示kinect可视窗口
             KinectColorViewer kc = new KinectColorViewer();
@@ -128,7 +128,7 @@ namespace ChannelChance
                 userControl.Visibility = Visibility.Collapsed;
                 var index = controls.IndexOf(userControl);
                 index++;
-                var i = index % 4;
+                var i = index % 5;
                 var control = controls[i];
                 control.Visibility = Visibility.Visible;
                 _currentControl = control as IDirectionMove;
