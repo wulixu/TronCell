@@ -92,10 +92,7 @@ namespace ChannelChance.Controls
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeLeftIndex(1);
-                if (count > 0)
-                    leftEllipseAnimControl.MoveToNext();
-                else
-                    leftEllipseAnimControl.MoveToLast();
+                leftEllipseAnimControl.MoveToNext();
             }
         }
 
@@ -107,10 +104,7 @@ namespace ChannelChance.Controls
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeRightIndex(1);
-                if (count > 0)
-                    rightEllipseAnimControl.MoveToNext();
-                else
-                    rightEllipseAnimControl.MoveToLast();
+                rightEllipseAnimControl.MoveToNext();
             }
         }
 
