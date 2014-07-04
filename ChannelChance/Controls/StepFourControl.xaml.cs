@@ -21,9 +21,10 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepFourControl : UserControl
     {
-        public StepFourControl()
+        public StepFourControl(MainWindow window)
         {
             InitializeComponent();
+            Window = window;
             media.MediaEnded += OnSceneOver;
         }
 
@@ -33,15 +34,15 @@ namespace ChannelChance.Controls
         {
             if (SeesawManager.Instance.IsFinish)
             {
-                SeesawManager.Instance.HandDirection = HandDirection.None;
-                SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
-                MessageBox.Show("The End!");
+                if (SceneOver != null)
+                    SceneOver(this, e);
             }
             else
             {
                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
                 media.Visibility = Visibility.Collapsed;
             }
+            Window.Play();
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
@@ -62,8 +63,11 @@ namespace ChannelChance.Controls
 
         private void ShowMedia()
         {
+            Window.Pause();
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
         }
+
+        public MainWindow Window { get; set; }
     }
 }

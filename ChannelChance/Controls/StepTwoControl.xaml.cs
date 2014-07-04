@@ -24,19 +24,22 @@ namespace ChannelChance.Controls
     public partial class StepTwoControl : UserControl
     {
         private DispatcherTimer timer;
-        public StepTwoControl()
+        public StepTwoControl(MainWindow window)
         {
             InitializeComponent();
+            Window = window;
             media.MediaEnded += OnSceneOver;
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                window.Pause();
                 ShowMedia(Appconfig.II_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                window.Pause();
                 ShowMedia(Appconfig.II_B_MP4);
             };
 
@@ -55,6 +58,7 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            Window.Play();
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
@@ -80,5 +84,7 @@ namespace ChannelChance.Controls
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
         }
+
+        public MainWindow Window { get; set; }
     }
 }
