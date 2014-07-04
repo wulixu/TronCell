@@ -18,15 +18,15 @@ namespace ChannelChance.Kinect
 
             if (nowJoints != null && startJoints != null)
             {
-                JointData startHandLeft = startJoints.HandLeft;
-                JointData nowHandLeft = nowJoints.HandLeft;
+                JointData startHand = startJoints.HandRight;
+                JointData nowHand = nowJoints.HandRight;
 
-                if (startHandLeft.TrackingState == JointTrackingState.Tracked &&
-                    nowHandLeft.TrackingState == JointTrackingState.Tracked &&
-                    nowHandLeft.Z > base.PlayerZDistance &&
-                    Math.Abs(nowHandLeft.Y - startHandLeft.Y) > base.GestureGateDistance)
+                if (startHand.TrackingState == JointTrackingState.Tracked &&
+                    nowHand.TrackingState == JointTrackingState.Tracked &&
+                    nowHand.Z > base.PlayerZDistance &&
+                    Math.Abs(nowHand.Y - startHand.Y) > base.GestureGateDistance)
                 {
-                    base.GestureDistance = nowHandLeft.Y - startHandLeft.Y;
+                    base.GestureDistance = nowHand.Y - startHand.Y;
                     PlayerJoints.Clear();
                     return true;
 
