@@ -17,9 +17,14 @@ namespace ChannelChance.Kinect
 
     public enum KinectGestureType
     {
+        //状态
         RightHandsUP,
         LeftHandsUP,
+
+        //具体move
         RightHandsMove,
-        LeftHandsMove
+        LeftHandsMove,
+        RightHandsMoveY,
+        LeftHandsMoveY
     }
 }
