@@ -90,11 +90,15 @@ namespace ChannelChance.Controls
         public void LeftHandUp(int count)
         {
             ElementAnimControl.HandUpAndDown(HandDirection.L);
+            rightEllipseAnimControl.Reset();
+            leftEllipseAnimControl.Reset();
         }
 
         public void RightHandUp(int count)
         {
             ElementAnimControl.HandUpAndDown(HandDirection.R);
+            rightEllipseAnimControl.Reset();
+            leftEllipseAnimControl.Reset();
         }
 
         public void LeftHandsMoveY(int count)
