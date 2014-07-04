@@ -21,9 +21,10 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepFourControl : UserControl, IDirectionMove
     {
-        public StepFourControl()
+        public StepFourControl(MainWindow window)
         {
             InitializeComponent();
+            Window = window;
             media.MediaEnded += OnSceneOver;
         }
 
@@ -33,11 +34,8 @@ namespace ChannelChance.Controls
         {
             if (SeesawManager.Instance.IsFinish)
             {
-                SeesawManager.Instance.HandDirection = HandDirection.None;
-                SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
                 if (SceneOver != null)
                     SceneOver(this, e);
-                media.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -45,10 +43,12 @@ namespace ChannelChance.Controls
                 media.Visibility = Visibility.Collapsed;
             }
             _isMediaPlaying = false;
+            Window.Play();
         }
 
         private void ShowMedia()
         {
+            Window.Pause();
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
         }
@@ -96,5 +96,7 @@ namespace ChannelChance.Controls
         {
             get { return _isMediaPlaying; }
         }
+
+        public MainWindow Window { get; set; }
     }
 }

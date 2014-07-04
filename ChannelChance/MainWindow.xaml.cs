@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using ChannelChance.Kinect;
 using Microsoft.Samples.Kinect.WpfViewers;
 
@@ -24,17 +25,33 @@ namespace ChannelChance
     /// </summary>
     public partial class MainWindow : Window
     {
+        StepOneControl ctrOne = null;
+        StepTwoControl ctrTwo = null;
+        StepThreeControl ctrThree = null;
+        StepFourControl ctrFour = null;
+        StepFiveControl ctrFive = null;
         KinectGestureControl gestureControl = new KinectGestureControl();
-        StepOneControl ctrOne = new StepOneControl();
-        StepTwoControl ctrTwo = new StepTwoControl() { Visibility = Visibility.Collapsed };
-        StepThreeControl ctrThree = new StepThreeControl() { Visibility = Visibility.Collapsed };
-        StepFourControl ctrFour = new StepFourControl() { Visibility = Visibility.Collapsed };
         private List<UserControl> controls = new List<UserControl>();
         private IDirectionMove _currentControl;
 
         public MainWindow()
         {
             InitializeComponent();
+            ctrOne = new StepOneControl(this);
+            ctrTwo = new StepTwoControl(this) { Visibility = Visibility.Collapsed };
+            ctrThree = new StepThreeControl(this) { Visibility = Visibility.Collapsed };
+            ctrFour = new StepFourControl(this) { Visibility = Visibility.Collapsed };
+            ctrFive = new StepFiveControl(this) { Visibility = Visibility.Collapsed };
+            media.MediaEnded += (s, e) =>
+            {
+                media.Source = new Uri(Appconfig.MP3);
+                media.Play();
+            };
+            this.Loaded += (s, e) =>
+            {
+                media.Source = new Uri(Appconfig.MP3);
+                media.Play();
+            };
 
             gestureControl.OnKinectGestureDetected += gestureControl_OnKinectGestureDetected;
 
@@ -42,18 +59,20 @@ namespace ChannelChance
             ctrTwo.SceneOver += OnSceneOver;
             ctrThree.SceneOver += OnSceneOver;
             ctrFour.SceneOver += OnSceneOver;
-            ctrOne.LayoutTransform = ctrTwo.LayoutTransform = ctrThree.LayoutTransform = ctrFour.LayoutTransform = this.LayoutTransform =
+            ctrFive.SceneOver += OnSceneOver;
+            ctrOne.LayoutTransform = ctrTwo.LayoutTransform = ctrThree.LayoutTransform = ctrFour.LayoutTransform = ctrFive.LayoutTransform = this.LayoutTransform =
                 new ScaleTransform(SystemParameters.PrimaryScreenWidth / 1920.0d, SystemParameters.PrimaryScreenHeight / 1080d);
             layoutGrid.Children.Add(ctrOne);
             layoutGrid.Children.Add(ctrTwo);
             layoutGrid.Children.Add(ctrThree);
             layoutGrid.Children.Add(ctrFour);
+            layoutGrid.Children.Add(ctrFive);
 
             controls.Add(ctrOne);
             controls.Add(ctrTwo);
             controls.Add(ctrThree);
             controls.Add(ctrFour);
-
+            controls.Add(ctrFive);
             _currentControl = ctrOne;
 
 
@@ -113,10 +132,22 @@ namespace ChannelChance
                 var control = controls[i];
                 control.Visibility = Visibility.Visible;
                 _currentControl = control as IDirectionMove;
+                if (sender as StepFourControl != null)
+                    ctrFive.Init();
                 Console.WriteLine("NextPage:" + i);
             }
-            
         }
+
+        public void Pause()
+        {
+            media.Pause();
+        }
+
+        public void Play()
+        {
+            media.Play();
+        }
+       
 
         protected override void OnClosed(EventArgs e)
         {

@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\StepFiveControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StepFourControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +105,9 @@
     <Compile Include="Common\SeesawManager.cs" />
     <Compile Include="Controls\ImageAnimControl.xaml.cs">
       <DependentUpon>ImageAnimControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StepFiveControl.xaml.cs">
+      <DependentUpon>StepFiveControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StepFourControl.xaml.cs">
       <DependentUpon>StepFourControl.xaml</DependentUpon>
@@ -154,6 +161,10 @@
     <Resource Include="Imgs\ground.png" />
     <Resource Include="Imgs\seesaw.png" />
     <Resource Include="Imgs\wallpaper-IA.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\end_A.png" />
+    <Resource Include="Imgs\end_B.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
