@@ -12,9 +12,7 @@ namespace KinectChannel
         {
             this.TrackedId = skeleton.TrackingId;
             this.TimeStamp = DateTime.Now;
-            CurrentArmJoints = new ArmJoints(skeleton);
-            LastFrameArmJoints = new ArmJoints(skeleton);
-
+            this.PlayerJoints = new List<PlayerJoints>();
             this.Z = skeleton.Position.Z;
         }
 
@@ -26,14 +24,9 @@ namespace KinectChannel
         public float Z { get; set; }
 
         /// <summary>
-        /// 上一Frame的几个重要关节数据
+        /// Player的几个重要关节数据
         /// </summary>
-        public ArmJoints LastFrameArmJoints { get; set; }
-
-        /// <summary>
-        /// 当前Frame的几个重要关节数据
-        /// </summary>
-        public ArmJoints CurrentArmJoints { get; set; }
+        public List<PlayerJoints> PlayerJoints { get; set; }
 
         private DateTime TimeStamp { get; set; }
 
@@ -44,47 +37,27 @@ namespace KinectChannel
             { return (DateTime.Now.Subtract(this.TimeStamp).Milliseconds < 300); }
         }
 
-        public void UpdateSketon(Skeleton skeleton)
+        public void AddSketon(Skeleton skeleton)
         {
-            //this.LastFrameArmJoints = CurrentArmJoints.Clone() as ArmJoints;
-
-            this.LastFrameArmJoints.ElbowLeft.X = this.CurrentArmJoints.ElbowLeft.X;
-            this.LastFrameArmJoints.ElbowLeft.Y = this.CurrentArmJoints.ElbowLeft.Y;
-            this.LastFrameArmJoints.ElbowLeft.Z = this.CurrentArmJoints.ElbowLeft.Z;
-            this.LastFrameArmJoints.ElbowLeft.TrackingState = this.CurrentArmJoints.ElbowLeft.TrackingState;
-
-            this.LastFrameArmJoints.ElbowRight.X = this.CurrentArmJoints.ElbowRight.X;
-            this.LastFrameArmJoints.ElbowRight.Y = this.CurrentArmJoints.ElbowRight.Y;
-            this.LastFrameArmJoints.ElbowRight.Z = this.CurrentArmJoints.ElbowRight.Z;
-            this.LastFrameArmJoints.ElbowRight.TrackingState = this.CurrentArmJoints.ElbowRight.TrackingState;
-
-            this.LastFrameArmJoints.HandRight.X = this.CurrentArmJoints.HandRight.X;
-            this.LastFrameArmJoints.HandRight.Y = this.CurrentArmJoints.HandRight.Y;
-            this.LastFrameArmJoints.HandRight.Z = this.CurrentArmJoints.HandRight.Z;
-            this.LastFrameArmJoints.HandRight.TrackingState = this.CurrentArmJoints.HandRight.TrackingState;
-
-            this.LastFrameArmJoints.HandLeft.X = this.CurrentArmJoints.HandLeft.X;
-            this.LastFrameArmJoints.HandLeft.Y = this.CurrentArmJoints.HandLeft.Y;
-            this.LastFrameArmJoints.HandLeft.Z = this.CurrentArmJoints.HandLeft.Z;
-            this.LastFrameArmJoints.HandLeft.TrackingState = this.CurrentArmJoints.HandLeft.TrackingState;
-
-
-            this.CurrentArmJoints = new ArmJoints(skeleton);
-
+            this.PlayerJoints.Add(new PlayerJoints(skeleton));
             this.TimeStamp = DateTime.Now;
+            if (PlayerJoints.Count > 30)
+            {
+                PlayerJoints jointsToRemove = PlayerJoints[0];
+                PlayerJoints.Remove(jointsToRemove);
+            }
         }
     }
 
-    public class ArmJoints : ICloneable
+    public class PlayerJoints
     {
-        private ArmJoints() { }
-
-        public ArmJoints(Skeleton skeleton)
+        public PlayerJoints(Skeleton skeleton)
         {
             this.HandLeft = new JointData(skeleton.Joints[JointType.HandLeft]);
             this.HandRight = new JointData(skeleton.Joints[JointType.HandRight]);
             this.ElbowLeft = new JointData(skeleton.Joints[JointType.ElbowLeft]);
             this.ElbowRight = new JointData(skeleton.Joints[JointType.ElbowRight]);
+            this.TimeStamp = DateTime.Now;
         }
 
         public JointData HandRight { get; set; }
@@ -92,23 +65,11 @@ namespace KinectChannel
 
         public JointData ElbowRight { get; set; }
         public JointData ElbowLeft { get; set; }
-
-        public object Clone()
-        {
-            ArmJoints armJoints = new ArmJoints();
-            armJoints.HandLeft = this.HandLeft.Clone() as JointData;
-            armJoints.HandRight = this.HandRight.Clone() as JointData;
-            armJoints.ElbowLeft = this.ElbowLeft.Clone() as JointData;
-            armJoints.ElbowRight = this.ElbowRight.Clone() as JointData;
-
-            return armJoints;
-        }
+        public DateTime TimeStamp { get; set; }
     }
 
-    public class JointData : ICloneable
+    public class JointData
     {
-        private JointData() { }
-
         public JointData(Joint joint)
         {
             this.X = joint.Position.X;
@@ -123,14 +84,5 @@ namespace KinectChannel
 
         public JointTrackingState TrackingState { get; set; }
 
-        public object Clone()
-        {
-            JointData jointData = new JointData();
-            jointData.X = this.X;
-            jointData.Y = this.Y;
-            jointData.Z = this.Z;
-            jointData.TrackingState = this.TrackingState;
-            return jointData;
-        }
     }
 }

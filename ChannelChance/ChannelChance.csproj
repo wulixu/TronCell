@@ -121,6 +121,13 @@
     <Compile Include="Controls\StepTwoControl.xaml.cs">
       <DependentUpon>StepTwoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Kinect\GestureDetectorBase.cs" />
+    <Compile Include="Kinect\HandLSweepXDetector.cs" />
+    <Compile Include="Kinect\HandLSweepYDetector.cs" />
+    <Compile Include="Kinect\HandRSweepXDetector.cs" />
+    <Compile Include="Kinect\HandRSweepYDecector.cs" />
+    <Compile Include="Kinect\HandsLUPDetector.cs" />
+    <Compile Include="Kinect\HandsRUPDetector.cs" />
     <Compile Include="Kinect\KinectGestureControl.cs" />
     <Compile Include="Kinect\KinectGestureEventArgs.cs" />
     <Compile Include="Kinect\KinectPlayer.cs" />
