@@ -102,6 +102,12 @@ namespace ChannelChance.Controls
             }
         }
 
+        public void Reset()
+        {
+            ElementAnimControl.Reset();
+        }
+
+
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {

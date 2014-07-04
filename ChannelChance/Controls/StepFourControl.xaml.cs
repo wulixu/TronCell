@@ -90,6 +90,9 @@ namespace ChannelChance.Controls
             if (SeesawManager.Instance.CanPlayMP4)
                 ShowMedia();
         }
+        public void Reset()
+        {
+        }
 
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
