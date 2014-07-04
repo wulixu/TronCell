@@ -88,8 +88,11 @@ namespace ChannelChance.Kinect
 
 
         #region Kinect Skeleton processing
-        float stepDistance = 0.05f;//每次操作的1个单位
-        float minDistance = 1.3f;//人离kinect最近距离
+
+        HandRSweepXDetector handRSweepXDetector = new HandRSweepXDetector();
+        HandRSweepYDecector handRSweepYDecector = new HandRSweepYDecector();
+        HandLSweepXDetector handLSweepXDetector = new HandLSweepXDetector();
+        HandLSweepYDetector handLSweepYDetector = new HandLSweepYDetector();
 
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
         {
@@ -109,16 +112,19 @@ namespace ChannelChance.Kinect
                     {
                         if (SkeletonTrackingState.Tracked == sskeleton.TrackingState)
                         {
-                            KinectPlayer pplayer;
-                            if (this.players.ContainsKey(sskeleton.TrackingId))
+                            if (sskeleton.Joints.Count > 0)
                             {
-                                pplayer = this.players[sskeleton.TrackingId];
-                                pplayer.UpdateSketon(sskeleton);
-                            }
-                            else
-                            {
-                                pplayer = new KinectPlayer(sskeleton);
-                                this.players.Add(sskeleton.TrackingId, pplayer);
+                                KinectPlayer pplayer;
+                                if (this.players.ContainsKey(sskeleton.TrackingId))
+                                {
+                                    pplayer = this.players[sskeleton.TrackingId];
+                                }
+                                else
+                                {
+                                    pplayer = new KinectPlayer(sskeleton);
+                                    this.players.Add(sskeleton.TrackingId, pplayer);
+                                }
+                                pplayer.AddSketon(sskeleton);
                             }
                         }
                     }
@@ -130,113 +136,54 @@ namespace ChannelChance.Kinect
                         {
                             continue;
                         }
-                        JointData lastHandRight = p.LastFrameArmJoints.HandRight;
-                        JointData lastHandLeft = p.LastFrameArmJoints.HandLeft;
-                        JointData lastElbowRight = p.LastFrameArmJoints.ElbowRight;
-                        JointData lastElbowLeft = p.LastFrameArmJoints.ElbowLeft;
-
-                        JointData nowHandRight = p.CurrentArmJoints.HandRight;
-                        JointData nowHandLeft = p.CurrentArmJoints.HandLeft;
-                        JointData nowElbowRight = p.CurrentArmJoints.ElbowRight;
-                        JointData nowElbowLeft = p.CurrentArmJoints.ElbowLeft;
-
-                        //right hand up
-                        if (lastHandRight.TrackingState == JointTrackingState.Tracked &&
-                            lastElbowRight.TrackingState == JointTrackingState.Tracked &&
-                            nowHandRight.TrackingState == JointTrackingState.Tracked &&
-                            nowElbowRight.TrackingState == JointTrackingState.Tracked &&
-                            lastHandRight.Y < lastElbowRight.Y && 
-                            nowHandRight.Y > nowElbowRight.Y
-                            && p.Z > minDistance && nowHandRight.Z > minDistance)
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.RightHandsUP,
-                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandRight.Y - nowElbowRight.Y) / stepDistance)),
-                                Distance = nowHandRight.Y - nowElbowRight.Y
-                            });
-                        }
-                        //left hand up
-                        if (lastHandLeft.TrackingState == JointTrackingState.Tracked &&
-                            lastElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                            nowHandLeft.TrackingState == JointTrackingState.Tracked &&
-                            nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                            lastHandLeft.Y < lastElbowLeft.Y && 
-                            nowHandLeft.Y > nowElbowLeft.Y &&
-                            p.Z > minDistance && nowHandLeft.Z > minDistance)
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.LeftHandsUP,
-                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandLeft.Y - nowElbowLeft.Y) / stepDistance)),
-                                Distance = nowHandLeft.Y - nowElbowLeft.Y
-                            });
-                        }
+                       
 
                         //right hand move on X
-                        if (lastHandRight.TrackingState == JointTrackingState.Tracked &&
-                            nowHandRight.TrackingState == JointTrackingState.Tracked &&
-                            nowElbowRight.TrackingState == JointTrackingState.Tracked &&
-                            p.Z > minDistance && nowHandRight.Z > minDistance && 
-                            nowHandRight.Y > nowElbowRight.Y &&
-                            Math.Abs(nowHandRight.X - lastHandRight.X) > 0.03)
+                        if (handRSweepXDetector.GetstureDetected(p.PlayerJoints))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
                                 GestureType = KinectGestureType.RightHandsMove,
-                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandRight.X - lastHandRight.X) / stepDistance)),
-                                Distance = nowHandRight.X - lastHandRight.X
-                            });
-                        }
-                        //left hand move on X
-                        if (lastHandLeft.TrackingState == JointTrackingState.Tracked &&
-                            nowHandLeft.TrackingState == JointTrackingState.Tracked &&
-                            nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                            p.Z > minDistance && nowHandLeft.Z > minDistance && 
-                            nowHandLeft.Y > nowElbowLeft.Y &&
-                            Math.Abs(nowHandLeft.X - lastHandLeft.X) > 0.03)
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.LeftHandsMove,
-                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandLeft.Y - lastHandLeft.Y) / stepDistance)),
-                                Distance = nowHandLeft.Y - lastHandLeft.Y
+                                ActionStep = Convert.ToInt16(Math.Ceiling(handRSweepXDetector.GestureDistance / handRSweepXDetector.GestureGateDistance)),
+                                Distance = handRSweepXDetector.GestureDistance 
                             });
                         }
 
-                        //right hand move on Y
-                        if (lastHandRight.TrackingState == JointTrackingState.Tracked &&
-                            nowHandRight.TrackingState == JointTrackingState.Tracked &&
-                            nowElbowRight.TrackingState == JointTrackingState.Tracked &&
-                            p.Z > minDistance && nowHandRight.Z > minDistance &&
-                            nowHandRight.Y > nowElbowRight.Y &&
-                            Math.Abs(nowHandRight.Y - lastHandRight.Y) > 0.03)
+                        //left hand move on X
+                        if (handLSweepXDetector.GetstureDetected(p.PlayerJoints))
+                        {
+
+                            this.RaiseEvent(new KinectGestureEventArgs()
+                            {
+                                GestureType = KinectGestureType.LeftHandsMove,
+                                ActionStep = Convert.ToInt16(Math.Ceiling(handLSweepXDetector.GestureDistance / handLSweepXDetector.GestureGateDistance)),
+                                Distance = handLSweepXDetector.GestureGateDistance
+                            });
+                        }
+
+                        ////right hand move on Y
+                        if (handRSweepYDecector.GetstureDetected(p.PlayerJoints))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
                                 GestureType = KinectGestureType.RightHandsMoveY,
-                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandRight.Y - lastHandRight.Y) / stepDistance)),
-                                Distance = nowHandRight.Y - lastHandRight.Y
+                                ActionStep = Convert.ToInt16(Math.Ceiling(handRSweepYDecector.GestureDistance / handRSweepYDecector.GestureGateDistance)),
+                                Distance = handRSweepYDecector.GestureDistance
                             });
                         }
-                        //left hand move on Y
-                        if (lastHandLeft.TrackingState == JointTrackingState.Tracked &&
-                            nowHandLeft.TrackingState == JointTrackingState.Tracked &&
-                            nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                            p.Z > minDistance && nowHandLeft.Z > minDistance &&
-                            nowHandLeft.Y > nowElbowLeft.Y &&
-                            Math.Abs(nowHandLeft.Y - lastHandLeft.Y) > 0.03)
+                        
+
+                        ////left hand move on Y
+                        if (handLSweepYDetector.GetstureDetected(p.PlayerJoints))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.LeftHandsMoveY,
-                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandLeft.Y - lastHandLeft.Y) / stepDistance)),
-                                Distance = nowHandLeft.Y - lastHandLeft.Y
-                            });
+                           {
+                               GestureType = KinectGestureType.LeftHandsMoveY,
+                               ActionStep = Convert.ToInt16(Math.Ceiling(handLSweepYDetector.GestureDistance / handLSweepYDetector.GestureGateDistance)),
+                               Distance = handLSweepYDetector.GestureDistance
+                           });
                         }
                     }
-
-
                 }
             }
         }
