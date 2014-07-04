@@ -7,6 +7,8 @@ using System.Windows.Data;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit;
 using Microsoft.Samples.Kinect.WpfViewers;
+using KinectChannel;
+using System.Threading;
 
 namespace ChannelChance.Kinect
 {
@@ -29,10 +31,15 @@ namespace ChannelChance.Kinect
             // Bind the KinectSensor from the sensorChooser to the KinectSensorManager
             var kinectSensorBinding = new Binding("Kinect") { Source = sensorChooser };
             BindingOperations.SetBinding(KinectSensorManager, KinectSensorManager.KinectSensorProperty, kinectSensorBinding);
+
+            Thread thread = new Thread(ClearUnActivePlayer);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
         }
         public void Stop()
         {
             sensorChooser.Stop();
+            players.Clear();
         }
 
         protected override void OnKinectSensorChanged(object sender, KinectSensorManagerEventArgs<KinectSensor> args)
@@ -81,8 +88,9 @@ namespace ChannelChance.Kinect
 
 
         #region Kinect Skeleton processing
-        float stepDistance = 0.03f;//一部的距离
-        float minDistance = 1.2f;
+        float stepDistance = 0.03f;//每次操作的1个单位
+        float minDistance = 1.5f;//人离kinect最近距离
+
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
@@ -114,14 +122,7 @@ namespace ChannelChance.Kinect
                             }
                         }
                     }
-                    //foreach (var player in this.players)
-                    //{
-                    //    if (!player.Value.IsAlive)
-                    //    {
-                    //        this.players.Remove(player.Value.TrackedId);
-                    //        break;
-                    //    }
-                    //}
+                    
                     foreach (var item in players)
                     {
                         KinectPlayer p = item.Value;
@@ -144,7 +145,8 @@ namespace ChannelChance.Kinect
                             lastElbowRight.TrackingState == JointTrackingState.Tracked &&
                             nowHandRight.TrackingState == JointTrackingState.Tracked &&
                             nowElbowRight.TrackingState == JointTrackingState.Tracked &&
-                            lastHandRight.Y < lastElbowRight.Y && (nowHandRight.Y - nowElbowRight.Y) > 0.001
+                            lastHandRight.Y < lastElbowRight.Y && 
+                            nowHandRight.Y > nowElbowRight.Y
                             && p.Z > minDistance && nowHandRight.Z > minDistance)
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
@@ -159,7 +161,8 @@ namespace ChannelChance.Kinect
                             lastElbowLeft.TrackingState == JointTrackingState.Tracked &&
                             nowHandLeft.TrackingState == JointTrackingState.Tracked &&
                             nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                            lastHandLeft.Y < lastElbowLeft.Y && (nowHandLeft.Y - nowElbowLeft.Y) > 0.001 &&
+                            lastHandLeft.Y < lastElbowLeft.Y && 
+                            nowHandLeft.Y > nowElbowLeft.Y &&
                             p.Z > minDistance && nowHandLeft.Z > minDistance)
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
@@ -170,12 +173,11 @@ namespace ChannelChance.Kinect
                             });
                         }
 
-                        //right hand move
+                        //right hand move on X
                         if (lastHandRight.TrackingState == JointTrackingState.Tracked &&
                             nowHandRight.TrackingState == JointTrackingState.Tracked &&
                             nowElbowRight.TrackingState == JointTrackingState.Tracked &&
-                            p.Z > minDistance && nowHandRight.Z > minDistance &&
-                            Math.Abs(nowHandRight.Y - lastHandRight.Y) < 0.05 &&
+                            p.Z > minDistance && nowHandRight.Z > minDistance && 
                             nowHandRight.Y > nowElbowRight.Y &&
                             Math.Abs(nowHandRight.X - lastHandRight.X) > 0.03)
                         {
@@ -186,12 +188,11 @@ namespace ChannelChance.Kinect
                                 Distance = nowHandRight.X - lastHandRight.X
                             });
                         }
-                        //left hand move
+                        //left hand move on X
                         if (lastHandLeft.TrackingState == JointTrackingState.Tracked &&
                             nowHandLeft.TrackingState == JointTrackingState.Tracked &&
                             nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                            p.Z > minDistance && nowHandLeft.Z > minDistance &&
-                            Math.Abs(nowHandLeft.Y - lastHandLeft.Y) < 0.05 &&
+                            p.Z > minDistance && nowHandLeft.Z > minDistance && 
                             nowHandLeft.Y > nowElbowLeft.Y &&
                             Math.Abs(nowHandLeft.X - lastHandLeft.X) > 0.03)
                         {
@@ -202,11 +203,55 @@ namespace ChannelChance.Kinect
                                 Distance = nowHandLeft.Y - lastHandLeft.Y
                             });
                         }
+
+                        //right hand move on Y
+                        if (lastHandRight.TrackingState == JointTrackingState.Tracked &&
+                            nowHandRight.TrackingState == JointTrackingState.Tracked &&
+                            nowElbowRight.TrackingState == JointTrackingState.Tracked &&
+                            p.Z > minDistance && nowHandRight.Z > minDistance &&
+                            nowHandRight.Y > nowElbowRight.Y &&
+                            Math.Abs(nowHandRight.Y - lastHandRight.Y) > 0.03)
+                        {
+                            this.RaiseEvent(new KinectGestureEventArgs()
+                            {
+                                GestureType = KinectGestureType.RightHandsMoveY,
+                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandRight.Y - lastHandRight.Y) / stepDistance)),
+                                Distance = nowHandRight.Y - lastHandRight.Y
+                            });
+                        }
+                        //left hand move on Y
+                        if (lastHandLeft.TrackingState == JointTrackingState.Tracked &&
+                            nowHandLeft.TrackingState == JointTrackingState.Tracked &&
+                            nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
+                            p.Z > minDistance && nowHandLeft.Z > minDistance &&
+                            nowHandLeft.Y > nowElbowLeft.Y &&
+                            Math.Abs(nowHandLeft.Y - lastHandLeft.Y) > 0.03)
+                        {
+                            this.RaiseEvent(new KinectGestureEventArgs()
+                            {
+                                GestureType = KinectGestureType.LeftHandsMoveY,
+                                ActionStep = Convert.ToInt16(Math.Ceiling((nowHandLeft.Y - lastHandLeft.Y) / stepDistance)),
+                                Distance = nowHandLeft.Y - lastHandLeft.Y
+                            });
+                        }
                     }
 
 
                 }
             }
+        }
+
+        private void ClearUnActivePlayer()
+        {
+            foreach (var player in this.players)
+            {
+                if (!player.Value.IsAlive)
+                {
+                    this.players.Remove(player.Value.TrackedId);
+                    break;
+                }
+            }
+            Thread.Sleep(3000);
         }
 
 

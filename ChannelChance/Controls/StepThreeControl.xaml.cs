@@ -30,10 +30,12 @@ namespace ChannelChance.Controls
             ElementAnimControl.Initial(Appconfig.GroundImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.III_A_MP4);
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                _isMediaPlaying = true;
                 ShowMedia(Appconfig.III_B_MP4);
             };
         }
@@ -44,6 +46,8 @@ namespace ChannelChance.Controls
         {
             if (SceneOver != null)
                 SceneOver(this, e);
+            media.Visibility = Visibility.Collapsed;
+            _isMediaPlaying = false;
         }
 
         private void ShowMedia(string mediaUri)
@@ -54,30 +58,50 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
-           // ElementAnimControl.ChangeLeftIndex(1);
+
         }
 
         public void RightHandMove(int count)
         {
-           // ElementAnimControl.ChangeRightIndex(1);
+
         }
 
         public void LeftHandUp(int count)
         {
-            for (int i = 0; i < count; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(1);
-            }
-           // ElementAnimControl.HandUpAndDown(HandDirection.L);
+            ElementAnimControl.HandUpAndDown(HandDirection.L);
         }
 
         public void RightHandUp(int count)
         {
-            for (int i = 0; i < count; i++)
+            ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+            if (count > 0)
+                return;
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(1);
+            }
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+            if (count > 0)
+                return;
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeRightIndex(1);
             }
-            //ElementAnimControl.HandUpAndDown(HandDirection.R);
+        }
+
+        private bool _isMediaPlaying;
+        public bool IsMediaPlaying
+        {
+            get { return _isMediaPlaying; }
         }
     }
 }

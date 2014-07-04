@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Kinect;
 
-namespace ChannelChance.Kinect
+namespace KinectChannel
 {
     public class KinectPlayer
     {
@@ -21,9 +20,19 @@ namespace ChannelChance.Kinect
 
         public int TrackedId { get; set; }
 
+        /// <summary>
+        /// 人体Z的距离
+        /// </summary>
         public float Z { get; set; }
+
+        /// <summary>
+        /// 上一Frame的几个重要关节数据
+        /// </summary>
         public ArmJoints LastFrameArmJoints { get; set; }
 
+        /// <summary>
+        /// 当前Frame的几个重要关节数据
+        /// </summary>
         public ArmJoints CurrentArmJoints { get; set; }
 
         private DateTime TimeStamp { get; set; }
@@ -37,7 +46,29 @@ namespace ChannelChance.Kinect
 
         public void UpdateSketon(Skeleton skeleton)
         {
-            this.LastFrameArmJoints = CurrentArmJoints.Clone() as ArmJoints;
+            //this.LastFrameArmJoints = CurrentArmJoints.Clone() as ArmJoints;
+
+            this.LastFrameArmJoints.ElbowLeft.X = this.CurrentArmJoints.ElbowLeft.X;
+            this.LastFrameArmJoints.ElbowLeft.Y = this.CurrentArmJoints.ElbowLeft.Y;
+            this.LastFrameArmJoints.ElbowLeft.Z = this.CurrentArmJoints.ElbowLeft.Z;
+            this.LastFrameArmJoints.ElbowLeft.TrackingState = this.CurrentArmJoints.ElbowLeft.TrackingState;
+
+            this.LastFrameArmJoints.ElbowRight.X = this.CurrentArmJoints.ElbowRight.X;
+            this.LastFrameArmJoints.ElbowRight.Y = this.CurrentArmJoints.ElbowRight.Y;
+            this.LastFrameArmJoints.ElbowRight.Z = this.CurrentArmJoints.ElbowRight.Z;
+            this.LastFrameArmJoints.ElbowRight.TrackingState = this.CurrentArmJoints.ElbowRight.TrackingState;
+
+            this.LastFrameArmJoints.HandRight.X = this.CurrentArmJoints.HandRight.X;
+            this.LastFrameArmJoints.HandRight.Y = this.CurrentArmJoints.HandRight.Y;
+            this.LastFrameArmJoints.HandRight.Z = this.CurrentArmJoints.HandRight.Z;
+            this.LastFrameArmJoints.HandRight.TrackingState = this.CurrentArmJoints.HandRight.TrackingState;
+
+            this.LastFrameArmJoints.HandLeft.X = this.CurrentArmJoints.HandLeft.X;
+            this.LastFrameArmJoints.HandLeft.Y = this.CurrentArmJoints.HandLeft.Y;
+            this.LastFrameArmJoints.HandLeft.Z = this.CurrentArmJoints.HandLeft.Z;
+            this.LastFrameArmJoints.HandLeft.TrackingState = this.CurrentArmJoints.HandLeft.TrackingState;
+
+
             this.CurrentArmJoints = new ArmJoints(skeleton);
 
             this.TimeStamp = DateTime.Now;

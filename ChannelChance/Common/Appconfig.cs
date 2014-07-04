@@ -31,5 +31,11 @@ namespace ChannelChance.Common
         public static readonly string TiltImagesDirName = "TiltImages";
         public static readonly string GroundImagesDirName = "GroundImages";
         public static readonly string Seesawimages = "Seesawimages";
+
+        public static int ToRorL(int count)
+        {
+            var b = count > 0;
+            return b ? 1 : -1;
+        }
     }
 }
