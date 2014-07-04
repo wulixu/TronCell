@@ -57,12 +57,14 @@ namespace ChannelChance.Controls
                         _ischanging = false;
                         if (PlayLeftNextPage != null)
                             PlayLeftNextPage.Invoke(1);
+                        Reset();
                     }
                     if (_rightImgIndex == RightCount.Length)
                     {
                         _ischanging = false;
                         if (PlayRightNextPage != null)
                             PlayRightNextPage.Invoke(1);
+                        Reset();
                     }
 
                     return;
@@ -200,6 +202,14 @@ namespace ChannelChance.Controls
             var bitmapImages = ImageHelper.LoadImages(path);
             _bitmapImages.AddRange(bitmapImages);
         }
+
+        private void Reset()
+        {
+            _leftImgIndex = LeftCount.Length;
+            _rightImgIndex = 0;
+            _nextIndex = _midCount;
+        }
+
 
         public void Dispose()
         {
