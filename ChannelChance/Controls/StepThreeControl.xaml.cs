@@ -73,11 +73,15 @@ namespace ChannelChance.Controls
         public void LeftHandUp(int count)
         {
             ElementAnimControl.HandUpAndDown(HandDirection.L);
+            rightEllipseAnimControl.Reset();
+            leftEllipseAnimControl.Reset();
         }
 
         public void RightHandUp(int count)
         {
             ElementAnimControl.HandUpAndDown(HandDirection.R);
+            rightEllipseAnimControl.Reset();
+            leftEllipseAnimControl.Reset();
         }
 
         public void LeftHandsMoveY(int count)
@@ -88,6 +92,10 @@ namespace ChannelChance.Controls
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeLeftIndex(1);
+                if (count > 0)
+                    leftEllipseAnimControl.MoveToNext();
+                else
+                    leftEllipseAnimControl.MoveToLast();
             }
         }
 
@@ -99,6 +107,10 @@ namespace ChannelChance.Controls
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeRightIndex(1);
+                if (count > 0)
+                    rightEllipseAnimControl.MoveToNext();
+                else
+                    rightEllipseAnimControl.MoveToLast();
             }
         }
 
