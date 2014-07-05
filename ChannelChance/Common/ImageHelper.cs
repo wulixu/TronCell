@@ -27,10 +27,15 @@ namespace ChannelChance.Common
             BitmapImage bitmapImage = null;
             if (File.Exists(path))
             {
-                bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(path);
-                bitmapImage.EndInit();
+                using (var stream = new MemoryStream(File.ReadAllBytes(path)))
+                {
+                    bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze();
+                }
+
             }
             return bitmapImage;
         }
