@@ -86,25 +86,27 @@ namespace ChannelChance.Controls
 
         public void LeftHandsMoveY(int count)
         {
-            if (count > 0)
-                return;
             var length = Math.Abs(count);
             for (int i = 0; i < length; i++)
             {
-                ElementAnimControl.ChangeLeftIndex(1);
-                leftEllipseAnimControl.MoveToNext();
+                ElementAnimControl.ChangeLeftIndex(-Appconfig.ToRorL(count));
+                if (count < 0)
+                    leftEllipseAnimControl.MoveToNext();
+                else
+                    leftEllipseAnimControl.MoveToLast();
             }
         }
 
         public void RightHandsMoveY(int count)
         {
-            if (count > 0)
-                return;
             var length = Math.Abs(count);
             for (int i = 0; i < length; i++)
             {
-                ElementAnimControl.ChangeRightIndex(1);
-                rightEllipseAnimControl.MoveToNext();
+                ElementAnimControl.ChangeRightIndex(-Appconfig.ToRorL(count));
+                if (count < 0)
+                    rightEllipseAnimControl.MoveToNext();
+                else
+                    rightEllipseAnimControl.MoveToLast();
             }
         }
 
