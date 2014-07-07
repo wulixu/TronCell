@@ -67,6 +67,9 @@ namespace ChannelChance.Controls
                 }
 
                 _isRight = count > 0;
+                if (_bitmapImages == null || _bitmapImages.Count <= _currentIndex)
+                    return;
+
                 if (_isRight)
                 {
                     _currentIndex++;
