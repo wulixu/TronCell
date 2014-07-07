@@ -32,8 +32,8 @@ namespace ChannelChance.Controls
                 _isMediaPlaying = false;
             };
             Window = window;
-            ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 2 };
-            ElementAnimControl.RightCount = new int[5] { 2, 5, 5, 5, 5 };
+            ElementAnimControl.LeftCount = new int[7] { 4, 3, 3, 3, 3, 3, 3 };
+            ElementAnimControl.RightCount = new int[7] { 3, 3, 3, 3, 3, 3, 4 };
             ElementAnimControl.Initial(Appconfig.TiltImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
