@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using ChannelChance.Common;
 
 namespace ChannelChance.Controls
@@ -18,6 +19,7 @@ namespace ChannelChance.Controls
 
         #region Fields
 
+        private DispatcherTimer _timer;
         private List<BitmapImage> _bitmapImages;
         private int _currentIndex = 0;
         private int _nextIndex = 0;
@@ -34,13 +36,23 @@ namespace ChannelChance.Controls
         public ImageAnimControl()
         {
             InitializeComponent();
-
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(10);
+            _timer.Tick += _timer_Tick;
+            _timer.Start();
             _bitmapImages = new List<BitmapImage>();
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
         #region Events
+        void _timer_Tick(object sender, EventArgs e)
+        {
+            if (!_ischanging)
+            {
+                Reset();
+            }
+        }
         void CompositionTarget_Rendering(object sender, EventArgs e)
         {
             if (_ischanging)
