@@ -35,7 +35,7 @@ namespace ChannelChance
         KinectGestureControl gestureControl = new KinectGestureControl();
         private List<UserControl> controls = new List<UserControl>();
         private IDirectionMove _currentControl;
-
+        private DispatcherTimer _timer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
@@ -88,6 +88,20 @@ namespace ChannelChance
             kc.Margin = new Thickness(50);
             kc.KinectSensorManager = gestureControl.KinectSensorManager;
             this.layoutGrid.Children.Add(kc);
+
+            _timer.Interval = TimeSpan.FromSeconds(3);
+            int count = 0;
+
+            _timer.Tick += (sender, args) =>
+            {
+                var gestureEventArgs = new KinectGestureEventArgs();
+                gestureEventArgs.ActionStep = count % 2 == 0 ? 7 : -7;
+                gestureEventArgs.GestureType = count % 2 == 0 ? KinectGestureType.RightHandsMove : KinectGestureType.LeftHandsMoveY;
+                gestureControl_OnKinectGestureDetected(null, gestureEventArgs);
+                count++;
+
+            };
+            _timer.Start();
         }
         void gestureControl_OnKinectGestureDetected(object sender, KinectGestureEventArgs e)
         {
@@ -152,7 +166,7 @@ namespace ChannelChance
         {
             media.Play();
         }
-       
+
 
         protected override void OnClosed(EventArgs e)
         {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -20,7 +22,7 @@ namespace ChannelChance.Controls
         #region Fields
 
         private DispatcherTimer _timer;
-        private List<BitmapImage> _bitmapImages;
+        private List<string> _bitmapImages;
         private int _currentIndex = 0;
         private int _nextIndex = 0;
         private bool _ischanging = false;
@@ -36,11 +38,13 @@ namespace ChannelChance.Controls
         public ImageAnimControl()
         {
             InitializeComponent();
+            this.DataContext = this;
+
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += _timer_Tick;
             _timer.Start();
-            _bitmapImages = new List<BitmapImage>();
+            _bitmapImages = new List<string>();
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
@@ -80,20 +84,26 @@ namespace ChannelChance.Controls
                 }
 
                 _isRight = count > 0;
-                if (_bitmapImages == null || _bitmapImages.Count <= _currentIndex || _currentIndex < 0)
-                    return;
 
                 if (_isRight)
                 {
                     _currentIndex++;
-                    var currentImage = _bitmapImages[_currentIndex];
-                    ElementImage.Source = currentImage;
+                    if (_bitmapImages != null && _bitmapImages.Count > _currentIndex && _currentIndex >= 0)
+                    {
+                        var currentImage = _bitmapImages[_currentIndex];
+                        var bitmapImage = ImageHelper.LoadImage(currentImage);
+                        ElementImage.Source = bitmapImage;
+                    }
                 }
                 else
                 {
                     _currentIndex--;
-                    var currentImage = _bitmapImages[_currentIndex];
-                    ElementImage.Source = currentImage;
+                    if (_bitmapImages != null && _currentIndex >= 0 && _bitmapImages.Count > _currentIndex)
+                    {
+                        var currentImage = _bitmapImages[_currentIndex];
+                        var bitmapImage = ImageHelper.LoadImage(currentImage);
+                        ElementImage.Source = bitmapImage;
+                    }
                 }
             }
         }
@@ -106,9 +116,11 @@ namespace ChannelChance.Controls
             LoadDatas(imageDir);
             _maxCount = _bitmapImages.Count;
             _midCount = (int)Math.Ceiling(_maxCount / 2.0);
-            ElementImage.Source = _bitmapImages[_midCount];
+            var bitmapImage = _bitmapImages[_midCount];
+            ElementImage.Source = ImageHelper.LoadImage(bitmapImage);
             _nextIndex = _currentIndex = _midCount;
             _leftImgIndex = LeftCount.Length;
+
         }
 
         /// <summary>
@@ -216,7 +228,7 @@ namespace ChannelChance.Controls
         private void LoadDatas(string dirName)
         {
             var path = System.IO.Path.Combine(Environment.CurrentDirectory, dirName);
-            var bitmapImages = ImageHelper.LoadImages(path);
+            var bitmapImages = ImageHelper.LoadImageNames(path);
             _bitmapImages.AddRange(bitmapImages);
         }
 
@@ -225,7 +237,8 @@ namespace ChannelChance.Controls
             _leftImgIndex = LeftCount.Length;
             _rightImgIndex = 0;
             _nextIndex = _midCount;
-            ElementImage.Source = _bitmapImages[_midCount];
+            var bitmapImage = _bitmapImages[_midCount];
+            ElementImage.Source = ImageHelper.LoadImage(bitmapImage);
         }
 
 
