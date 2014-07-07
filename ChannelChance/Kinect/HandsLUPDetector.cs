@@ -10,11 +10,11 @@ namespace ChannelChance.Kinect
 {
     public class HandsLUPDetector:GestureDetectorBase
     {
-        public override bool GetstureDetected(List<PlayerJoints> PlayerJoints)
+        public override bool GetstureDetected(KinectPlayer p)
         {
             PlayerJoints startJoints;
             PlayerJoints nowJoints;
-            Get2Joints(PlayerJoints, out startJoints, out nowJoints);
+            Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
 
             if (nowJoints != null && startJoints != null)
             {
@@ -31,10 +31,11 @@ namespace ChannelChance.Kinect
                     nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
                     startHandLeft.Y < startElbowLeft.Y &&
                     nowHandLeft.Y > nowElbowLeft.Y &&
+                    p.Z > base.PlayerZDistance &&
                     nowHandLeft.Z > base.PlayerZDistance)
                 {
                     base.GestureDistance = 0f;
-                    PlayerJoints.Clear();
+                    p.PlayerJoints.Clear();
                     return true;
                 }
             }

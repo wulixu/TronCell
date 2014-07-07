@@ -10,11 +10,16 @@ namespace ChannelChance.Kinect
 {
     public class HandRSweepYDecector:GestureDetectorBase
     {
-        public override bool GetstureDetected(List<PlayerJoints> PlayerJoints)
+        public HandRSweepYDecector()
+        {
+            base.GestureGateDistance = 0.05f;
+        }
+
+        public override bool GetstureDetected(KinectPlayer p)
         {
             PlayerJoints startJoints;
             PlayerJoints nowJoints;
-            Get2Joints(PlayerJoints, out startJoints, out nowJoints);
+            Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
 
             if (nowJoints != null && startJoints != null)
             {
@@ -24,10 +29,11 @@ namespace ChannelChance.Kinect
                 if (startHand.TrackingState == JointTrackingState.Tracked &&
                     nowHand.TrackingState == JointTrackingState.Tracked &&
                     nowHand.Z > base.PlayerZDistance &&
+                    p.Z > base.PlayerZDistance &&
                     Math.Abs(nowHand.Y - startHand.Y) > base.GestureGateDistance)
                 {
                     base.GestureDistance = nowHand.Y - startHand.Y;
-                    PlayerJoints.Clear();
+                    p.PlayerJoints.Clear();
                     return true;
 
                 }
