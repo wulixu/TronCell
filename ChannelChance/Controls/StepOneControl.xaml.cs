@@ -62,8 +62,8 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
-            media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
+            media.Visibility = Visibility.Visible;
         }
 
         public void LeftHandMove(int count)
@@ -122,6 +122,8 @@ namespace ChannelChance.Controls
         public void Reset()
         {
             ElementAnimControl.Reset();
+            rightEllipseAnimControl.Reset();
+            leftEllipseAnimControl.Reset();
         }
 
         public bool IsMediaPlaying

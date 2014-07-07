@@ -57,8 +57,8 @@ namespace ChannelChance.Controls
         {
             _isMediaPlaying = true;
             Window.Pause();
-            media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
+            media.Visibility = Visibility.Visible;
         }
 
         public void Init()
