@@ -32,8 +32,8 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
-            ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
+            ElementAnimControl.LeftCount = new int[7] { 4, 4, 4, 4, 3, 3, 3 };
+            ElementAnimControl.RightCount = new int[7] { 3, 3, 3, 4, 4, 4, 4 };
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
@@ -113,12 +113,12 @@ namespace ChannelChance.Controls
 
         public void LeftHandsMoveY(int count)
         {
-            
+
         }
 
         public void RightHandsMoveY(int count)
         {
-          
+
         }
         public void Reset()
         {

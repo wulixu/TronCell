@@ -48,7 +48,8 @@ namespace ChannelChance.Controls
         #region Events
         void _timer_Tick(object sender, EventArgs e)
         {
-            if (!_ischanging)
+            var count = _nextIndex - _currentIndex;
+            if (_ischanging && count == 0)
             {
                 Reset();
             }
@@ -116,6 +117,8 @@ namespace ChannelChance.Controls
         /// <param name="index"></param>
         public void ChangeRightIndex(int index)
         {
+            _timer.Stop();
+            _timer.Start();
             Console.WriteLine("ChangeRightIndex:" + index);
             if (index > 0)
             {
@@ -154,6 +157,8 @@ namespace ChannelChance.Controls
         /// <param name="index"></param>
         public void ChangeLeftIndex(int index)
         {
+            _timer.Stop();
+            _timer.Start();
             if (index > 0)
             {
                 var count = _leftImgIndex - index;

@@ -30,6 +30,8 @@ namespace ChannelChance.Common
                 bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.CacheOption=BitmapCacheOption.OnLoad;
+                bitmapImage.DecodePixelWidth = 1024;
+                bitmapImage.DecodePixelHeight = 576;
                 bitmapImage.UriSource = new Uri(path);
                 bitmapImage.EndInit();
                 bitmapImage.Freeze();
