@@ -15,12 +15,12 @@ namespace ChannelChance.Kinect
             
         }
 
-        public override bool GetstureDetected(List<PlayerJoints> PlayerJoints)
+        public override bool GetstureDetected(KinectPlayer p)
         {
 
             PlayerJoints startJoints;
             PlayerJoints nowJoints;
-            Get2Joints(PlayerJoints, out startJoints, out nowJoints);
+            Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
 
             if (nowJoints != null && startJoints != null)
             {
@@ -32,11 +32,12 @@ namespace ChannelChance.Kinect
                     nowHandLeft.TrackingState == JointTrackingState.Tracked &&
                     nowElbowLeft.TrackingState == JointTrackingState.Tracked &&
                     nowHandLeft.Z > base.PlayerZDistance &&
+                    p.Z > base.PlayerZDistance &&
                     nowHandLeft.Y > nowElbowLeft.Y &&
                     Math.Abs(nowHandLeft.X - startHandLeft.X) > base.GestureGateDistance)
                 {
                     base.GestureDistance = nowHandLeft.X - startHandLeft.X;
-                    PlayerJoints.Clear();
+                    p.PlayerJoints.Clear();
                     return true;
                 }
             }

@@ -140,7 +140,7 @@ namespace ChannelChance.Kinect
                         }
 
                         //右手举了
-                        if (handsRUPDetector.GetstureDetected(p.PlayerJoints))
+                        if (handsRUPDetector.GetstureDetected(p))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
@@ -148,7 +148,7 @@ namespace ChannelChance.Kinect
                             });
                         }
                         //左手举了
-                        if (handsLUPDetector.GetstureDetected(p.PlayerJoints))
+                        if (handsLUPDetector.GetstureDetected(p))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
@@ -157,7 +157,7 @@ namespace ChannelChance.Kinect
                         }
 
                         //right hand move on X
-                        if (handRSweepXDetector.GetstureDetected(p.PlayerJoints))
+                        if (handRSweepXDetector.GetstureDetected(p))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
@@ -168,7 +168,7 @@ namespace ChannelChance.Kinect
                         }
 
                         //left hand move on X
-                        if (handLSweepXDetector.GetstureDetected(p.PlayerJoints))
+                        if (handLSweepXDetector.GetstureDetected(p))
                         {
 
                             this.RaiseEvent(new KinectGestureEventArgs()
@@ -180,7 +180,7 @@ namespace ChannelChance.Kinect
                         }
 
                         ////right hand move on Y
-                        if (handRSweepYDecector.GetstureDetected(p.PlayerJoints))
+                        if (handRSweepYDecector.GetstureDetected(p))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
@@ -192,7 +192,7 @@ namespace ChannelChance.Kinect
                         
 
                         ////left hand move on Y
-                        if (handLSweepYDetector.GetstureDetected(p.PlayerJoints))
+                        if (handLSweepYDetector.GetstureDetected(p))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                            {
