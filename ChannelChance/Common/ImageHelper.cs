@@ -29,6 +29,7 @@ namespace ChannelChance.Common
             {
                 bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
+                bitmapImage.CacheOption=BitmapCacheOption.OnLoad;
                 bitmapImage.UriSource = new Uri(path);
                 bitmapImage.EndInit();
                 bitmapImage.Freeze();
