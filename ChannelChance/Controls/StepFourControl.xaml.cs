@@ -26,6 +26,10 @@ namespace ChannelChance.Controls
             InitializeComponent();
             Window = window;
             media.MediaEnded += OnSceneOver;
+            media.MediaFailed += (sender, args) =>
+            {
+                _isMediaPlaying = false;
+            };
         }
 
         public event EventHandler SceneOver;

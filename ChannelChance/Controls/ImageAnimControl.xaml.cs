@@ -37,7 +37,7 @@ namespace ChannelChance.Controls
         {
             InitializeComponent();
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(10);
+            _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += _timer_Tick;
             _timer.Start();
             _bitmapImages = new List<BitmapImage>();
