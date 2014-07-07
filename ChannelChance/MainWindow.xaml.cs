@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using ChannelChance.Kinect;
 using Microsoft.Samples.Kinect.WpfViewers;
+using log4net;
 
 namespace ChannelChance
 {
@@ -25,6 +26,7 @@ namespace ChannelChance
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly ILog _logger = LogManager.GetLogger("Logger");
         StepOneControl ctrOne = null;
         StepTwoControl ctrTwo = null;
         StepThreeControl ctrThree = null;
@@ -49,6 +51,7 @@ namespace ChannelChance
             };
             this.Loaded += (s, e) =>
             {
+                _logger.Debug("................启动......................");
                 media.Source = new Uri(Appconfig.MP3);
                 media.Play();
             };
