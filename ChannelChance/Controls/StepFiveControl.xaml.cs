@@ -33,10 +33,10 @@ namespace ChannelChance.Controls
 
         private void OnSceneOver(object s, EventArgs e)
         {
-            if (SceneOver != null)
-                SceneOver(this, e);
             _IsMediaPlaying = false;
             Window.Play();
+            if (SceneOver != null)
+                SceneOver(this, e);
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)

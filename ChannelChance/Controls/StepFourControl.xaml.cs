@@ -32,6 +32,8 @@ namespace ChannelChance.Controls
 
         private void OnSceneOver(object s, EventArgs e)
         {
+            _isMediaPlaying = false;
+            Window.Play();
             if (SeesawManager.Instance.IsFinish)
             {
                 if (SceneOver != null)
@@ -42,8 +44,6 @@ namespace ChannelChance.Controls
                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
                 media.Visibility = Visibility.Collapsed;
             }
-            _isMediaPlaying = false;
-            Window.Play();
         }
 
         private void ShowMedia()

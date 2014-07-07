@@ -50,11 +50,11 @@ namespace ChannelChance.Controls
 
         private void OnSceneOver(object s, EventArgs e)
         {
-            if (SceneOver != null)
-                SceneOver(this, e);
             media.Visibility = Visibility.Collapsed;
             _isMediaPlaying = false;
             Window.Play();
+            if (SceneOver != null)
+                SceneOver(this, e);
         }
 
         private void ShowMedia(string mediaUri)
@@ -108,12 +108,12 @@ namespace ChannelChance.Controls
 
         public void LeftHandsMoveY(int count)
         {
-            
+
         }
 
         public void RightHandsMoveY(int count)
         {
-            
+
         }
 
         public void Reset()

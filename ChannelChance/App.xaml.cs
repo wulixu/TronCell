@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace ChannelChance
 
         static App()
         {
+            MakeAppSingleton();
             XmlConfigurator.Configure();
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
@@ -28,5 +30,20 @@ namespace ChannelChance
             _logger.Error(e.ExceptionObject);
         }
 
+        private static void MakeAppSingleton()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            Process[] processes = Process.GetProcessesByName(currentProcess.ProcessName);
+            if (processes.Count() > 1)
+            {
+                foreach (var item in processes)
+                {
+                    if (item.Id != currentProcess.Id)
+                    {
+                        item.Kill();
+                    }
+                }
+            }
+        }
     }
 }
