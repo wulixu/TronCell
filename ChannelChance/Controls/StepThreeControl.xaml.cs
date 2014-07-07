@@ -117,6 +117,8 @@ namespace ChannelChance.Controls
         public void Reset()
         {
             ElementAnimControl.Reset();
+            leftEllipseAnimControl.Reset();
+            rightEllipseAnimControl.Reset();
         }
 
 
