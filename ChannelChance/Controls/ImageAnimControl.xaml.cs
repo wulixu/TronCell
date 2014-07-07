@@ -47,26 +47,28 @@ namespace ChannelChance.Controls
             {
                 var count = _nextIndex - _currentIndex;
 
-                _isRight = count > 0;
-
                 if (count == 0)
                 {
-
                     if (_leftImgIndex == 0)
                     {
                         _ischanging = false;
                         if (PlayLeftNextPage != null)
                             PlayLeftNextPage.Invoke(1);
+                        return;
                     }
                     if (_rightImgIndex == RightCount.Length)
                     {
                         _ischanging = false;
                         if (PlayRightNextPage != null)
                             PlayRightNextPage.Invoke(1);
+                        return;
                     }
-
                     return;
                 }
+
+                _isRight = count > 0;
+                if (_bitmapImages == null || _bitmapImages.Count <= _currentIndex)
+                    return;
 
                 if (_isRight)
                 {
