@@ -156,6 +156,11 @@ namespace ChannelChance
 
         protected override void OnClosed(EventArgs e)
         {
+            ctrOne.SceneOver -= OnSceneOver;
+            ctrTwo.SceneOver -= OnSceneOver;
+            ctrThree.SceneOver -= OnSceneOver;
+            ctrFour.SceneOver -= OnSceneOver;
+            ctrFive.SceneOver -= OnSceneOver;
             base.OnClosed(e);
             gestureControl.Stop();
         }
