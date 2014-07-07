@@ -25,6 +25,10 @@ namespace ChannelChance.Controls
         {
             InitializeComponent();
             media.MediaEnded += OnSceneOver;
+            media.MediaFailed += (sender, args) =>
+            {
+                _isMediaPlaying = false;
+            };
             Window = window;
             imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
         }
@@ -33,7 +37,7 @@ namespace ChannelChance.Controls
 
         private void OnSceneOver(object s, EventArgs e)
         {
-            _IsMediaPlaying = false;
+            _isMediaPlaying = false;
             Window.Play();
             if (SceneOver != null)
                 SceneOver(this, e);
@@ -51,7 +55,7 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
-            _IsMediaPlaying = true;
+            _isMediaPlaying = true;
             Window.Pause();
             media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
@@ -102,10 +106,10 @@ namespace ChannelChance.Controls
         public void Reset()
         {
         }
-        private bool _IsMediaPlaying;
+        private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {
-            get { return _IsMediaPlaying; }
+            get { return _isMediaPlaying; }
         }
     }
 }

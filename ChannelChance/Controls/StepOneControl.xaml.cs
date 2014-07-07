@@ -27,6 +27,10 @@ namespace ChannelChance.Controls
         {
             InitializeComponent();
             media.MediaEnded += OnSceneOver;
+            media.MediaFailed += (sender, args) =>
+            {
+                _isMediaPlaying = false;
+            };
             Window = window;
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 2 };
             ElementAnimControl.RightCount = new int[5] { 2, 5, 5, 5, 5 };

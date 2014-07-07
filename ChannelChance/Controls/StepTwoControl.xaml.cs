@@ -28,6 +28,10 @@ namespace ChannelChance.Controls
             InitializeComponent();
             Window = window;
             media.MediaEnded += OnSceneOver;
+            media.MediaFailed += (sender, args) =>
+            {
+                _isMediaPlaying = false;
+            };
             ElementAnimControl.LeftCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.RightCount = new int[5] { 5, 5, 5, 5, 5 };
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
