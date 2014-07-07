@@ -43,7 +43,7 @@ namespace ChannelChance.Kinect
         public GestureDetectorBase()
         {
             this.MinTimeDuration = 0;
-            this.MaxTimeDuration = 250;
+            this.MaxTimeDuration = 500;
             this.PlayerZDistance = 1.3f;
             this.GestureGateDistance = 0.08f;
         }
