@@ -18,7 +18,7 @@
         <Storyboard x:Key="sb2"  Duration="0:0:4" RepeatBehavior="Forever">
             <DoubleAnimation  Storyboard.TargetName="e8" 
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" BeginTime="0:0:0" Duration="0:0:1"
+                From="1" To="1" BeginTime="0:0:0" Duration="0:0:0.1"
                 >
                 <!--<DoubleAnimation.EasingFunction>
                     <ElasticEase EasingMode="EaseInOut"></ElasticEase>
@@ -50,7 +50,7 @@
             </Grid.OpacityMask>
 
             <StackPanel Orientation="Horizontal">
-                <Ellipse x:Name="e0" Width="12" Height="12" Stroke="Black" Margin="9,0,40,0"/>
+                <Ellipse x:Name="e0" Width="12" Height="12" Stroke="Black" Margin="9,0,40,0" />
                 <Ellipse x:Name="e1" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
                 <Ellipse x:Name="e2" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
                 <Ellipse x:Name="e3" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
@@ -59,7 +59,7 @@
                 <Ellipse x:Name="e6" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
                 <Ellipse x:Name="e7" Width="12" Height="12" Stroke="Black" Margin="0,0,40,0"/>
             </StackPanel>
-            <Ellipse x:Name="e8" Width="30" Height="30" Stroke="Black"  Fill="White" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+            <Ellipse x:Name="e8" Width="30" Height="30" Stroke="Black"  Fill="#FFEEEEEE" Margin="0,0,0,0" HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </UserControl>
