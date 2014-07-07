@@ -35,7 +35,7 @@ namespace ChannelChance.Kinect
         /// </summary>
         /// <param name="PlayerJoints"></param>
         /// <returns></returns>
-        public virtual bool GetstureDetected(List<PlayerJoints> PlayerJoints)
+        public virtual bool GetstureDetected( KinectPlayer player)
         {
             return false;
         }
@@ -43,9 +43,9 @@ namespace ChannelChance.Kinect
         public GestureDetectorBase()
         {
             this.MinTimeDuration = 0;
-            this.MaxTimeDuration = 500;
+            this.MaxTimeDuration = 300;
             this.PlayerZDistance = 1.3f;
-            this.GestureGateDistance = 0.08f;
+            this.GestureGateDistance = 0.07f;
         }
 
         protected void Get2Joints(List<PlayerJoints> PlayerJoints, out PlayerJoints startJoints, out PlayerJoints nowJoints)
