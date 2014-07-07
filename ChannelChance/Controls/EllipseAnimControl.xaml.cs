@@ -48,7 +48,7 @@ namespace ChannelChance.Controls
         {
             InitializeComponent();
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 10);
+            timer.Interval = new TimeSpan(0, 0, 3);
             timer.Tick += timer_Tick; timer.Start();
             sbMannual = this.FindResource("sb1") as Storyboard;
             sbAuto = this.FindResource("sb2") as Storyboard;
