@@ -13,10 +13,10 @@ namespace ChannelChance.Kinect
         /// 人所在的最近距离
         /// </summary>
         public float PlayerZDistance { get; set; }
-        //动作持续最长时间
+        //动作持续最长时间ms
         public int MinTimeDuration { get; set; }
         /// <summary>
-        /// 动作持续最短时间
+        /// 动作持续最短时间ms
         /// </summary>
         public int MaxTimeDuration { get; set; }
         /// <summary>
@@ -43,9 +43,9 @@ namespace ChannelChance.Kinect
         public GestureDetectorBase()
         {
             this.MinTimeDuration = 0;
-            this.MaxTimeDuration = 300;
+            this.MaxTimeDuration = 250;
             this.PlayerZDistance = 1.3f;
-            this.GestureGateDistance = 0.06f;
+            this.GestureGateDistance = 0.08f;
         }
 
         protected void Get2Joints(List<PlayerJoints> PlayerJoints, out PlayerJoints startJoints, out PlayerJoints nowJoints)
