@@ -60,8 +60,8 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
-            media.Visibility = Visibility.Visible;
             media.Source = new Uri(mediaUri);
+            media.Visibility = Visibility.Visible;
         }
 
         public void LeftHandMove(int count)
