@@ -152,6 +152,15 @@ namespace ChannelChance.Controls
         {
             this.timer.Start();
         }
+
+        public int PageIndex
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         public bool IsMediaPlaying
         {
             get { return _isMediaPlaying; }
