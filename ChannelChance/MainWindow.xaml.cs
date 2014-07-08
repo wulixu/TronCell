@@ -97,27 +97,21 @@ namespace ChannelChance
             switch (e.GestureType)
             {
                 case KinectGestureType.LeftHandsUP:
-                    Console.WriteLine("LeftHandsUp ActionStep:" + e.ActionStep);
                     _currentControl.LeftHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.LeftHandsMove:
-                    Console.WriteLine("LeftHandsMove ActionStep:" + e.ActionStep);
                     _currentControl.LeftHandMove(e.ActionStep);
                     break;
                 case KinectGestureType.LeftHandsMoveY:
-                    Console.WriteLine("LeftHandsMoveY " + e.ActionStep);
                     _currentControl.LeftHandsMoveY(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsUP:
-                    Console.WriteLine("RightHandsUp ActionStep:" + e.ActionStep);
                     _currentControl.RightHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsMove:
-                    Console.WriteLine("RightHandsMove ActionStep:" + e.ActionStep);
                     _currentControl.RightHandMove(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsMoveY:
-                    Console.WriteLine("RightHandsMoveY " + e.ActionStep);
                     _currentControl.RightHandsMoveY(e.ActionStep);
                     break;
             }
@@ -137,10 +131,10 @@ namespace ChannelChance
                 var control = controls[i];
                 control.Visibility = Visibility.Visible;
                 _currentControl = control as IDirectionMove;
-                _currentControl.Initial();
+                if (_currentControl != null)
+                    _currentControl.Initial();
                 if (sender as StepFourControl != null)
                     ctrFive.Init();
-                Console.WriteLine("NextPage:" + i);
             }
         }
 
@@ -153,7 +147,80 @@ namespace ChannelChance
         {
             media.Play();
         }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            var gestureEventArgs = new KinectGestureEventArgs();
+            switch (e.Key)
+            {
+                case Key.Left:
+                    gestureEventArgs.ActionStep = 7;
+                    gestureEventArgs.GestureType = KinectGestureType.LeftHandsMove;
+                    break;
+                case Key.Right:
+                    gestureEventArgs.ActionStep = 7;
+                    gestureEventArgs.GestureType = KinectGestureType.RightHandsMove;
+                    break;
+                case Key.Up:
+                    if (_currentControl.PageIndex == 3)
+                    {
+                        var isleftCtrl = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl);
+                        if (isleftCtrl)
+                        {
+                            gestureEventArgs.ActionStep = 7;
+                            gestureEventArgs.GestureType = KinectGestureType.LeftHandsMoveY;
+                        }
+                        var isrightCtrl = e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
+                        if (isrightCtrl)
+                        {
+                            gestureEventArgs.ActionStep = 7;
+                            gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
+                        }
+                    }
+                    else
+                    {
+                        var isleftCtrl = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl);
+                        if (isleftCtrl)
+                        {
+                            gestureEventArgs.ActionStep = 7;
+                            gestureEventArgs.GestureType = KinectGestureType.LeftHandsUP;
+                        }
+                        var isrightCtrl = e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
+                        if (isrightCtrl)
+                        {
+                            gestureEventArgs.ActionStep = 7;
+                            gestureEventArgs.GestureType = KinectGestureType.RightHandsUP;
+                        }
+                    }
+                    break;
+                case Key.Down:
+                    var isleftCtrl1 = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl);
+                    if (isleftCtrl1)
+                    {
+                        gestureEventArgs.ActionStep = -7;
+                        gestureEventArgs.GestureType = KinectGestureType.LeftHandsMoveY;
+                    }
+                    var isrightCtrl2 = e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
+                    if (isrightCtrl2)
+                    {
+                        gestureEventArgs.ActionStep = -7;
+                        gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
+                    }
+                    break;
+                default:
+                    gestureEventArgs = null;
+                    break;
+            }
+            if (gestureEventArgs == null)
+                return;
 
+            if (_currentControl.PageIndex == 3)
+            {
+                for (int i = 0; i < 3; i++)
+                    gestureControl_OnKinectGestureDetected(null, gestureEventArgs);
+            }
+            gestureControl_OnKinectGestureDetected(null, gestureEventArgs);
+            base.OnKeyDown(e);
+        }
 
         protected override void OnClosed(EventArgs e)
         {

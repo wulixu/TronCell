@@ -35,7 +35,8 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            media.MediaOpened += (s, e) => {
+            media.MediaOpened += (s, e) =>
+            {
                 Panel.SetZIndex(media, 999);
             };
             Window = window;
@@ -155,6 +156,14 @@ namespace ChannelChance.Controls
         public bool IsMediaPlaying
         {
             get { return _isMediaPlaying; }
+        }
+
+        public int PageIndex
+        {
+            get
+            {
+                return 0;
+            }
         }
     }
 }

@@ -219,7 +219,7 @@ namespace ChannelChance.Controls
         {
             _leftImgIndex = LeftCount.Length;
             _rightImgIndex = 0;
-            _nextIndex = _midCount;
+            _nextIndex = _currentIndex = _midCount;
             var bitmapImage = _bitmapImages[_midCount];
             ElementImage.Source = ImageHelper.LoadImage(bitmapImage);
         }

@@ -112,5 +112,12 @@ namespace ChannelChance.Controls
         {
             get { return _isMediaPlaying; }
         }
+        public int PageIndex
+        {
+            get
+            {
+                return 4;
+            }
+        }
     }
 }
