@@ -174,7 +174,7 @@ namespace ChannelChance.Kinect
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
                                 GestureType = KinectGestureType.LeftHandsMove,
-                                ActionStep = Convert.ToInt16(Math.Ceiling(handLSweepXDetector.GestureDistance / handLSweepXDetector.GestureGateDistance)),
+                                ActionStep = - Convert.ToInt16(Math.Ceiling(handLSweepXDetector.GestureDistance / handLSweepXDetector.GestureGateDistance)),
                                 Distance = handLSweepXDetector.GestureGateDistance
                             });
                         }
