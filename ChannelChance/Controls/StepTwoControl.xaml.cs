@@ -54,6 +54,7 @@ namespace ChannelChance.Controls
         }
         void timer_Tick(object sender, EventArgs e)
         {
+            ElementAnimControl.Reset();
             leftEllipseAnimControl.BeginAutoMove();
             rightEllipseAnimControl.BeginAutoMove();
         }
@@ -76,6 +77,8 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
+            this.timer.Stop(); this.timer.Start();
+            rightEllipseAnimControl.StopAutoMove();
             var length = Math.Abs(count);
             for (int i = 0; i < length; i++)
             {
@@ -90,7 +93,9 @@ namespace ChannelChance.Controls
 
         public void RightHandMove(int count)
         {
+            this.timer.Stop(); this.timer.Start();
             var length = Math.Abs(count);
+            leftEllipseAnimControl.StopAutoMove();
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeRightIndex(Appconfig.ToRorL(count));
