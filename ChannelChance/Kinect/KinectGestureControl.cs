@@ -9,6 +9,7 @@ using Microsoft.Kinect.Toolkit;
 using Microsoft.Samples.Kinect.WpfViewers;
 using KinectChannel;
 using System.Threading;
+using System.Configuration;
 
 namespace ChannelChance.Kinect
 {
@@ -17,20 +18,19 @@ namespace ChannelChance.Kinect
 
         public event EventHandler<KinectGestureEventArgs> OnKinectGestureDetected;
 
-        KinectSensorChooser sensorChooser;
+        KinectSensorChooser sensorChooser = new KinectSensorChooser();
         private Skeleton[] skeletonData;
-        private Dictionary<int, KinectPlayer> players;
+        private Dictionary<int, KinectPlayer> players = new Dictionary<int, KinectPlayer>();
 
         public KinectGestureControl()
         {
-            sensorChooser = new KinectSensorChooser();
-            players = new Dictionary<int, KinectPlayer>();
-            this.KinectSensorManager = new Microsoft.Samples.Kinect.WpfViewers.KinectSensorManager();
             sensorChooser.Start();
-
-            // Bind the KinectSensor from the sensorChooser to the KinectSensorManager
+             
+            this.KinectSensorManager = new Microsoft.Samples.Kinect.WpfViewers.KinectSensorManager();
             var kinectSensorBinding = new Binding("Kinect") { Source = sensorChooser };
             BindingOperations.SetBinding(KinectSensorManager, KinectSensorManager.KinectSensorProperty, kinectSensorBinding);
+            this.KinectSensorManager.ElevationAngle = Convert.ToInt16(ConfigurationManager.AppSettings["Angle"]);
+
 
             Thread thread = new Thread(ClearUnActivePlayer);
             thread.SetApartmentState(ApartmentState.STA);
