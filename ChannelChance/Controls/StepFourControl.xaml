@@ -15,14 +15,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image Source="/ChannelChance;component/Imgs/seesaw.png"  Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="img"/>
-        <controls:EllipseAnimForStep4Control x:Name="rightEllipseAnimControl"  Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Margin="772,224,188,-224">
+        <controls:EllipseAnimForStep4Control x:Name="rightEllipseAnimControl" Width="125" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Margin="1190,224,188,-224" HorizontalAlignment="Left">
             <controls:EllipseAnimForStep4Control.RenderTransform>
                 <TransformGroup>
                     <TranslateTransform Y="-12" X="-2"></TranslateTransform>
                 </TransformGroup>
             </controls:EllipseAnimForStep4Control.RenderTransform>
         </controls:EllipseAnimForStep4Control>
-        <controls:EllipseAnimForStep4Control x:Name="leftEllipseAnimControl"  Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Margin="-290,224,290,-224" >
+        <controls:EllipseAnimForStep4Control x:Name="leftEllipseAnimControl" Width="125"  Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Margin="605,224,290,-224" HorizontalAlignment="Left" >
             <controls:EllipseAnimForStep4Control.RenderTransform>
                 <TransformGroup>
                     <TranslateTransform Y="-12" X="2"></TranslateTransform>
