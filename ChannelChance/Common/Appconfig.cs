@@ -50,7 +50,8 @@ namespace ChannelChance.Common
             if (AnimaEllipsePositions == null)
             {
                 AnimaEllipsePositions = new Dictionary<string, double[]>();
-                AnimaEllipsePositions.Add("IV_L0_R1_R", new double[] { 525 - delta, 1235 });
+                AnimaEllipsePositions.Add("Default", new double[] { 605, 1190 });
+                AnimaEllipsePositions.Add("IV_L0_R1_R", new double[] { 525 - delta, 1235 - delta });
                 AnimaEllipsePositions.Add("IV_L0_R2_R", new double[] { 390 - delta, 1175 - delta });
                 AnimaEllipsePositions.Add("IV_L1_R0_L", new double[] { 670 - delta, 1370 - delta });
                 AnimaEllipsePositions.Add("IV_L1_R1_L", new double[] { 540 - delta, 1370 - delta });

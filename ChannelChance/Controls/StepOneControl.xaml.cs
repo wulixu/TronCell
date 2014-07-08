@@ -35,6 +35,9 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
+            media.MediaOpened += (s, e) => {
+                Panel.SetZIndex(media, 999);
+            };
             Window = window;
             ElementAnimControl.LeftCount = new int[7] { 4, 3, 3, 3, 3, 3, 3 };
             ElementAnimControl.RightCount = new int[7] { 3, 3, 3, 3, 3, 3, 4 };
@@ -73,6 +76,7 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
+            Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
             media.Visibility = Visibility.Visible;
             media.Play();

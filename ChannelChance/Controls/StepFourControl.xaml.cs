@@ -32,6 +32,10 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
+            media.MediaOpened += (s, e) =>
+            {
+                Panel.SetZIndex(media, 999);
+            };
         }
 
         public event EventHandler SceneOver;
@@ -71,6 +75,7 @@ namespace ChannelChance.Controls
         private void ShowMedia()
         {
             Window.Pause();
+            Panel.SetZIndex(media, -1);
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
             media.Visibility = Visibility.Visible;
             media.Play();
@@ -115,9 +120,7 @@ namespace ChannelChance.Controls
         private int _rightCount = 0;
         public void RightHandsMoveY(int count)
         {
-            Console.WriteLine("Count:" + count);
-            Console.WriteLine("RightCount:" + _rightCount);
-            if (_rightCount >= 3)
+           if (_rightCount >= 3)
             {
                 _isMediaPlaying = true;
                 SeesawManager.Instance.HandDirection = HandDirection.R;
@@ -133,7 +136,14 @@ namespace ChannelChance.Controls
         {
         }
         public void Initial()
-        { }
+        {
+            double[] p = Appconfig.GetAnimaEllipsePositions("Default");
+            if (p != null)
+            {
+                leftEllipseAnimControl.Margin = new Thickness(p[0], leftEllipseAnimControl.Margin.Top, leftEllipseAnimControl.Margin.Right, leftEllipseAnimControl.Margin.Bottom);// p[0];
+                rightEllipseAnimControl.Margin = new Thickness(p[1], rightEllipseAnimControl.Margin.Top, rightEllipseAnimControl.Margin.Right, rightEllipseAnimControl.Margin.Bottom);// p[0];
+            }
+        }
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {
