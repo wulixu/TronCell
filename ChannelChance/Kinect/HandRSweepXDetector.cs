@@ -32,7 +32,7 @@ namespace ChannelChance.Kinect
                     nowElbowRight.TrackingState == JointTrackingState.Tracked &&
                     nowHandRight.Z > base.PlayerZDistance &&
                     p.Z > base.PlayerZDistance &&
-                    nowHandRight.Y > nowElbowRight.Y &&
+                    nowHandRight.Y - nowElbowRight.Y>-0.1f &&
                     Math.Abs(nowHandRight.X - startHandRight.X) > base.GestureGateDistance)
                 {
                     base.GestureDistance = nowHandRight.X - startHandRight.X;
