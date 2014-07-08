@@ -117,7 +117,14 @@ namespace ChannelChance.Controls
         {
         }
         public void Initial()
-        { }
+        {
+            double[] p = Appconfig.GetAnimaEllipsePositions("Default");
+            if (p != null)
+            {
+                leftEllipseAnimControl.Margin = new Thickness(p[0], leftEllipseAnimControl.Margin.Top, leftEllipseAnimControl.Margin.Right, leftEllipseAnimControl.Margin.Bottom);// p[0];
+                rightEllipseAnimControl.Margin = new Thickness(p[1], rightEllipseAnimControl.Margin.Top, rightEllipseAnimControl.Margin.Right, rightEllipseAnimControl.Margin.Bottom);// p[0];
+            }
+        }
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {
