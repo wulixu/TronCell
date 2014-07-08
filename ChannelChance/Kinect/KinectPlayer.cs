@@ -41,7 +41,7 @@ namespace KinectChannel
         {
             this.PlayerJoints.Add(new PlayerJoints(skeleton));
             this.TimeStamp = DateTime.Now;
-            if (PlayerJoints.Count > 30)
+            if (PlayerJoints.Count > 15)
             {
                 PlayerJoints jointsToRemove = PlayerJoints[0];
                 PlayerJoints.Remove(jointsToRemove);

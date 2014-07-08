@@ -12,7 +12,7 @@ namespace ChannelChance.Kinect
     {
         public HandLSweepXDetector()
         {
-            
+            base.GestureGateDistance = 0.06f;
         }
 
         public override bool GetstureDetected(KinectPlayer p)
