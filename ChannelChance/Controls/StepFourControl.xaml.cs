@@ -76,7 +76,7 @@ namespace ChannelChance.Controls
         private void ShowMedia()
         {
             Window.Pause();
-            Panel.SetZIndex(media, -1);
+            //Panel.SetZIndex(media, -1);
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
             media.Visibility = Visibility.Visible;
             border.Visibility = Visibility.Visible;

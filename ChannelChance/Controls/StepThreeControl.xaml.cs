@@ -76,7 +76,7 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
-            Panel.SetZIndex(media, -1);
+            //Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
             media.Visibility = Visibility.Visible;
             border.Visibility = Visibility.Visible;
