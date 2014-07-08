@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChannelChance.Common
 {
-    public abstract class Appconfig
+    public static class Appconfig
     {
         public static readonly string ApplicationPath = Environment.CurrentDirectory;
 
@@ -42,6 +42,36 @@ namespace ChannelChance.Common
         {
             var b = count > 0;
             return b ? 1 : -1;
+        }
+        public static Dictionary<string, double[]> AnimaEllipsePositions =null;
+        public static double[]  GetAnimaEllipsePositions(string key)
+        {
+            double delta = 47;double[] returnV=null;
+            if (AnimaEllipsePositions == null)
+            {
+                AnimaEllipsePositions = new Dictionary<string, double[]>();
+                AnimaEllipsePositions.Add("IV_L0_R1_R", new double[] { 525 - delta, 1235 });
+                AnimaEllipsePositions.Add("IV_L0_R2_R", new double[] { 390 - delta, 1175 - delta });
+                AnimaEllipsePositions.Add("IV_L1_R0_L", new double[] { 670 - delta, 1370 - delta });
+                AnimaEllipsePositions.Add("IV_L1_R1_L", new double[] { 540 - delta, 1370 - delta });
+                AnimaEllipsePositions.Add("IV_L1_R1_R", new double[] { 540 - delta, 1370 - delta });
+                AnimaEllipsePositions.Add("IV_L1_R2_L", new double[] { 410 - delta, 1315 - delta });
+                AnimaEllipsePositions.Add("IV_L1_R2_R", new double[] { 410 - delta, 1315 - delta });
+                AnimaEllipsePositions.Add("IV_L2_R0_L", new double[] { 730 - delta, 1505 - delta });
+                AnimaEllipsePositions.Add("IV_L2_R1_L", new double[] { 585 - delta, 1505 - delta });
+                AnimaEllipsePositions.Add("IV_L2_R1_R", new double[] { 585 - delta, 1505 - delta });
+                AnimaEllipsePositions.Add("IV_L2_R2_L", new double[] { 450 - delta, 1435 - delta });
+                AnimaEllipsePositions.Add("IV_L2_R2_R", new double[] { 450 - delta, 1435 - delta });
+            }
+            try
+            {
+                returnV = AnimaEllipsePositions[key];
+            }
+            catch
+            {
+                returnV = null;
+            }
+            return returnV;
         }
     }
 }

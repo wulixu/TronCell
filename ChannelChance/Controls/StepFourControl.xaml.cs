@@ -1,4 +1,5 @@
 ﻿using ChannelChance.Common;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepFourControl : UserControl, IDirectionMove
     {
+        private static readonly ILog _logger = LogManager.GetLogger("Logger");
         public StepFourControl(MainWindow window)
         {
             InitializeComponent();
@@ -46,7 +48,20 @@ namespace ChannelChance.Controls
             }
             else
             {
-                img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
+                try
+                {
+                    double[] p = Appconfig.GetAnimaEllipsePositions(SeesawManager.Instance.CurrentImgName);
+                    if (p != null)
+                    {
+                        leftEllipseAnimControl.Margin = new Thickness(p[0], leftEllipseAnimControl.Margin.Top, leftEllipseAnimControl.Margin.Right, leftEllipseAnimControl.Margin.Bottom);// p[0];
+                        rightEllipseAnimControl.Margin = new Thickness(p[1], rightEllipseAnimControl.Margin.Top, rightEllipseAnimControl.Margin.Right, rightEllipseAnimControl.Margin.Bottom);// p[0];
+                    }
+                }
+                catch(Exception ex)
+                {
+                    _logger.Error(ex.Message);
+                }
+                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
             }
             media.Stop();
             media.Visibility = Visibility.Collapsed;
