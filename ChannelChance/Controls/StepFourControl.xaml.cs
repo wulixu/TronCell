@@ -32,9 +32,6 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            media.MediaOpened += (s, e) => {
-                Panel.SetZIndex(media, 999);
-            };
         }
 
         public event EventHandler SceneOver;
@@ -45,6 +42,7 @@ namespace ChannelChance.Controls
             Window.Play();
             if (SeesawManager.Instance.IsFinish)
             {
+                img.Source = new BitmapImage(new Uri("/Imgs/seesaw.png", UriKind.Relative));
                 if (SceneOver != null)
                     SceneOver(this, e);
             }
@@ -63,8 +61,9 @@ namespace ChannelChance.Controls
                 }
                  img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
             }
+            media.Stop();
             media.Visibility = Visibility.Collapsed;
-            Panel.SetZIndex(media, -1);
+            media.Source = null;
         }
 
         private void ShowMedia()
@@ -72,6 +71,7 @@ namespace ChannelChance.Controls
             Window.Pause();
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
             media.Visibility = Visibility.Visible;
+            media.Play();
         }
 
         public void LeftHandMove(int count)
@@ -86,16 +86,6 @@ namespace ChannelChance.Controls
 
         public void LeftHandUp(int count)
         {
-            
-        }
-
-        public void RightHandUp(int count)
-        {
-           
-        }
-
-        public void LeftHandsMoveY(int count)
-        {
             _isMediaPlaying = true;
             SeesawManager.Instance.HandDirection = HandDirection.L;
             SeesawManager.Instance.LeftHandTimes++;
@@ -103,13 +93,23 @@ namespace ChannelChance.Controls
                 ShowMedia();
         }
 
-        public void RightHandsMoveY(int count)
+        public void RightHandUp(int count)
         {
             _isMediaPlaying = true;
             SeesawManager.Instance.HandDirection = HandDirection.R;
             SeesawManager.Instance.RightHandTimes++;
             if (SeesawManager.Instance.CanPlayMP4)
                 ShowMedia();
+        }
+
+        public void LeftHandsMoveY(int count)
+        {
+          
+        }
+
+        public void RightHandsMoveY(int count)
+        {
+           
         }
         public void Reset()
         {

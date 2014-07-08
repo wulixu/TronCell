@@ -29,6 +29,6 @@
                 </TransformGroup>
             </controls:EllipseAnimForStep4Control.RenderTransform>
         </controls:EllipseAnimForStep4Control>
-        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed"/>
+        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed" LoadedBehavior="Manual"/>
     </Grid>
 </UserControl>
