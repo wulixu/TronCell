@@ -45,7 +45,7 @@ namespace ChannelChance.Kinect
             this.MinTimeDuration = 0;
             this.MaxTimeDuration = 300;
             this.PlayerZDistance = 1.3f;
-            this.GestureGateDistance = 0.06f;
+            this.GestureGateDistance = 0.05f;
         }
 
         protected void Get2Joints(List<PlayerJoints> PlayerJoints, out PlayerJoints startJoints, out PlayerJoints nowJoints)
