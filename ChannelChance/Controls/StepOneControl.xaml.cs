@@ -37,7 +37,8 @@ namespace ChannelChance.Controls
             };
             media.MediaOpened += (s, e) => {
                 //Panel.SetZIndex(media, 999);
-                border.Visibility = Visibility.Collapsed;
+                //border.Visibility = Visibility.Collapsed;
+                media.Opacity = 1;
             };
             Window = window;
             ElementAnimControl.LeftCount = new int[7] { 4, 3, 3, 3, 3, 3, 3 };
@@ -67,7 +68,8 @@ namespace ChannelChance.Controls
         private void OnSceneOver(object s, EventArgs e)
         {
             media.Stop();
-            media.Visibility = Visibility.Collapsed;
+            //media.Visibility = Visibility.Collapsed;
+            media.Opacity = 0;
             media.Source = null;
             _isMediaPlaying = false;
             Window.Play();
@@ -79,9 +81,10 @@ namespace ChannelChance.Controls
         {
             //Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
-            media.Visibility = Visibility.Visible;
-            border.Visibility = Visibility.Visible;
+            //media.Visibility = Visibility.Visible;
+            //border.Visibility = Visibility.Visible;
             media.Play();
+            //media.Opacity = 1;
         }
 
         public void LeftHandMove(int count)

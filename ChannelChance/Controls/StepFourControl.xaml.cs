@@ -35,7 +35,8 @@ namespace ChannelChance.Controls
             media.MediaOpened += (s, e) =>
             {
                 //Panel.SetZIndex(media, 999);
-                border.Visibility = Visibility.Collapsed;
+                //border.Visibility = Visibility.Collapsed;
+                media.Opacity = 1;
             };
         }
 
@@ -69,7 +70,8 @@ namespace ChannelChance.Controls
                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
             }
             media.Stop();
-            media.Visibility = Visibility.Collapsed;
+            //media.Visibility = Visibility.Collapsed;
+            media.Opacity = 0;
             media.Source = null;
         }
 
@@ -78,8 +80,8 @@ namespace ChannelChance.Controls
             Window.Pause();
             //Panel.SetZIndex(media, -1);
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
-            media.Visibility = Visibility.Visible;
-            border.Visibility = Visibility.Visible;
+            //media.Visibility = Visibility.Visible;
+            //border.Visibility = Visibility.Visible;
             media.Play();
         }
 

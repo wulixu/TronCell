@@ -32,7 +32,8 @@ namespace ChannelChance.Controls
             media.MediaOpened += (s, e) =>
             {
                 //Panel.SetZIndex(media, 999);
-                border.Visibility = Visibility.Collapsed;
+                //border.Visibility = Visibility.Collapsed;
+                media.Opacity = 1;
             };
             Window = window;
             imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
@@ -43,7 +44,8 @@ namespace ChannelChance.Controls
         private void OnSceneOver(object s, EventArgs e)
         {
             media.Stop();
-            media.Visibility = Visibility.Collapsed;
+            //media.Visibility = Visibility.Collapsed;
+            media.Opacity = 0;
             media.Source = null;
             _isMediaPlaying = false;
             Window.Play();
@@ -57,8 +59,9 @@ namespace ChannelChance.Controls
             Window.Pause();
             //Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
-            media.Visibility = Visibility.Visible;
-            border.Visibility = Visibility.Visible;
+            //media.Visibility = Visibility.Visible;
+            //border.Visibility = Visibility.Visible;
+            
             media.Play();
         }
 
