@@ -32,6 +32,10 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
+            media.MediaOpened += (s, e) =>
+            {
+                Panel.SetZIndex(media, 999);
+            };
         }
 
         public event EventHandler SceneOver;
@@ -71,6 +75,7 @@ namespace ChannelChance.Controls
         private void ShowMedia()
         {
             Window.Pause();
+            Panel.SetZIndex(media, -1);
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
             media.Visibility = Visibility.Visible;
             media.Play();
