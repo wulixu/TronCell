@@ -44,9 +44,9 @@ namespace ChannelChance.Common
             return b ? 1 : -1;
         }
         public static Dictionary<string, double[]> AnimaEllipsePositions =null;
-        private Appconfig()
+        public static double[]  GetAnimaEllipsePositions(string key)
         {
-            double delta = 47;
+            double delta = 47;double[] returnV=null;
             if (AnimaEllipsePositions == null)
             {
                 AnimaEllipsePositions = new Dictionary<string, double[]>();
@@ -63,6 +63,15 @@ namespace ChannelChance.Common
                 AnimaEllipsePositions.Add("IV_L2_R2_L", new double[] { 450 - delta, 1435 - delta });
                 AnimaEllipsePositions.Add("IV_L2_R2_R", new double[] { 450 - delta, 1435 - delta });
             }
+            try
+            {
+                returnV = AnimaEllipsePositions[key];
+            }
+            catch
+            {
+                returnV = null;
+            }
+            return returnV;
         }
     }
 }

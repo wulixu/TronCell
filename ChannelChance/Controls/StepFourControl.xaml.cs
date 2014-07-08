@@ -50,10 +50,12 @@ namespace ChannelChance.Controls
             {
                 try
                 {
-                    double[] p = Appconfig.AnimaEllipsePositions[SeesawManager.Instance.CurrentImgName];
-                    leftEllipseAnimControl.Margin = new Thickness(p[0], leftEllipseAnimControl.Margin.Top, leftEllipseAnimControl.Margin.Right, leftEllipseAnimControl.Margin.Bottom);// p[0];
-                    rightEllipseAnimControl.Margin = new Thickness(p[1], rightEllipseAnimControl.Margin.Top, rightEllipseAnimControl.Margin.Right, rightEllipseAnimControl.Margin.Bottom);// p[0];
-
+                    double[] p = Appconfig.GetAnimaEllipsePositions(SeesawManager.Instance.CurrentImgName);
+                    if (p != null)
+                    {
+                        leftEllipseAnimControl.Margin = new Thickness(p[0], leftEllipseAnimControl.Margin.Top, leftEllipseAnimControl.Margin.Right, leftEllipseAnimControl.Margin.Bottom);// p[0];
+                        rightEllipseAnimControl.Margin = new Thickness(p[1], rightEllipseAnimControl.Margin.Top, rightEllipseAnimControl.Margin.Right, rightEllipseAnimControl.Margin.Bottom);// p[0];
+                    }
                 }
                 catch(Exception ex)
                 {
