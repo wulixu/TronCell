@@ -4,5 +4,6 @@
      Title="MainWindow" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize">
     <Grid x:Name="layoutGrid">
         <MediaElement x:Name="media" LoadedBehavior="Manual" Panel.ZIndex="-999" Width="0" Height="0"/>
+        <Canvas Name="root"  Width="1920" Height="1080" Panel.ZIndex="100"></Canvas>
     </Grid>
 </Window>
