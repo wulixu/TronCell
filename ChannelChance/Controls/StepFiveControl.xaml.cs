@@ -29,6 +29,9 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
+            media.MediaOpened += (s, e) => {
+                Panel.SetZIndex(media, 999);
+            };
             Window = window;
             imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
         }
@@ -41,6 +44,7 @@ namespace ChannelChance.Controls
             Window.Play();
             if (SceneOver != null)
                 SceneOver(this, e);
+            Panel.SetZIndex(media, -1);
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)

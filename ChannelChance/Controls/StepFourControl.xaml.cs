@@ -30,6 +30,9 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
+            media.MediaOpened += (s, e) => {
+                Panel.SetZIndex(media, 999);
+            };
         }
 
         public event EventHandler SceneOver;
@@ -46,8 +49,9 @@ namespace ChannelChance.Controls
             else
             {
                 img.Source = new BitmapImage(new Uri(SeesawManager.Instance.CurrentImg));
-                media.Visibility = Visibility.Collapsed;
             }
+            media.Visibility = Visibility.Collapsed;
+            Panel.SetZIndex(media, -1);
         }
 
         private void ShowMedia()
