@@ -31,7 +31,8 @@ namespace ChannelChance.Controls
             };
             media.MediaOpened += (s, e) =>
             {
-                Panel.SetZIndex(media, 999);
+                //Panel.SetZIndex(media, 999);
+                border.Visibility = Visibility.Collapsed;
             };
             Window = window;
             imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
@@ -54,9 +55,10 @@ namespace ChannelChance.Controls
         {
             _isMediaPlaying = true;
             Window.Pause();
-            Panel.SetZIndex(media, -1);
+            //Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
             media.Visibility = Visibility.Visible;
+            border.Visibility = Visibility.Visible;
             media.Play();
         }
 
