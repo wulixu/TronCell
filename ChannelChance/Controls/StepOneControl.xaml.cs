@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChannelChance.Common;
+using System.Windows.Threading;
 
 namespace ChannelChance.Controls
 {
@@ -22,10 +23,13 @@ namespace ChannelChance.Controls
     public partial class StepOneControl : UserControl, IDirectionMove
     {
         private bool _isMediaPlaying;
-
+        private DispatcherTimer timer = new DispatcherTimer();
         public StepOneControl(MainWindow window)
         {
             InitializeComponent();
+            timer.Interval = new TimeSpan(0, 0, Appconfig.AutoPlayInterval);
+            timer.Tick += timer_Tick;
+            timer.Start();
             media.MediaEnded += OnSceneOver;
             media.MediaFailed += (sender, args) =>
             {
@@ -50,7 +54,11 @@ namespace ChannelChance.Controls
         }
 
         public event EventHandler SceneOver;
-
+        void timer_Tick(object sender, EventArgs e)
+        {
+            leftEllipseAnimControl.BeginAutoMove();
+            rightEllipseAnimControl.BeginAutoMove();
+        }
         private void OnSceneOver(object s, EventArgs e)
         {
             media.Visibility = Visibility.Collapsed;
@@ -69,6 +77,7 @@ namespace ChannelChance.Controls
         public void LeftHandMove(int count)
         {
             var length = Math.Abs(count);
+            rightEllipseAnimControl.StopAutoMove();
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeLeftIndex(Appconfig.ToRorL(count));
@@ -82,6 +91,7 @@ namespace ChannelChance.Controls
         public void RightHandMove(int count)
         {
             var length = Math.Abs(count);
+            leftEllipseAnimControl.StopAutoMove();
             for (int i = 0; i < length; i++)
             {
                 ElementAnimControl.ChangeRightIndex(Appconfig.ToRorL(count));
@@ -98,6 +108,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.L);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            this.timer.Stop(); this.timer.Start();
         }
 
         public MainWindow Window { get; set; }
@@ -107,6 +118,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.R);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            this.timer.Stop(); this.timer.Start();
         }
 
         public void LeftHandsMoveY(int count)
@@ -124,8 +136,12 @@ namespace ChannelChance.Controls
             ElementAnimControl.Reset();
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            this.timer.Stop();
         }
-
+        public void Initial()
+        {
+            this.timer.Start();
+        }
         public bool IsMediaPlaying
         {
             get { return _isMediaPlaying; }

@@ -97,7 +97,8 @@ namespace ChannelChance.Controls
         public void Reset()
         {
         }
-
+        public void Initial()
+        { }
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {

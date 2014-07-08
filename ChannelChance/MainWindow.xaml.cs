@@ -137,6 +137,7 @@ namespace ChannelChance
                 var control = controls[i];
                 control.Visibility = Visibility.Visible;
                 _currentControl = control as IDirectionMove;
+                _currentControl.Initial();
                 if (sender as StepFourControl != null)
                     ctrFive.Init();
                 Console.WriteLine("NextPage:" + i);

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChannelChance.Common;
+using System.Windows.Threading;
 
 namespace ChannelChance.Controls
 {
@@ -21,9 +22,12 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepThreeControl : UserControl, IDirectionMove
     {
+        private DispatcherTimer timer = new DispatcherTimer();
         public StepThreeControl(MainWindow window)
         {
             InitializeComponent();
+            timer.Interval = new TimeSpan(0, 0, Appconfig.AutoPlayInterval);
+            timer.Tick += timer_Tick;
             media.MediaEnded += OnSceneOver;
             media.MediaFailed += (sender, args) =>
             {
@@ -46,7 +50,11 @@ namespace ChannelChance.Controls
                 ShowMedia(Appconfig.III_B_MP4);
             };
         }
-
+        void timer_Tick(object sender, EventArgs e)
+        {
+            leftEllipseAnimControl.BeginAutoMove();
+            rightEllipseAnimControl.BeginAutoMove();
+        }
         public event EventHandler SceneOver;
 
         private void OnSceneOver(object s, EventArgs e)
@@ -79,6 +87,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.L);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            timer.Stop(); timer.Start();
         }
 
         public void RightHandUp(int count)
@@ -86,6 +95,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.R);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            timer.Stop(); timer.Start();
         }
 
         public void LeftHandsMoveY(int count)
@@ -116,12 +126,16 @@ namespace ChannelChance.Controls
 
         public void Reset()
         {
+            this.timer.Stop();
             ElementAnimControl.Reset();
             leftEllipseAnimControl.Reset();
             rightEllipseAnimControl.Reset();
         }
 
-
+        public void Initial()
+        {
+            this.timer.Start();
+        }
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
         {

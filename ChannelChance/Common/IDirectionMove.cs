@@ -44,6 +44,10 @@ namespace ChannelChance.Common
         /// 重置
         /// </summary>
         void Reset();
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        void Initial();
         bool IsMediaPlaying { get; }
     }
 }

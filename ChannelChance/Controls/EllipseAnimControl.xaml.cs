@@ -48,7 +48,7 @@ namespace ChannelChance.Controls
         {
             InitializeComponent();
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 3);
+            timer.Interval = new TimeSpan(0, 0, 13000);
             timer.Tick += timer_Tick; timer.Start();
             sbMannual = this.FindResource("sb1") as Storyboard;
             sbAuto = this.FindResource("sb2") as Storyboard;
@@ -62,15 +62,21 @@ namespace ChannelChance.Controls
 
         public void BeginAutoMove()
         {
-            sbAuto.Begin(e8, true);
-            isAutoComplted = false;
+            if (isAutoComplted)
+            {
+                sbAuto.Begin(e8, true);
+                isAutoComplted = false;
+            }
         }
         public void StopAutoMove()
         {
+            sbAuto.Stop(e8);
             sbAuto.Remove(e8);
             e8.Margin = new Thickness(0, 0, 0, 0);
             e8.Opacity = 1;
             isAutoComplted = true;
+            To = new Thickness(0, 0, 0, 0);
+            bigEllipseIndex = 0;
         }
         public void MoveToLast()
         {
@@ -105,7 +111,9 @@ namespace ChannelChance.Controls
             e8.Margin = new Thickness(0, 0, 0, 0);
             e8.Opacity = 1;
             From = new Thickness(0, 0, 0, 0);
+            To = new Thickness(0, 0, 0, 0);
             isAutoComplted = true;
+            bigEllipseIndex = 0;
         }
     }
 }

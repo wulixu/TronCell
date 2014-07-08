@@ -23,9 +23,12 @@ namespace ChannelChance.Controls
     public partial class StepTwoControl : UserControl, IDirectionMove
     {
         private bool _isMediaPlaying;
+        private DispatcherTimer timer = new DispatcherTimer();
         public StepTwoControl(MainWindow window)
         {
             InitializeComponent();
+            timer.Interval = new TimeSpan(0, 0, Appconfig.AutoPlayInterval);
+            timer.Tick += timer_Tick;
             Window = window;
             media.MediaEnded += OnSceneOver;
             media.MediaFailed += (sender, args) =>
@@ -49,7 +52,11 @@ namespace ChannelChance.Controls
             };
 
         }
-
+        void timer_Tick(object sender, EventArgs e)
+        {
+            leftEllipseAnimControl.BeginAutoMove();
+            rightEllipseAnimControl.BeginAutoMove();
+        }
         public event EventHandler SceneOver;
 
         private void OnSceneOver(object s, EventArgs e)
@@ -100,6 +107,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.L);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            timer.Stop(); timer.Start();
         }
 
         public MainWindow Window { get; set; }
@@ -109,6 +117,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.R);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
+            timer.Stop(); timer.Start();
         }
 
         public void LeftHandsMoveY(int count)
@@ -122,11 +131,15 @@ namespace ChannelChance.Controls
         }
         public void Reset()
         {
+            this.timer.Stop();
             ElementAnimControl.Reset();
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
         }
-
+        public void Initial()
+        {
+            this.timer.Start();
+        }
         public bool IsMediaPlaying
         {
             get { return _isMediaPlaying; }
