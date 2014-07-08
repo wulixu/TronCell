@@ -59,9 +59,9 @@ namespace ChannelChance.Controls
         public event EventHandler SceneOver;
         void timer_Tick(object sender, EventArgs e)
         {
-            ElementAnimControl.Reset();
             leftEllipseAnimControl.BeginAutoMove();
             rightEllipseAnimControl.BeginAutoMove();
+            ElementAnimControl.Reset();
         }
         private void OnSceneOver(object s, EventArgs e)
         {
