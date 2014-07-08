@@ -24,15 +24,11 @@ namespace ChannelChance.Common
         }
         public static List<string> LoadImageNames(string dir)
         {
-            List<string> bitmapImages = new List<string>();
+            var bitmapImages = new List<string>();
             if (Directory.Exists(dir))
             {
                 var files = Directory.GetFiles(dir).OrderBy(x => x);
-                foreach (var file in files)
-                {
-                    //var bitmapImage = LoadImage(file);
-                    bitmapImages.Add(file);
-                }
+                bitmapImages.AddRange(files);
             }
             return bitmapImages;
         }

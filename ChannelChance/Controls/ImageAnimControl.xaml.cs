@@ -21,7 +21,6 @@ namespace ChannelChance.Controls
 
         #region Fields
 
-        private DispatcherTimer _timer;
         private List<string> _bitmapImages;
         private int _currentIndex = 0;
         private int _nextIndex = 0;
@@ -40,24 +39,12 @@ namespace ChannelChance.Controls
             InitializeComponent();
             this.DataContext = this;
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
-            _timer.Tick += _timer_Tick;
-            _timer.Start();
             _bitmapImages = new List<string>();
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
         #region Events
-        void _timer_Tick(object sender, EventArgs e)
-        {
-            var count = _nextIndex - _currentIndex;
-            if (_ischanging && count == 0)
-            {
-                Reset();
-            }
-        }
         void CompositionTarget_Rendering(object sender, EventArgs e)
         {
             if (_ischanging)
@@ -129,8 +116,6 @@ namespace ChannelChance.Controls
         /// <param name="index"></param>
         public void ChangeRightIndex(int index)
         {
-            _timer.Stop();
-            _timer.Start();
             Console.WriteLine("ChangeRightIndex:" + index);
             if (index > 0)
             {
@@ -169,8 +154,6 @@ namespace ChannelChance.Controls
         /// <param name="index"></param>
         public void ChangeLeftIndex(int index)
         {
-            _timer.Stop();
-            _timer.Start();
             if (index > 0)
             {
                 var count = _leftImgIndex - index;
