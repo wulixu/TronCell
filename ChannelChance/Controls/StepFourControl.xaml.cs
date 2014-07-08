@@ -53,8 +53,8 @@ namespace ChannelChance.Controls
         private void ShowMedia()
         {
             Window.Pause();
-            media.Visibility = Visibility.Visible;
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
+            media.Visibility = Visibility.Visible;
         }
 
         public void LeftHandMove(int count)

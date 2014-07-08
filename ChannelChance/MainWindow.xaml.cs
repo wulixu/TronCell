@@ -35,7 +35,6 @@ namespace ChannelChance
         KinectGestureControl gestureControl = new KinectGestureControl();
         private List<UserControl> controls = new List<UserControl>();
         private IDirectionMove _currentControl;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -153,7 +152,7 @@ namespace ChannelChance
         {
             media.Play();
         }
-       
+
 
         protected override void OnClosed(EventArgs e)
         {
