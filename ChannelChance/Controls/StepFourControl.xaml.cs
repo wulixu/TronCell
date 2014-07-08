@@ -34,7 +34,8 @@ namespace ChannelChance.Controls
             };
             media.MediaOpened += (s, e) =>
             {
-                Panel.SetZIndex(media, 999);
+                //Panel.SetZIndex(media, 999);
+                border.Visibility = Visibility.Collapsed;
             };
         }
 
@@ -78,6 +79,7 @@ namespace ChannelChance.Controls
             Panel.SetZIndex(media, -1);
             media.Source = new Uri(SeesawManager.Instance.MP4Path);
             media.Visibility = Visibility.Visible;
+            border.Visibility = Visibility.Visible;
             media.Play();
         }
 

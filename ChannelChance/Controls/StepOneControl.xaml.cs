@@ -37,7 +37,8 @@ namespace ChannelChance.Controls
             };
             media.MediaOpened += (s, e) =>
             {
-                Panel.SetZIndex(media, 999);
+                //Panel.SetZIndex(media, 999);
+                border.Visibility = Visibility.Collapsed;
             };
             Window = window;
             ElementAnimControl.LeftCount = new int[7] { 4, 3, 3, 3, 3, 3, 3 };
@@ -77,9 +78,10 @@ namespace ChannelChance.Controls
 
         private void ShowMedia(string mediaUri)
         {
-            Panel.SetZIndex(media, -1);
+            //Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
             media.Visibility = Visibility.Visible;
+            border.Visibility = Visibility.Visible;
             media.Play();
         }
 
