@@ -95,7 +95,16 @@ namespace ChannelChance
             Canvas.SetLeft(kc2, kLeft);
             Canvas.SetTop(kc2, kTop);
             kc2.KinectSensorManager = gestureControl.KinectSensorManager;
-            this.root.Children.Add(kc2); 
+            this.root.Children.Add(kc2);
+
+            KinectSkeletonViewer ks = new KinectSkeletonViewer();
+            ks.Opacity = kAlpha;
+            ks.Width = kWidth;
+            ks.Height = kHeight;
+            Canvas.SetLeft(ks, kLeft);
+            Canvas.SetTop(ks, kTop);
+            ks.KinectSensorManager = gestureControl.KinectSensorManager;
+            this.root.Children.Add(ks); 
            
         }
         void gestureControl_OnKinectGestureDetected(object sender, KinectGestureEventArgs e)
