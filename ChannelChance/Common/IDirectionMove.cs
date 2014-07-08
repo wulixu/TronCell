@@ -49,6 +49,5 @@ namespace ChannelChance.Common
         /// </summary>
         void Initial();
         bool IsMediaPlaying { get; }
-        int PageIndex { get; }
     }
 }

@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using ChannelChance.Kinect;
 using Microsoft.Samples.Kinect.WpfViewers;
 using log4net;
+using System.Configuration;
 
 namespace ChannelChance
 {
@@ -80,14 +81,22 @@ namespace ChannelChance
             _currentControl = ctrOne;
 
             //显示kinect可视窗口
-            KinectColorViewer kc = new KinectColorViewer();
-            kc.Width = 160d;
-            kc.Height = 120d;
-            kc.HorizontalAlignment = HorizontalAlignment.Right;
-            kc.VerticalAlignment = VerticalAlignment.Top;
-            kc.Margin = new Thickness(50);
-            kc.KinectSensorManager = gestureControl.KinectSensorManager;
-            this.layoutGrid.Children.Add(kc);
+            string[] kv = ConfigurationManager.AppSettings["SkeletonInfo"].Split(',');
+            double kWidth = Convert.ToDouble(kv[0]);
+            double kHeight = Convert.ToDouble(kv[1]);
+            double kLeft = Convert.ToDouble(kv[2]);
+            double kTop = Convert.ToDouble(kv[3]);
+            double kAlpha = Convert.ToDouble(kv[4]);
+
+            KinectColorViewer kc2 = new KinectColorViewer();
+            kc2.Opacity = kAlpha;
+            kc2.Width = kWidth;
+            kc2.Height = kHeight;
+            Canvas.SetLeft(kc2, kLeft);
+            Canvas.SetTop(kc2, kTop);
+            kc2.KinectSensorManager = gestureControl.KinectSensorManager;
+            this.root.Children.Add(kc2); 
+           
         }
         void gestureControl_OnKinectGestureDetected(object sender, KinectGestureEventArgs e)
         {

@@ -31,8 +31,7 @@ namespace ChannelChance.Controls
             };
             media.MediaOpened += (s, e) =>
             {
-                //Panel.SetZIndex(media, 999);
-                border.Visibility = Visibility.Collapsed;
+                Panel.SetZIndex(media, 999);
             };
             Window = window;
             imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
@@ -55,10 +54,9 @@ namespace ChannelChance.Controls
         {
             _isMediaPlaying = true;
             Window.Pause();
-            //Panel.SetZIndex(media, -1);
+            Panel.SetZIndex(media, -1);
             media.Source = new Uri(mediaUri);
             media.Visibility = Visibility.Visible;
-            border.Visibility = Visibility.Visible;
             media.Play();
         }
 
@@ -113,13 +111,6 @@ namespace ChannelChance.Controls
         public bool IsMediaPlaying
         {
             get { return _isMediaPlaying; }
-        }
-        public int PageIndex
-        {
-            get
-            {
-                return 4;
-            }
         }
     }
 }
