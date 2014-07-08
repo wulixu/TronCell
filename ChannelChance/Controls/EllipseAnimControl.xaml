@@ -27,7 +27,7 @@
             <ThicknessAnimation 
                 Storyboard.TargetName="e8"
                 Storyboard.TargetProperty="Margin"
-                From="0,0,0,0" To="364,0,0,0" BeginTime="0:0:1"  Duration="0:0:3"
+                From="0,0,0,0" To="364,0,0,0" BeginTime="0:0:0.2"  Duration="0:0:3"
                 >
                 <ThicknessAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseInOut"></CircleEase>
