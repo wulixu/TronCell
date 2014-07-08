@@ -56,6 +56,7 @@ namespace ChannelChance.Controls
         public event EventHandler SceneOver;
         void timer_Tick(object sender, EventArgs e)
         {
+            ElementAnimControl.Reset();
             leftEllipseAnimControl.BeginAutoMove();
             rightEllipseAnimControl.BeginAutoMove();
         }
@@ -76,6 +77,7 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
+            this.timer.Stop(); this.timer.Start();
             var length = Math.Abs(count);
             rightEllipseAnimControl.StopAutoMove();
             for (int i = 0; i < length; i++)
@@ -90,6 +92,7 @@ namespace ChannelChance.Controls
 
         public void RightHandMove(int count)
         {
+            this.timer.Stop(); this.timer.Start();
             var length = Math.Abs(count);
             leftEllipseAnimControl.StopAutoMove();
             for (int i = 0; i < length; i++)
@@ -108,7 +111,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.L);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
-            this.timer.Stop(); this.timer.Start();
+            //this.timer.Stop(); this.timer.Start();
         }
 
         public MainWindow Window { get; set; }
@@ -118,7 +121,7 @@ namespace ChannelChance.Controls
             ElementAnimControl.HandUpAndDown(HandDirection.R);
             rightEllipseAnimControl.Reset();
             leftEllipseAnimControl.Reset();
-            this.timer.Stop(); this.timer.Start();
+            //this.timer.Stop(); this.timer.Start();
         }
 
         public void LeftHandsMoveY(int count)
