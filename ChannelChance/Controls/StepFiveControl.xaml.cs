@@ -29,9 +29,6 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            media.MediaOpened += (s, e) => {
-                Panel.SetZIndex(media, 999);
-            };
             Window = window;
             imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
         }
@@ -40,21 +37,13 @@ namespace ChannelChance.Controls
 
         private void OnSceneOver(object s, EventArgs e)
         {
+            media.Stop();
+            media.Visibility = Visibility.Collapsed;
+            media.Source = null;
             _isMediaPlaying = false;
             Window.Play();
             if (SceneOver != null)
                 SceneOver(this, e);
-            Panel.SetZIndex(media, -1);
-        }
-
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            ShowMedia(Appconfig.V_A_MP4);
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            ShowMedia(Appconfig.V_B_MP4);
         }
 
         private void ShowMedia(string mediaUri)
@@ -63,6 +52,7 @@ namespace ChannelChance.Controls
             Window.Pause();
             media.Source = new Uri(mediaUri);
             media.Visibility = Visibility.Visible;
+            media.Play();
         }
 
         public void Init()
@@ -77,34 +67,33 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
-            
+
         }
 
         public void RightHandMove(int count)
         {
-            
+
         }
 
         public void LeftHandUp(int count)
         {
-            
+
         }
 
         public void RightHandUp(int count)
         {
-            
+            ShowMedia(Appconfig.V_B_MP4);
         }
 
         public void LeftHandsMoveY(int count)
         {
-            if(count<0)
+            if (count < 0)
                 ShowMedia(Appconfig.V_A_MP4);
         }
 
         public void RightHandsMoveY(int count)
         {
-            if(count>0)
-                ShowMedia(Appconfig.V_B_MP4);
+
         }
 
         public void Reset()

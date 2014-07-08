@@ -38,6 +38,7 @@ namespace ChannelChance
         public MainWindow()
         {
             InitializeComponent();
+
             ctrOne = new StepOneControl(this);
             ctrTwo = new StepTwoControl(this) { Visibility = Visibility.Collapsed };
             ctrThree = new StepThreeControl(this) { Visibility = Visibility.Collapsed };
