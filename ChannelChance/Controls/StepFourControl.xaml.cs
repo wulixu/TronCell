@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,10 +24,12 @@ namespace ChannelChance.Controls
     public partial class StepFourControl : UserControl, IDirectionMove
     {
         private static readonly ILog _logger = LogManager.GetLogger("Logger");
+        Storyboard sb = null;
         public StepFourControl(MainWindow window)
         {
             InitializeComponent();
             Window = window;
+            sb = Resources["sb1"] as Storyboard;
             media.MediaEnded += OnSceneOver;
             media.MediaFailed += (sender, args) =>
             {
@@ -36,6 +39,11 @@ namespace ChannelChance.Controls
             {
                 //Panel.SetZIndex(media, 999);
                 //border.Visibility = Visibility.Collapsed;
+                //media.Opacity = 1;
+            };
+            sb.Completed += (s, e) =>
+            {
+                sb.Remove(media);
                 media.Opacity = 1;
             };
         }
@@ -83,6 +91,7 @@ namespace ChannelChance.Controls
             //media.Visibility = Visibility.Visible;
             //border.Visibility = Visibility.Visible;
             media.Play();
+            sb.Begin(media, true);
         }
 
         public void LeftHandMove(int count)

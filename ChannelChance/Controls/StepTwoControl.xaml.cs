@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using ChannelChance.Common;
+using System.Windows.Media.Animation;
 
 namespace ChannelChance.Controls
 {
@@ -24,9 +25,11 @@ namespace ChannelChance.Controls
     {
         private bool _isMediaPlaying;
         private DispatcherTimer timer = new DispatcherTimer();
+        Storyboard sb = null;
         public StepTwoControl(MainWindow window)
         {
             InitializeComponent();
+            sb = Resources["sb1"] as Storyboard;
             timer.Interval = new TimeSpan(0, 0, Appconfig.AutoPlayInterval);
             timer.Tick += timer_Tick;
             Window = window;
@@ -35,10 +38,15 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            media.MediaOpened += (s, e) =>
+            //media.MediaOpened += (s, e) =>
+            //{
+            //    //Panel.SetZIndex(media, 999);
+            //    //border.Visibility = Visibility.Collapsed;
+            //    media.Opacity = 1;
+            //};
+            sb.Completed += (s, e) =>
             {
-                //Panel.SetZIndex(media, 999);
-                //border.Visibility = Visibility.Collapsed;
+                sb.Remove(media);
                 media.Opacity = 1;
             };
             ElementAnimControl.LeftCount = new int[7] { 4, 4, 4, 4, 3, 3, 3 };
@@ -86,6 +94,7 @@ namespace ChannelChance.Controls
             //border.Visibility = Visibility.Visible;
             media.Play();
             //media.Opacity = 1;
+            sb.Begin(media, true);
         }
 
         public void LeftHandMove(int count)

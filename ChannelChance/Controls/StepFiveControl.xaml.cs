@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChannelChance.Common;
+using System.Windows.Media.Animation;
 
 namespace ChannelChance.Controls
 {
@@ -21,18 +22,25 @@ namespace ChannelChance.Controls
     /// </summary>
     public partial class StepFiveControl : UserControl, IDirectionMove
     {
+        Storyboard sb = null;
         public StepFiveControl(MainWindow window)
         {
             InitializeComponent();
+            sb = Resources["sb1"] as Storyboard;
             media.MediaEnded += OnSceneOver;
             media.MediaFailed += (sender, args) =>
             {
                 _isMediaPlaying = false;
             };
-            media.MediaOpened += (s, e) =>
+            //media.MediaOpened += (s, e) =>
+            //{
+            //    //Panel.SetZIndex(media, 999);
+            //    //border.Visibility = Visibility.Collapsed;
+            //    media.Opacity = 1;
+            //};
+            sb.Completed += (s, e) =>
             {
-                //Panel.SetZIndex(media, 999);
-                //border.Visibility = Visibility.Collapsed;
+                sb.Remove(media);
                 media.Opacity = 1;
             };
             Window = window;
@@ -63,6 +71,7 @@ namespace ChannelChance.Controls
             //border.Visibility = Visibility.Visible;
             
             media.Play();
+            sb.Begin(media, true);
         }
 
         public void Init()

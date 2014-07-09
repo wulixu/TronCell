@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:ChannelChance.Controls"
              Height="1080" Width="1920" >
+    <UserControl.Resources>
+        <Storyboard  x:Key="sb1">
+            <DoubleAnimation Storyboard.TargetName="media" Storyboard.TargetProperty="Opacity" From="0.8" To="1"  Duration="0:0:0.2"/>
+        </Storyboard>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChannelChance.Common;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 namespace ChannelChance.Controls
 {
@@ -23,9 +24,11 @@ namespace ChannelChance.Controls
     public partial class StepThreeControl : UserControl, IDirectionMove
     {
         private DispatcherTimer timer = new DispatcherTimer();
+        Storyboard sb = null;
         public StepThreeControl(MainWindow window)
         {
             InitializeComponent();
+            sb = Resources["sb1"] as Storyboard;
             timer.Interval = new TimeSpan(0, 0, Appconfig.AutoPlayInterval);
             timer.Tick += timer_Tick;
             media.MediaEnded += OnSceneOver;
@@ -33,10 +36,14 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            media.MediaOpened += (s, e) =>
-            {
-                //Panel.SetZIndex(media, 999);
-                //border.Visibility = Visibility.Collapsed;
+            //media.MediaOpened += (s, e) =>
+            //{
+            //    //Panel.SetZIndex(media, 999);
+            //    //border.Visibility = Visibility.Collapsed;
+            //    //media.Opacity = 1;
+            //};
+            sb.Completed += (s, e) => {
+                sb.Remove(media);
                 media.Opacity = 1;
             };
             Window = window;
@@ -84,6 +91,7 @@ namespace ChannelChance.Controls
             //border.Visibility = Visibility.Visible;
             media.Play();
             //media.Opacity = 1;
+            sb.Begin(media,true);
         }
 
         public void LeftHandMove(int count)
