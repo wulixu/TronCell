@@ -40,6 +40,7 @@ namespace ChannelChance.Controls
                 //Panel.SetZIndex(media, 999);
                 //border.Visibility = Visibility.Collapsed;
                 //media.Opacity = 1;
+                sb.Begin(media, true);
             };
             sb.Completed += (s, e) =>
             {
@@ -91,7 +92,7 @@ namespace ChannelChance.Controls
             //media.Visibility = Visibility.Visible;
             //border.Visibility = Visibility.Visible;
             media.Play();
-            sb.Begin(media, true);
+            //sb.Begin(media, true);
         }
 
         public void LeftHandMove(int count)

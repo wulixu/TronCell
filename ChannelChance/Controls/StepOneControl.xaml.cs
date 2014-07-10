@@ -38,12 +38,13 @@ namespace ChannelChance.Controls
             {
                 _isMediaPlaying = false;
             };
-            //media.MediaOpened += (s, e) =>
-            //{
-            //    //Panel.SetZIndex(media, 999);
-            //    //border.Visibility = Visibility.Collapsed;
-            //    //media.Opacity = 1;
-            //};
+            media.MediaOpened += (s, e) =>
+            {
+                //Panel.SetZIndex(media, 999);
+                //border.Visibility = Visibility.Collapsed;
+                //media.Opacity = 1;
+                sb.Begin(media, true);
+            };
             sb.Completed += (s, e) =>
             {
                 sb.Remove(media);
@@ -94,7 +95,7 @@ namespace ChannelChance.Controls
             //border.Visibility = Visibility.Visible;
             media.Play();
             //media.Opacity = 1;
-            sb.Begin(media, true);
+            //sb.Begin(media, true);
         }
 
         public void LeftHandMove(int count)

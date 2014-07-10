@@ -5,7 +5,7 @@
              Height="1080" Width="1920" >
     <UserControl.Resources>
         <Storyboard  x:Key="sb1">
-            <DoubleAnimation Storyboard.TargetName="media" Storyboard.TargetProperty="Opacity" From="0.8" To="1"  Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="media" Storyboard.TargetProperty="Opacity" From="0.9" To="1"  Duration="0:0:0.6"/>
         </Storyboard>
     </UserControl.Resources>
     <Grid>
