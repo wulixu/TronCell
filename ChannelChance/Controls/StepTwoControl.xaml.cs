@@ -55,15 +55,17 @@ namespace ChannelChance.Controls
             ElementAnimControl.Initial(Appconfig.CutImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                HandOption.Instance.Page2State = HandDirection.R;
                 window.Pause();
                 _isMediaPlaying = true;
-                ShowMedia(Appconfig.II_A_MP4);
+                ShowMedia();
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                HandOption.Instance.Page2State = HandDirection.L;
                 window.Pause();
                 _isMediaPlaying = true;
-                ShowMedia(Appconfig.II_B_MP4);
+                ShowMedia();
             };
 
         }
@@ -87,10 +89,10 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
         }
 
-        private void ShowMedia(string mediaUri)
+        private void ShowMedia()
         {
             //Panel.SetZIndex(media, -1);
-            media.Source = new Uri(mediaUri);
+            media.Source = new Uri(HandOption.Instance.Page2Video);
             //media.Visibility = Visibility.Visible;
             //border.Visibility = Visibility.Visible;
             media.Play();

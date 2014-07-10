@@ -109,6 +109,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\Appconfig.cs" />
+    <Compile Include="Common\HandOption.cs" />
     <Compile Include="Common\IDirectionMove.cs" />
     <Compile Include="Common\ImageHelper.cs" />
     <Compile Include="Controls\EllipseAnimControl.xaml.cs">

@@ -53,15 +53,17 @@ namespace ChannelChance.Controls
             ElementAnimControl.Initial(Appconfig.GroundImagesDirName);
             ElementAnimControl.PlayRightNextPage += i =>
             {
+                HandOption.Instance.Page3State = HandDirection.R;
                 window.Pause();
                 _isMediaPlaying = true;
-                ShowMedia(Appconfig.III_A_MP4);
+                ShowMedia();
             };
             ElementAnimControl.PlayLeftNextPage += i =>
             {
+                HandOption.Instance.Page3State = HandDirection.L;
                 window.Pause();
                 _isMediaPlaying = true;
-                ShowMedia(Appconfig.III_B_MP4);
+                ShowMedia();
             };
         }
         void timer_Tick(object sender, EventArgs e)
@@ -84,10 +86,10 @@ namespace ChannelChance.Controls
                 SceneOver(this, e);
         }
 
-        private void ShowMedia(string mediaUri)
+        private void ShowMedia()
         {
             //Panel.SetZIndex(media, -1);
-            media.Source = new Uri(mediaUri);
+            media.Source = new Uri(HandOption.Instance.Page3Video);
             //media.Visibility = Visibility.Visible;
             //border.Visibility = Visibility.Visible;
             media.Play();

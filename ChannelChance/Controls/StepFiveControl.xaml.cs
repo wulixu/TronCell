@@ -45,7 +45,6 @@ namespace ChannelChance.Controls
                 media.Opacity = 1;
             };
             Window = window;
-            imgCode.Source = new BitmapImage(new Uri(Appconfig.TowDimensionPic));
         }
 
         public event EventHandler SceneOver;
@@ -77,10 +76,21 @@ namespace ChannelChance.Controls
 
         public void Init()
         {
-            imgLeft.Visibility = SeesawManager.Instance.HandDirection == HandDirection.L ? Visibility.Visible : Visibility.Collapsed;
-            imgRight.Visibility = SeesawManager.Instance.HandDirection == HandDirection.R ? Visibility.Visible : Visibility.Collapsed;
+            Tuple<Uri, Uri> page1 = HandOption.Instance.Page1Img;
+            Tuple<Uri, Uri> page2 = HandOption.Instance.Page2Img;
+            Tuple<Uri, Uri> page3= HandOption.Instance.Page3Img;
+            Tuple<Uri, Uri> page4 = HandOption.Instance.Page4Img;
+            img1.Source = new BitmapImage(page1.Item2);
+            img2.Source = new BitmapImage(page2.Item2);
+            img3.Source = new BitmapImage(page3.Item2);
+            img4.Source = new BitmapImage(page4.Item2);
+            demesion1.Source = new BitmapImage(page1.Item1);
+            demesion2.Source = new BitmapImage(page2.Item1);
+            demesion3.Source = new BitmapImage(page3.Item1);
+            demesion4.Source = new BitmapImage(page4.Item1);
             SeesawManager.Instance.HandDirection = HandDirection.None;
             SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
+            HandOption.Instance.SetInit();
         }
 
         public MainWindow Window { get; set; }
