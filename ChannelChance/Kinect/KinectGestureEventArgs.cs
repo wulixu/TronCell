@@ -25,6 +25,9 @@ namespace ChannelChance.Kinect
         RightHandsMove,
         LeftHandsMove,
         RightHandsMoveY,
-        LeftHandsMoveY
+        LeftHandsMoveY,
+
+        //双臂伸平
+        Fly
     }
 }
