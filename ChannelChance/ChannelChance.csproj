@@ -136,6 +136,7 @@
     <Compile Include="Controls\StepTwoControl.xaml.cs">
       <DependentUpon>StepTwoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Kinect\FlyDetector.cs" />
     <Compile Include="Kinect\GestureDetectorBase.cs" />
     <Compile Include="Kinect\HandLSweepXDetector.cs" />
     <Compile Include="Kinect\HandLSweepYDetector.cs" />

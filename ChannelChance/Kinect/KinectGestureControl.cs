@@ -95,7 +95,7 @@ namespace ChannelChance.Kinect
         HandLSweepYDetector handLSweepYDetector = new HandLSweepYDetector();
         HandsRUPDetector handsRUPDetector = new HandsRUPDetector();
         HandsLUPDetector handsLUPDetector = new HandsLUPDetector();
-
+        FlyDetector flyDetector = new FlyDetector();
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
@@ -199,6 +199,16 @@ namespace ChannelChance.Kinect
                                GestureType = KinectGestureType.LeftHandsMoveY,
                                ActionStep = Convert.ToInt16(Math.Ceiling(handLSweepYDetector.GestureDistance / handLSweepYDetector.GestureGateDistance)),
                                Distance = handLSweepYDetector.GestureDistance
+                           });
+                        }
+
+                        if (flyDetector.GetstureDetected(p))
+                        {
+                             this.RaiseEvent(new KinectGestureEventArgs()
+                           {
+                               GestureType = KinectGestureType.Fly,
+                               ActionStep = 0,
+                               Distance =0
                            });
                         }
                     }
