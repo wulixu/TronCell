@@ -133,6 +133,9 @@ namespace ChannelChance
                 case KinectGestureType.RightHandsMoveY:
                     _currentControl.RightHandsMoveY(e.ActionStep);
                     break;
+                case KinectGestureType.Fly:
+                    _currentControl.Fly();
+                    break;
             }
         }
 

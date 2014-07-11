@@ -23,6 +23,7 @@ namespace ChannelChance.Controls
     public partial class StepFiveControl : UserControl, IDirectionMove
     {
         Storyboard sb = null;
+        HandDirection currentDirection = HandDirection.None;
         public StepFiveControl(MainWindow window)
         {
             InitializeComponent();
@@ -69,7 +70,7 @@ namespace ChannelChance.Controls
             media.Source = new Uri(mediaUri);
             //media.Visibility = Visibility.Visible;
             //border.Visibility = Visibility.Visible;
-            
+
             media.Play();
             //sb.Begin(media, true);
         }
@@ -78,7 +79,7 @@ namespace ChannelChance.Controls
         {
             Tuple<Uri, Uri> page1 = HandOption.Instance.Page1Img;
             Tuple<Uri, Uri> page2 = HandOption.Instance.Page2Img;
-            Tuple<Uri, Uri> page3= HandOption.Instance.Page3Img;
+            Tuple<Uri, Uri> page3 = HandOption.Instance.Page3Img;
             Tuple<Uri, Uri> page4 = HandOption.Instance.Page4Img;
             img1.Source = new BitmapImage(page1.Item2);
             img2.Source = new BitmapImage(page2.Item2);
@@ -88,6 +89,7 @@ namespace ChannelChance.Controls
             demesion2.Source = new BitmapImage(page2.Item1);
             demesion3.Source = new BitmapImage(page3.Item1);
             demesion4.Source = new BitmapImage(page4.Item1);
+            currentDirection = SeesawManager.Instance.HandDirection;
             SeesawManager.Instance.HandDirection = HandDirection.None;
             SeesawManager.Instance.LeftHandTimes = SeesawManager.Instance.RightHandTimes = 0;
             HandOption.Instance.SetInit();
@@ -112,13 +114,10 @@ namespace ChannelChance.Controls
 
         public void RightHandUp(int count)
         {
-            ShowMedia(Appconfig.V_B_MP4);
         }
 
         public void LeftHandsMoveY(int count)
         {
-            if (count < 0)
-                ShowMedia(Appconfig.V_A_MP4);
         }
 
         public void RightHandsMoveY(int count)
@@ -144,6 +143,14 @@ namespace ChannelChance.Controls
             {
                 return 4;
             }
+        }
+
+        public void Fly()
+        {
+            if (currentDirection == HandDirection.L)
+                ShowMedia(Appconfig.V_A_MP4);
+            else
+                ShowMedia(Appconfig.V_B_MP4);
         }
     }
 }

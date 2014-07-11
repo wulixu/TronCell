@@ -171,5 +171,10 @@ namespace ChannelChance.Controls
             }
         }
         public MainWindow Window { get; set; }
+
+        public void Fly()
+        {
+
+        }
     }
 }

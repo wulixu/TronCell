@@ -41,6 +41,10 @@ namespace ChannelChance.Common
         /// <param name="count"></param>
         void RightHandsMoveY(int count);
         /// <summary>
+        /// 两手举起
+        /// </summary>
+        void Fly();
+        /// <summary>
         /// 重置
         /// </summary>
         void Reset();

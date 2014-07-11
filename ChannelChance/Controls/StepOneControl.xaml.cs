@@ -184,6 +184,9 @@ namespace ChannelChance.Controls
             get { return _isMediaPlaying; }
         }
 
-        
+        public void Fly()
+        {
+
+        }
     }
 }

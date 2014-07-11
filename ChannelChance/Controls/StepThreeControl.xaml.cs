@@ -43,7 +43,8 @@ namespace ChannelChance.Controls
                 //media.Opacity = 1;
                 sb.Begin(media, true);
             };
-            sb.Completed += (s, e) => {
+            sb.Completed += (s, e) =>
+            {
                 sb.Remove(media);
                 media.Opacity = 1;
             };
@@ -178,5 +179,12 @@ namespace ChannelChance.Controls
             }
         }
         public MainWindow Window { get; set; }
+
+
+        public void Fly()
+        {
+
+        }
+
     }
 }
