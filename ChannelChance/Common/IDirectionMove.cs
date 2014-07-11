@@ -44,6 +44,15 @@ namespace ChannelChance.Common
         /// 两手举起
         /// </summary>
         void Fly();
+
+        /// <summary>
+        /// 第一次举起双手
+        /// </summary>
+        void Flying();
+        /// <summary>
+        /// 放下双手
+        /// </summary>
+        void FlyEnd();
         /// <summary>
         /// 重置
         /// </summary>
@@ -54,5 +63,6 @@ namespace ChannelChance.Common
         void Initial();
         int PageIndex { get; }
         bool IsMediaPlaying { get; }
+
     }
 }

@@ -149,10 +149,26 @@ namespace ChannelChance.Controls
 
         public void Fly()
         {
+            
+        }
+
+        private void PlaySound()
+        {
             if (currentDirection == HandDirection.L)
                 ShowMedia(Appconfig.V_A_MP4);
             else
                 ShowMedia(Appconfig.V_B_MP4);
+        }
+
+
+        public void Flying()
+        {
+            
+        }
+
+        public void FlyEnd()
+        {
+           
         }
     }
 }

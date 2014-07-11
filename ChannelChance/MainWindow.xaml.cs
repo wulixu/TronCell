@@ -136,6 +136,12 @@ namespace ChannelChance
                 case KinectGestureType.Fly:
                     _currentControl.Fly();
                     break;
+                case KinectGestureType.Flying:
+                    _currentControl.Flying();
+                    break;
+                case KinectGestureType.FlyEnd:
+                    _currentControl.FlyEnd();
+                    break;
             }
         }
 
@@ -227,6 +233,12 @@ namespace ChannelChance
                         gestureEventArgs.ActionStep = -7;
                         gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
                     }
+                    break;
+                case Key.LeftAlt:
+                    gestureEventArgs.GestureType = KinectGestureType.Flying;
+                    break;
+                case Key.RightAlt:
+                    gestureEventArgs.GestureType = KinectGestureType.FlyEnd;
                     break;
                 default:
                     gestureEventArgs = null;

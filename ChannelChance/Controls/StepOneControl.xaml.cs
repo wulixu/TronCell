@@ -188,5 +188,16 @@ namespace ChannelChance.Controls
         {
 
         }
+
+
+        public void Flying()
+        {
+            
+        }
+
+        public void FlyEnd()
+        {
+            
+        }
     }
 }
