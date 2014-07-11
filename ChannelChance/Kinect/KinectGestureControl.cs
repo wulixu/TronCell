@@ -96,6 +96,8 @@ namespace ChannelChance.Kinect
         HandsRUPDetector handsRUPDetector = new HandsRUPDetector();
         HandsLUPDetector handsLUPDetector = new HandsLUPDetector();
         FlyDetector flyDetector = new FlyDetector();
+        FlyingDetector flyingDetector = new FlyingDetector();
+
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
@@ -202,6 +204,7 @@ namespace ChannelChance.Kinect
                            });
                         }
 
+                        //flying 超过了预定的2S
                         if (flyDetector.GetstureDetected(p))
                         {
                              this.RaiseEvent(new KinectGestureEventArgs()
@@ -211,6 +214,26 @@ namespace ChannelChance.Kinect
                                Distance =0
                            });
                         }
+                    }
+
+                    //flying
+                    if (flyingDetector.Detected(players))
+                    {
+                        this.RaiseEvent(new KinectGestureEventArgs()
+                        {
+                            GestureType = KinectGestureType.Flying,
+                            ActionStep = 0,
+                            Distance = 0
+                        });
+                    }
+                    else
+                    {
+                        this.RaiseEvent(new KinectGestureEventArgs()
+                        {
+                            GestureType = KinectGestureType.FlyEnd,
+                            ActionStep = 0,
+                            Distance = 0
+                        }); 
                     }
                 }
             }

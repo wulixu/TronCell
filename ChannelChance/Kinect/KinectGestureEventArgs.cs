@@ -28,6 +28,8 @@ namespace ChannelChance.Kinect
         LeftHandsMoveY,
 
         //双臂伸平
-        Fly
+        Fly,
+        Flying,
+        FlyEnd
     }
 }

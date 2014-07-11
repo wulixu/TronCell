@@ -7,11 +7,53 @@ using System.Text;
 
 namespace ChannelChance.Kinect
 {
+    /// <summary>
+    /// 有1个人飞就认为在飞
+    /// </summary>
+    public class FlyingDetector: GestureDetectorBase
+    {
+        private  bool IsFlying(KinectPlayer p)
+        {
+            PlayerJoints nowJoints = p.PlayerJoints.LastOrDefault();
+
+            if (nowJoints != null)
+            { 
+                if (
+                 nowJoints.HandRight.Z > base.PlayerZDistance &&
+                 nowJoints.HandLeft.Z > base.PlayerZDistance &&
+                 Math.Abs(nowJoints.HandLeft.Y - nowJoints.ElbowLeft.Y) < 0.10 &&
+                 Math.Abs(nowJoints.HandRight.Y - nowJoints.ElbowRight.Y) < 0.10 &&
+                 p.IsAlive)
+                {
+                    return true;
+                };
+            }
+
+            return false;
+        }
+
+        public bool Detected(Dictionary<int, KinectPlayer> players)
+        {
+            foreach (var item in players)
+            {
+                if (!item.Value.IsAlive)
+                {
+                    continue;
+                }
+                if (IsFlying(item.Value))
+                {
+                    return true; ;
+                }
+            }
+            return false;
+        }
+    }
+
     public class FlyDetector : GestureDetectorBase
     {
         public FlyDetector()
         {
-            base.MinTimeDuration = 1000;
+            base.MinTimeDuration = 2000;
         }
 
         /// <summary>
@@ -30,7 +72,7 @@ namespace ChannelChance.Kinect
 
                 if (IsFly(startJoints) &&
                     IsFly(nowJoints) &&
-                    DateTime.Now.Subtract(startJoints.TimeStamp).TotalMilliseconds > base.MinTimeDuration)
+                    nowJoints.TimeStamp.Subtract(startJoints.TimeStamp).TotalMilliseconds> base.MinTimeDuration)
                 {
                     p.PlayerJoints.Clear();
                     return true;
@@ -42,14 +84,11 @@ namespace ChannelChance.Kinect
 
         private bool IsFly(PlayerJoints player)
         {
-            if (player.HandLeft.TrackingState == JointTrackingState.Tracked &&
-                player.HandRight.TrackingState == JointTrackingState.Tracked &&
-                player.ElbowLeft.TrackingState == JointTrackingState.Tracked &&
-                player.ElbowRight.TrackingState == JointTrackingState.Tracked &&
-                player.HandRight.Z > base.PlayerZDistance &&
-                player.HandLeft.Z > base.PlayerZDistance &&
-                Math.Abs(player.HandLeft.Y - player.ElbowLeft.Y) < 0.15 &&
-                Math.Abs(player.HandRight.Y - player.ElbowRight.Y) < 0.15)
+            if (
+                 player.HandRight.Z > base.PlayerZDistance &&
+                 player.HandLeft.Z > base.PlayerZDistance &&
+                 Math.Abs(player.HandLeft.Y - player.ElbowLeft.Y) < 0.10 &&
+                 Math.Abs(player.HandRight.Y - player.ElbowRight.Y) < 0.10 )
             {
                 return true;
             }
@@ -59,15 +98,8 @@ namespace ChannelChance.Kinect
         protected override void Get2Joints(List<PlayerJoints> PlayerJoints, out PlayerJoints startJoints, out PlayerJoints nowJoints)
         {
             startJoints = null;
-            nowJoints = null;
-            if (PlayerJoints.Count > 1)
-            {
-                nowJoints = PlayerJoints[PlayerJoints.Count - 1];
-            }
-            else
-            {
-                return;
-            }
+            nowJoints = PlayerJoints.LastOrDefault();
+           
              
             for (int i = PlayerJoints.Count - 1; i > -1; i--)
             {
