@@ -42,7 +42,7 @@ namespace ChannelChance.Kinect
 
         public GestureDetectorBase()
         {
-            this.MinTimeDuration = 0;
+            this.MinTimeDuration = 50;
             this.MaxTimeDuration = 300;
             this.PlayerZDistance = 1.3f;
             this.GestureGateDistance = 0.05f;
@@ -62,7 +62,8 @@ namespace ChannelChance.Kinect
             }
             foreach (var item in PlayerJoints)
             {
-                if (DateTime.Now.Subtract(item.TimeStamp).TotalMilliseconds < this.MaxTimeDuration)
+                if (DateTime.Now.Subtract(item.TimeStamp).TotalMilliseconds < this.MaxTimeDuration &&
+                    DateTime.Now.Subtract(item.TimeStamp).TotalMilliseconds > this.MinTimeDuration)
                 {
                     startJoints = item;
                     break;
