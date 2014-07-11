@@ -77,6 +77,8 @@ namespace ChannelChance.Controls
 
         public void Init()
         {
+            leftImg.Visibility = SeesawManager.Instance.HandDirection == HandDirection.L ? Visibility.Visible : Visibility.Collapsed;
+            rightImg.Visibility = SeesawManager.Instance.HandDirection == HandDirection.L ? Visibility.Collapsed : Visibility.Visible;
             Tuple<Uri, Uri> page1 = HandOption.Instance.Page1Img;
             Tuple<Uri, Uri> page2 = HandOption.Instance.Page2Img;
             Tuple<Uri, Uri> page3 = HandOption.Instance.Page3Img;

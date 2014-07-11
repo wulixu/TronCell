@@ -195,6 +195,10 @@
   <ItemGroup>
     <Resource Include="128-img2ico.net.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\end_A.jpg" />
+    <Resource Include="Imgs\end_B.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

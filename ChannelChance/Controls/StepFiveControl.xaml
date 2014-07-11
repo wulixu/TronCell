@@ -11,24 +11,36 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="180"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Image Grid.Row="0" Grid.Column="0" x:Name="demesion1" Margin="0 50 0 0"/>
-        <Image Grid.Row="1" Grid.Column="0" x:Name="img1" />
-        <Image Grid.Row="0" Grid.Column="1" x:Name="demesion2" Margin="0 50 0 0"/>
-        <Image Grid.Row="1" Grid.Column="1" x:Name="img2" />
-        <Image Grid.Row="0" Grid.Column="2" x:Name="demesion3" Margin="0 50 0 0"/>
-        <Image Grid.Row="1" Grid.Column="2" x:Name="img3" />
-        <Image Grid.Row="0" Grid.Column="3" x:Name="demesion4" Margin="0 50 0 0"/>
-        <Image Grid.Row="1" Grid.Column="3" x:Name="img4" />
-        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="4" Opacity="0" LoadedBehavior="Manual"/>
-        <!--<Border x:Name="border" Background="#FFECEDFA" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>-->
+        <Image Source="/ChannelChance;component/Imgs/end_A.jpg"  Grid.RowSpan="4"  x:Name="leftImg" />
+        <Image Source="/ChannelChance;component/Imgs/end_B.jpg"  Grid.RowSpan="4"  x:Name="rightImg"/>
+        <TextBlock Text="选择，属于你的邂逅" TextAlignment="Center" FontFamily="黑体" FontSize="40" VerticalAlignment="Bottom" Opacity="0.6"/>
+        <TextBlock Grid.Row="1" Text="下 载 你 的 手 机 壁 纸" Margin="0 5 0 0" TextAlignment="Center"  FontFamily="黑体" FontSize="25" VerticalAlignment="Center" Opacity="0.6"/>
+        <Grid Grid.Row="2" Margin="100 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.Column="0" x:Name="demesion1" Margin="0 50 0 0"/>
+            <Image Grid.Row="1" Grid.Column="0" x:Name="img1" />
+            <Image Grid.Row="0" Grid.Column="1" x:Name="demesion2" Margin="0 50 0 0"/>
+            <Image Grid.Row="1" Grid.Column="1" x:Name="img2" />
+            <Image Grid.Row="0" Grid.Column="2" x:Name="demesion3" Margin="0 50 0 0"/>
+            <Image Grid.Row="1" Grid.Column="2" x:Name="img3" />
+            <Image Grid.Row="0" Grid.Column="3" x:Name="demesion4" Margin="0 50 0 0"/>
+            <Image Grid.Row="1" Grid.Column="3" x:Name="img4" />
+        </Grid>
+        <TextBlock Grid.Row="3" Text="重 启 你 的 邂 逅 旅 程"  FontFamily="黑体" TextAlignment="Center" FontSize="25" VerticalAlignment="Center" Opacity="0.6"/>
+        <MediaElement x:Name="media" Grid.RowSpan="4" Opacity="0" LoadedBehavior="Manual"/>
     </Grid>
 </UserControl>
