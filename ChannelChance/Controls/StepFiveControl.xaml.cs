@@ -27,6 +27,11 @@ namespace ChannelChance.Controls
         public StepFiveControl(MainWindow window)
         {
             InitializeComponent();
+            countdownControl.Initial(200, 170, 200);
+            countdownControl.CountdownCompleted += () => {
+                countdownControl.Visibility = Visibility.Collapsed;
+                PlaySound();
+            };
             sb = Resources["sb1"] as Storyboard;
             media.MediaEnded += OnSceneOver;
             media.MediaFailed += (sender, args) =>
@@ -149,7 +154,8 @@ namespace ChannelChance.Controls
 
         public void Fly()
         {
-            
+            countdownControl.Visibility=Visibility.Visible;
+            countdownControl.BeginCountdown();
         }
 
         private void PlaySound()
@@ -168,7 +174,7 @@ namespace ChannelChance.Controls
 
         public void FlyEnd()
         {
-           
+            countdownControl.StopCountdown();
         }
     }
 }

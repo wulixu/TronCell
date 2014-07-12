@@ -68,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CountdownControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EllipseAnimControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +116,9 @@
     <Compile Include="Common\HandOption.cs" />
     <Compile Include="Common\IDirectionMove.cs" />
     <Compile Include="Common\ImageHelper.cs" />
+    <Compile Include="Controls\CountdownControl.xaml.cs">
+      <DependentUpon>CountdownControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EllipseAnimControl.xaml.cs">
       <DependentUpon>EllipseAnimControl.xaml</DependentUpon>
     </Compile>
