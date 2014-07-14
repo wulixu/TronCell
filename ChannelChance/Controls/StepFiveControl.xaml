@@ -32,14 +32,30 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Grid.Column="0" x:Name="demesion1" Margin="0 50 0 0"/>
-            <Image Grid.Row="1" Grid.Column="0" x:Name="img1" />
-            <Image Grid.Row="0" Grid.Column="1" x:Name="demesion2" Margin="0 50 0 0"/>
-            <Image Grid.Row="1" Grid.Column="1" x:Name="img2" />
-            <Image Grid.Row="0" Grid.Column="2" x:Name="demesion3" Margin="0 50 0 0"/>
-            <Image Grid.Row="1" Grid.Column="2" x:Name="img3" />
-            <Image Grid.Row="0" Grid.Column="3" x:Name="demesion4" Margin="0 50 0 0"/>
-            <Image Grid.Row="1" Grid.Column="3" x:Name="img4" />
+            <Image Grid.Row="0" Grid.Column="0" x:Name="demesion1" Margin="0 40 0 10"/>
+            <Image Grid.Row="1" Grid.Column="0" x:Name="img1" >
+                <Image.Effect>
+                    <DropShadowEffect Color="Gray" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                </Image.Effect>
+            </Image>
+            <Image Grid.Row="0" Grid.Column="1" x:Name="demesion2" Margin="0 40 0 10"/>
+            <Image Grid.Row="1" Grid.Column="1" x:Name="img2" >
+                <Image.Effect>
+                    <DropShadowEffect Color="Gray" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                </Image.Effect>
+            </Image>
+            <Image Grid.Row="0" Grid.Column="2" x:Name="demesion3" Margin="0 40 0 10"/>
+            <Image Grid.Row="1" Grid.Column="2" x:Name="img3" >
+                <Image.Effect>
+                    <DropShadowEffect Color="Gray" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                </Image.Effect>
+            </Image>
+            <Image Grid.Row="0" Grid.Column="3" x:Name="demesion4" Margin="0 40 0 10"/>
+            <Image Grid.Row="1" Grid.Column="3" x:Name="img4" >
+                <Image.Effect>
+                    <DropShadowEffect Color="Gray" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                </Image.Effect>
+            </Image>
         </Grid>
         <TextBlock Grid.Row="3" Text="重 启 你 的 邂 逅 旅 程"  FontFamily="黑体" TextAlignment="Center" FontSize="25" VerticalAlignment="Center" Opacity="0.6"/>
         <MediaElement x:Name="media" Grid.RowSpan="4" Opacity="0" LoadedBehavior="Manual"/>
