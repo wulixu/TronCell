@@ -154,8 +154,7 @@ namespace ChannelChance.Controls
 
         public void Fly()
         {
-            countdownControl.Visibility=Visibility.Visible;
-            countdownControl.BeginCountdown();
+           
         }
 
         private void PlaySound()
@@ -169,7 +168,8 @@ namespace ChannelChance.Controls
 
         public void Flying()
         {
-            
+            countdownControl.Visibility = Visibility.Visible;
+            countdownControl.BeginCountdown();
         }
 
         public void FlyEnd()

@@ -234,10 +234,10 @@ namespace ChannelChance
                         gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
                     }
                     break;
-                case Key.LeftAlt:
+                case Key.LeftShift:
                     gestureEventArgs.GestureType = KinectGestureType.Flying;
                     break;
-                case Key.RightAlt:
+                case Key.RightShift:
                     gestureEventArgs.GestureType = KinectGestureType.FlyEnd;
                     break;
                 default:
