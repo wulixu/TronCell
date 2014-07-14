@@ -34,6 +34,8 @@ namespace ChannelChance.Controls
         private static void NeddleAngleValueChangedCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
         }
+        private bool isStorying = false;
+        private bool isStopPressed = false;
         private Storyboard sbNeddleStory = null;
         public CountdownControl()
         {
@@ -44,22 +46,32 @@ namespace ChannelChance.Controls
 
         void sbNeddleStory_Completed(object sender, EventArgs e)
         {
-            if (CountdownCompleted != null)
-                CountdownCompleted();
-        }
-        public void BeginCountdown()
-        {
-            if (this.sbNeddleStory != null)
-                sbNeddleStory.Begin();
-        }
-        public void StopCountdown()
-        {
-            if (this.sbNeddleStory != null)
+            if (isStopPressed)
             {
-                sbNeddleStory.Stop();
+                double angle = NeddleAngle;
+                NeddleAngle = angle;
+            }
+            else
+            {
                 if (CountdownCompleted != null)
                     CountdownCompleted();
             }
+            isStorying = false;
+        }
+        public void BeginCountdown()
+        {
+            if (!isStorying)
+            {
+                isStorying = true;
+                sbNeddleStory.Begin(this, true);
+                isStopPressed = false;
+            }
+        }
+        public void StopCountdown()
+        {
+            isStopPressed = true;
+            sbNeddleStory.Remove(this);
+            isStorying = false;
         }
         public void Initial(double bigCircleRadius, double smallCircleRadius, double fontSize)
         {

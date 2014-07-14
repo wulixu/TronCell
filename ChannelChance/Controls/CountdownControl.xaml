@@ -10,8 +10,8 @@
 
         <Grid.Resources>
             <local:LabelContentConverter x:Key="labelContentConverter"></local:LabelContentConverter>
-            <Storyboard x:Key="sbNeddle" FillBehavior="Stop">
-                <DoubleAnimation Storyboard.TargetName="me" Storyboard.TargetProperty="NeddleAngle" From="0" To="1080" Duration="0:0:2"></DoubleAnimation>
+            <Storyboard x:Key="sbNeddle" Duration="0:0:4.1">
+                <DoubleAnimation Storyboard.TargetName="me" Storyboard.TargetProperty="NeddleAngle" From="0" To="720" Duration="0:0:4"></DoubleAnimation>
             </Storyboard>
         </Grid.Resources>
         <!--<Grid.Triggers>
