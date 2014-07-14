@@ -62,9 +62,12 @@ namespace ChannelChance.Controls
         }
         public void StopCountdown()
         {
-            this.Visibility = Visibility.Collapsed;
-            sbNeddleStory.Stop();
-            isStorying = false;
+            if (isStorying)
+            {
+                this.Visibility = Visibility.Collapsed;
+                sbNeddleStory.Stop();
+                isStorying = false;
+            }
         }
         public void Initial(double bigCircleRadius, double smallCircleRadius, double fontSize)
         {
