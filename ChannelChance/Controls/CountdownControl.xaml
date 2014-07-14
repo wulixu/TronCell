@@ -22,6 +22,6 @@
         <Ellipse x:Name="ellipse" Stroke="#FFE886BF" ></Ellipse>
         <Path  x:Name="path" Fill="#FFF7E3EE">
         </Path>
-        <Label x:Name="lb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding ElementName=me, Path=NeddleAngle,Converter={StaticResource ResourceKey=labelContentConverter},ConverterParameter=1080}" ></Label>
+        <Label x:Name="lb" Foreground="#FFE886BF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding ElementName=me, Path=NeddleAngle,Converter={StaticResource ResourceKey=labelContentConverter},ConverterParameter=1080}" ></Label>
     </Grid>
 </UserControl>

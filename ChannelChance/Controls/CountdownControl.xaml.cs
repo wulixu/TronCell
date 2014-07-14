@@ -35,7 +35,6 @@ namespace ChannelChance.Controls
         {
         }
         private bool isStorying = false;
-        private bool isStopPressed = false;
         private Storyboard sbNeddleStory = null;
         public CountdownControl()
         {
@@ -46,12 +45,6 @@ namespace ChannelChance.Controls
 
         void sbNeddleStory_Completed(object sender, EventArgs e)
         {
-            if (isStopPressed)
-            {
-                double angle = NeddleAngle;
-                NeddleAngle = angle;
-            }
-            else
             {
                 if (CountdownCompleted != null)
                     CountdownCompleted();
@@ -63,14 +56,12 @@ namespace ChannelChance.Controls
             if (!isStorying)
             {
                 isStorying = true;
-                sbNeddleStory.Begin(this, true);
-                isStopPressed = false;
+                sbNeddleStory.Begin();
             }
         }
         public void StopCountdown()
         {
-            isStopPressed = true;
-            sbNeddleStory.Remove(this);
+            sbNeddleStory.Stop();
             isStorying = false;
         }
         public void Initial(double bigCircleRadius, double smallCircleRadius, double fontSize)
@@ -153,7 +144,7 @@ namespace ChannelChance.Controls
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             double p = (double)value % 360;
-            if (p >= 180)
+            if (p >= 180 || ((double)value > 0 && p == 0))
                 return true;
             else
                 return false;
