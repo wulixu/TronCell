@@ -57,6 +57,8 @@ namespace KinectChannel
             this.HandRight = new JointData(skeleton.Joints[JointType.HandRight]);
             this.ElbowLeft = new JointData(skeleton.Joints[JointType.ElbowLeft]);
             this.ElbowRight = new JointData(skeleton.Joints[JointType.ElbowRight]);
+            this.ShoulderRight = new JointData(skeleton.Joints[JointType.ShoulderRight]);
+            this.ShoulderLeft = new JointData(skeleton.Joints[JointType.ShoulderLeft]);
             this.TimeStamp = DateTime.Now;
         }
 
@@ -65,6 +67,10 @@ namespace KinectChannel
 
         public JointData ElbowRight { get; set; }
         public JointData ElbowLeft { get; set; }
+
+        public JointData ShoulderRight { get; set; }
+        public JointData ShoulderLeft { get; set; }
+
         public DateTime TimeStamp { get; set; }
     }
 
