@@ -55,12 +55,14 @@ namespace ChannelChance.Controls
         {
             if (!isStorying)
             {
+                this.Visibility = Visibility.Visible;
                 isStorying = true;
                 sbNeddleStory.Begin();
             }
         }
         public void StopCountdown()
         {
+            this.Visibility = Visibility.Collapsed;
             sbNeddleStory.Stop();
             isStorying = false;
         }
