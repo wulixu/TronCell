@@ -25,8 +25,8 @@ namespace ChannelChance.Kinect
                     nowJoints.ElbowRight.TrackingState == JointTrackingState.Tracked &&
                  nowJoints.ElbowLeft.Z > base.PlayerZDistance &&
                  nowJoints.ElbowRight.Z > base.PlayerZDistance &&
-                 Math.Abs(nowJoints.ShoulderLeft.Y - nowJoints.ElbowLeft.Y) < 0.10 &&
-                 Math.Abs(nowJoints.ShoulderRight.Y - nowJoints.ElbowRight.Y) < 0.10 &&
+                 Math.Abs(nowJoints.ShoulderLeft.Y - nowJoints.ElbowLeft.Y) < 0.15 &&
+                 Math.Abs(nowJoints.ShoulderRight.Y - nowJoints.ElbowRight.Y) < 0.15 &&
                  p.IsAlive)
                 {
                     return true;
