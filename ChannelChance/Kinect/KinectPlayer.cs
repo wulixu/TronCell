@@ -53,8 +53,10 @@ namespace KinectChannel
     {
         public PlayerJoints(Skeleton skeleton)
         {
-            this.HandLeft = new JointData(skeleton.Joints[JointType.HandLeft]);
-            this.HandRight = new JointData(skeleton.Joints[JointType.HandRight]);
+            //todo:快速修正
+            this.HandLeft = new JointData(skeleton.Joints[JointType.WristLeft]);
+            this.HandRight = new JointData(skeleton.Joints[JointType.WristRight]);
+
             this.ElbowLeft = new JointData(skeleton.Joints[JointType.ElbowLeft]);
             this.ElbowRight = new JointData(skeleton.Joints[JointType.ElbowRight]);
             this.ShoulderRight = new JointData(skeleton.Joints[JointType.ShoulderRight]);
