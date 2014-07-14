@@ -95,7 +95,6 @@ namespace ChannelChance.Kinect
         HandLSweepYDetector handLSweepYDetector = new HandLSweepYDetector();
         HandsRUPDetector handsRUPDetector = new HandsRUPDetector();
         HandsLUPDetector handsLUPDetector = new HandsLUPDetector();
-        FlyDetector flyDetector = new FlyDetector();
         FlyingDetector flyingDetector = new FlyingDetector();
 
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
@@ -202,18 +201,7 @@ namespace ChannelChance.Kinect
                                ActionStep = Convert.ToInt16(Math.Ceiling(handLSweepYDetector.GestureDistance / handLSweepYDetector.GestureGateDistance)),
                                Distance = handLSweepYDetector.GestureDistance
                            });
-                        }
-
-                        //flying 超过了预定的2S
-                        if (flyDetector.GetstureDetected(p))
-                        {
-                             this.RaiseEvent(new KinectGestureEventArgs()
-                           {
-                               GestureType = KinectGestureType.Fly,
-                               ActionStep = 0,
-                               Distance =0
-                           });
-                        }
+                        } 
                     }
 
                     //flying
