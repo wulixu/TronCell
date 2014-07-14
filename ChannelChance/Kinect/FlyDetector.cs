@@ -19,10 +19,14 @@ namespace ChannelChance.Kinect
             if (nowJoints != null)
             { 
                 if (
-                 nowJoints.HandRight.Z > base.PlayerZDistance &&
-                 nowJoints.HandLeft.Z > base.PlayerZDistance &&
-                 Math.Abs(nowJoints.HandLeft.Y - nowJoints.ElbowLeft.Y) < 0.10 &&
-                 Math.Abs(nowJoints.HandRight.Y - nowJoints.ElbowRight.Y) < 0.10 &&
+                    nowJoints.ShoulderLeft.TrackingState == JointTrackingState.Tracked &&
+                    nowJoints.ShoulderRight.TrackingState == JointTrackingState.Tracked &&
+                    nowJoints.ElbowLeft.TrackingState == JointTrackingState.Tracked &&
+                    nowJoints.ElbowRight.TrackingState == JointTrackingState.Tracked &&
+                 nowJoints.ElbowLeft.Z > base.PlayerZDistance &&
+                 nowJoints.ElbowRight.Z > base.PlayerZDistance &&
+                 Math.Abs(nowJoints.ShoulderLeft.Y - nowJoints.ElbowLeft.Y) < 0.10 &&
+                 Math.Abs(nowJoints.ShoulderRight.Y - nowJoints.ElbowRight.Y) < 0.10 &&
                  p.IsAlive)
                 {
                     return true;
