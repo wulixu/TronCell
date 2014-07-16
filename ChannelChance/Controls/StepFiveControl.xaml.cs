@@ -27,7 +27,7 @@ namespace ChannelChance.Controls
         public StepFiveControl(MainWindow window)
         {
             InitializeComponent();
-            countdownControl.Initial(200, 170, 200);
+            countdownControl.Initial(200, 170, 200,60);
             countdownControl.CountdownCompleted += () => {
                 countdownControl.Visibility = Visibility.Collapsed;
                 PlaySound();
@@ -137,6 +137,7 @@ namespace ChannelChance.Controls
         }
         public void Initial()
         {
+            countdownControl.BeginCountdown();
         }
         private bool _isMediaPlaying;
         public bool IsMediaPlaying
@@ -168,13 +169,13 @@ namespace ChannelChance.Controls
 
         public void Flying()
         {
-            countdownControl.Visibility = Visibility.Visible;
-            countdownControl.BeginCountdown();
+            //countdownControl.Visibility = Visibility.Visible;
+            //countdownControl.BeginCountdown();
         }
 
         public void FlyEnd()
         {
-            countdownControl.StopCountdown();
+            //countdownControl.StopCountdown();
         }
     }
 }

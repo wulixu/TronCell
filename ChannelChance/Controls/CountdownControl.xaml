@@ -9,9 +9,8 @@
     <Grid x:Name="grid" Width="400" Height="400">
 
         <Grid.Resources>
-            <local:LabelContentConverter x:Key="labelContentConverter"></local:LabelContentConverter>
-            <Storyboard x:Key="sbNeddle" Duration="0:0:4.1">
-                <DoubleAnimation Storyboard.TargetName="me" Storyboard.TargetProperty="NeddleAngle" From="0" To="720" Duration="0:0:4"></DoubleAnimation>
+            <Storyboard x:Key="sbNeddle">
+                <DoubleAnimation x:Name="doubleAnima" Storyboard.TargetName="me" Storyboard.TargetProperty="NeddleAngle" ></DoubleAnimation>
             </Storyboard>
         </Grid.Resources>
         <!--<Grid.Triggers>
@@ -22,6 +21,6 @@
         <Ellipse x:Name="ellipse" Stroke="#FFE886BF" ></Ellipse>
         <Path  x:Name="path" Fill="#FFF7E3EE">
         </Path>
-        <Label x:Name="lb" Foreground="#FFE886BF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding ElementName=me, Path=NeddleAngle,Converter={StaticResource ResourceKey=labelContentConverter},ConverterParameter=1080}" ></Label>
+        <Label x:Name="lb" Opacity="0.5" Foreground="#FFE886BF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  ></Label>
     </Grid>
 </UserControl>

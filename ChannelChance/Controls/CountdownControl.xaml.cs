@@ -36,19 +36,22 @@ namespace ChannelChance.Controls
         }
         private bool isStorying = false;
         private Storyboard sbNeddleStory = null;
+        private double totalAngle = 0d;
         public CountdownControl()
         {
             InitializeComponent();
+            NeddleAngle = 0;
+            lb.Content = "";
             sbNeddleStory = grid.FindResource("sbNeddle") as Storyboard;
             sbNeddleStory.Completed += sbNeddleStory_Completed;
         }
 
         void sbNeddleStory_Completed(object sender, EventArgs e)
         {
-            {
-                if (CountdownCompleted != null)
-                    CountdownCompleted();
-            }
+            sbNeddleStory.Remove(this);
+            NeddleAngle = totalAngle;
+            if (CountdownCompleted != null)
+                CountdownCompleted();
             isStorying = false;
         }
         public void BeginCountdown()
@@ -57,21 +60,40 @@ namespace ChannelChance.Controls
             {
                 this.Visibility = Visibility.Visible;
                 isStorying = true;
-                sbNeddleStory.Begin();
+                sbNeddleStory.Begin(this,true);
             }
         }
-        public void StopCountdown()
+        //public void StopCountdown()
+        //{
+        //    if (isStorying)
+        //    {
+        //        this.Visibility = Visibility.Collapsed;
+        //        sbNeddleStory.Stop();
+        //        isStorying = false;
+        //    }
+        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bigCircleRadius">大圆半径</param>
+        /// <param name="smallCircleRadius">小圆半径</param>
+        /// <param name="fontSize">字体大小</param>
+        /// <param name="count">计数总量</param>
+        public void Initial(double bigCircleRadius, double smallCircleRadius, double fontSize,int count)
         {
-            if (isStorying)
-            {
-                this.Visibility = Visibility.Collapsed;
-                sbNeddleStory.Stop();
-                isStorying = false;
-            }
-        }
-        public void Initial(double bigCircleRadius, double smallCircleRadius, double fontSize)
-        {
+            totalAngle = 360 * count;
+            sbNeddleStory.Duration = new Duration(TimeSpan.FromSeconds(count + 0.1));
+            DoubleAnimation da = sbNeddleStory.Children[0] as DoubleAnimation;
+            da.From = 0d;
+            da.To = totalAngle;
+            da.Duration = new Duration(TimeSpan.FromSeconds(count));
             lb.FontSize = fontSize;
+            Binding bindlb = new Binding();
+            bindlb.Source = this;
+            bindlb.Path = new PropertyPath(NeddleAngleProperty);
+            bindlb.Converter = new LabelContentConverter();
+            bindlb.ConverterParameter = totalAngle;
+            BindingOperations.SetBinding(lb, Label.ContentProperty, bindlb);
             grid.Width = 2 * bigCircleRadius;
             grid.Height = 2 * bigCircleRadius;
             ellipse.StrokeThickness = bigCircleRadius - smallCircleRadius;
@@ -135,8 +157,10 @@ namespace ChannelChance.Controls
             double AngleTotal = double.Parse(parameter.ToString());//1080
 
             int contentValue = (int)(AngleTotal - currentAngle) / 360;
-            if (currentAngle < AngleTotal && currentAngle % 360 == 0)
-                contentValue -= 1;
+            if (currentAngle % 360 != 0)
+                contentValue += 1;
+            //if (currentAngle < AngleTotal && currentAngle % 360 == 0)
+            //    contentValue -= 1;
             return contentValue.ToString() + "\"";
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
