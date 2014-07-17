@@ -177,5 +177,10 @@ namespace ChannelChance.Controls
         {
             //countdownControl.StopCountdown();
         }
+
+        public void StopCountdown()
+        {
+            countdownControl.StopCountdown();
+        }
     }
 }

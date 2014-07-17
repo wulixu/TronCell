@@ -63,15 +63,13 @@ namespace ChannelChance.Controls
                 sbNeddleStory.Begin(this,true);
             }
         }
-        //public void StopCountdown()
-        //{
-        //    if (isStorying)
-        //    {
-        //        this.Visibility = Visibility.Collapsed;
-        //        sbNeddleStory.Stop();
-        //        isStorying = false;
-        //    }
-        //}
+        public void StopCountdown()
+        {
+                this.Visibility = Visibility.Collapsed;
+                sbNeddleStory.Stop(this);
+                sbNeddleStory.Remove(this);
+                isStorying = false;
+        }
         /// <summary>
         /// 
         /// </summary>
