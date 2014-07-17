@@ -38,8 +38,8 @@ namespace ChannelChance.Common
         {
             get
             {
-                string img1 = Page1State == HandDirection.L ? "dimension_IA.jpg" : "dimension_IB.jpg";
-                string img2 = Page1State == HandDirection.L ? "wallpaper-IA.jpg" : "wallpaper-IB.jpg";
+                string img1 = Page1State == HandDirection.L ? "dimension_IA.png" : "dimension_IB.png";
+                string img2 = Page1State == HandDirection.L ? "wallpaper-IA.png" : "wallpaper-IB.png";
                 return GetImg(img1, img2);
             }
         }
@@ -48,8 +48,8 @@ namespace ChannelChance.Common
         {
             get
             {
-                string img1 = Page2State == HandDirection.L ? "dimension_IIA.jpg" : "dimension_IIB.jpg";
-                string img2 = Page2State == HandDirection.L ? "wallpaper-IIA.jpg" : "wallpaper-IIB.jpg";
+                string img1 = Page2State == HandDirection.L ? "dimension_IIA.png" : "dimension_IIB.png";
+                string img2 = Page2State == HandDirection.L ? "wallpaper-IIA.png" : "wallpaper-IIB.png";
                 return GetImg(img1, img2);
             }
         }
@@ -58,8 +58,8 @@ namespace ChannelChance.Common
         {
             get
             {
-                string img1 = Page3State == HandDirection.L ? "dimension_IIIA.jpg" : "dimension_IIIB.jpg";
-                string img2 = Page3State == HandDirection.L ? "wallpaper-IIIA.jpg" : "wallpaper-IIIB.jpg";
+                string img1 = Page3State == HandDirection.L ? "dimension_IIIA.png" : "dimension_IIIB.png";
+                string img2 = Page3State == HandDirection.L ? "wallpaper-IIIA.png" : "wallpaper-IIIB.png";
                 return GetImg(img1, img2);
             }
         }
@@ -68,8 +68,8 @@ namespace ChannelChance.Common
         {
             get
             {
-                string img1 = SeesawManager.Instance.HandDirection == HandDirection.L ? "dimension_IVA.jpg" : "dimension_IVB.jpg";
-                string img2 = SeesawManager.Instance.HandDirection == HandDirection.L ? "wallpaper-IVA.jpg" : "wallpaper-IVB.jpg";
+                string img1 = SeesawManager.Instance.HandDirection == HandDirection.L ? "dimension_IVA.png" : "dimension_IVB.png";
+                string img2 = SeesawManager.Instance.HandDirection == HandDirection.L ? "wallpaper-IVA.png" : "wallpaper-IVB.png";
                 return GetImg(img1, img2);
             }
         }
