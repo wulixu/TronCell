@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using ChannelChance.Common;
+using log4net;
 using log4net.Config;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,13 @@ namespace ChannelChance
             MakeAppSingleton();
             XmlConfigurator.Configure();
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            App.Current.Resources.Add("Brightness",Appconfig.Brightness );
+            App.Current.Resources.Add("Contrast", Appconfig.Contrast);
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

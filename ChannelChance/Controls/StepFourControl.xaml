@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:ChannelChance.Common"
                  xmlns:controls="clr-namespace:ChannelChance.Controls"
              Height="1080" Width="1920" >
     <UserControl.Resources>
@@ -34,7 +35,11 @@
                 </TransformGroup>
             </controls:EllipseAnimForStep4Control.RenderTransform>
         </controls:EllipseAnimForStep4Control>
-        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" LoadedBehavior="Manual">
+            <MediaElement.Effect>
+                <l:BrightContrastEffect  Brightness="{StaticResource Brightness}"  Contrast="{StaticResource Contrast}"/>
+            </MediaElement.Effect>
+        </MediaElement>
         <!--<Border x:Name="border" Background="#FFECEDFA" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>-->
     </Grid>
 </UserControl>

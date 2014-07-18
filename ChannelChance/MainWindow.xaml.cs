@@ -163,38 +163,18 @@ namespace ChannelChance
             switch (e.Key)
             {
                 case Key.Left:
-                    if (_currentControl.PageIndex == 0 || _currentControl.PageIndex == 1)
-                    {
-                        gestureEventArgs.ActionStep = 7;
-                        gestureEventArgs.GestureType = KinectGestureType.LeftHandsMove;
-                    }
-                    else if (_currentControl.PageIndex == 2)
-                    {
+                    if (_currentControl.PageIndex == 2)
                         gestureEventArgs.ActionStep = -7;
-                        gestureEventArgs.GestureType = KinectGestureType.LeftHandsMoveY;
-                    }
-                    else if (_currentControl.PageIndex == 3)
-                    {
+                    else
                         gestureEventArgs.ActionStep = 7;
-                        gestureEventArgs.GestureType = KinectGestureType.LeftHandsMoveY;
-                    }
+                    gestureEventArgs.GestureType = KinectGestureType.LeftHandsMove;
                     break;
                 case Key.Right:
-                    if (_currentControl.PageIndex == 0 || _currentControl.PageIndex == 1)
-                    {
+                    if (_currentControl.PageIndex == 2)
+                        gestureEventArgs.ActionStep = -7;
+                    else
                         gestureEventArgs.ActionStep = 7;
                         gestureEventArgs.GestureType = KinectGestureType.RightHandsMove;
-                    }
-                    else if (_currentControl.PageIndex == 2)
-                    {
-                        gestureEventArgs.ActionStep = -7;
-                        gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
-                    }
-                    else if (_currentControl.PageIndex == 3)
-                    {
-                        gestureEventArgs.ActionStep = 7;
-                        gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
-                    }
                     break;
                 case Key.Enter:
                     if (_currentControl.PageIndex == 4)
@@ -207,58 +187,6 @@ namespace ChannelChance
                         }
                     }
                     break;
-                //case Key.Up:
-                //    if (_currentControl.PageIndex == 3)
-                //    {
-                //        var isleftCtrl = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl);
-                //        if (isleftCtrl)
-                //        {
-                //            gestureEventArgs.ActionStep = 7;
-                //            gestureEventArgs.GestureType = KinectGestureType.LeftHandsMoveY;
-                //        }
-                //        var isrightCtrl = e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
-                //        if (isrightCtrl)
-                //        {
-                //            gestureEventArgs.ActionStep = 7;
-                //            gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        var isleftCtrl = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl);
-                //        if (isleftCtrl)
-                //        {
-                //            gestureEventArgs.ActionStep = 7;
-                //            gestureEventArgs.GestureType = KinectGestureType.LeftHandsUP;
-                //        }
-                //        var isrightCtrl = e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
-                //        if (isrightCtrl)
-                //        {
-                //            gestureEventArgs.ActionStep = 7;
-                //            gestureEventArgs.GestureType = KinectGestureType.RightHandsUP;
-                //        }
-                //    }
-                //    break;
-                //case Key.Down:
-                //    var isleftCtrl1 = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl);
-                //    if (isleftCtrl1)
-                //    {
-                //        gestureEventArgs.ActionStep = -7;
-                //        gestureEventArgs.GestureType = KinectGestureType.LeftHandsMoveY;
-                //    }
-                //    var isrightCtrl2 = e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
-                //    if (isrightCtrl2)
-                //    {
-                //        gestureEventArgs.ActionStep = -7;
-                //        gestureEventArgs.GestureType = KinectGestureType.RightHandsMoveY;
-                //    }
-                //    break;
-                //case Key.LeftShift:
-                //    gestureEventArgs.GestureType = KinectGestureType.Flying;
-                //    break;
-                //case Key.RightShift:
-                //    gestureEventArgs.GestureType = KinectGestureType.FlyEnd;
-                //    break;
                 default:
                     gestureEventArgs = null;
                     break;

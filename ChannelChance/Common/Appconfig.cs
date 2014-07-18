@@ -26,6 +26,9 @@ namespace ChannelChance.Common
         public static readonly string GroundImagesDirName = "GroundImages";
         public static readonly string Seesawimages = "Seesawimages";
         public static readonly int AutoPlayInterval = 3;
+        public static readonly double Brightness = Convert.ToDouble(ConfigurationManager.AppSettings["Brightness"]);
+        public static readonly double Contrast = Convert.ToDouble(ConfigurationManager.AppSettings["Contrast"]);
+
         public static int ToRorL(int count)
         {
             var b = count > 0;

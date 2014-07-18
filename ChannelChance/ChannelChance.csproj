@@ -113,6 +113,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\Appconfig.cs" />
+    <Compile Include="Common\BrightContrastEffect.cs" />
     <Compile Include="Common\HandOption.cs" />
     <Compile Include="Common\IDirectionMove.cs" />
     <Compile Include="Common\ImageHelper.cs" />
@@ -178,6 +179,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="bricon.ps" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -205,6 +207,9 @@
   <ItemGroup>
     <Resource Include="Imgs\end_A.jpg" />
     <Resource Include="Imgs\end_B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bricon.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

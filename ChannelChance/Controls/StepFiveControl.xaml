@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChannelChance.Controls"
+             xmlns:l="clr-namespace:ChannelChance.Common"
              Height="1080" Width="1920">
     <UserControl.Resources>
         <Storyboard  x:Key="sb1">
@@ -58,7 +59,11 @@
             </Image>
         </Grid>
         <TextBlock Grid.Row="3" Text="重 启 你 的 邂 逅 旅 程"  FontFamily="黑体" TextAlignment="Center" FontSize="25" VerticalAlignment="Center" Opacity="0.6"/>
-        <MediaElement x:Name="media" Grid.RowSpan="4" Opacity="0" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="media" Grid.RowSpan="4" Opacity="0" LoadedBehavior="Manual">
+            <MediaElement.Effect>
+                <l:BrightContrastEffect  Brightness="{StaticResource Brightness}"  Contrast="{StaticResource Contrast}"/>
+            </MediaElement.Effect>
+        </MediaElement>
         <local:CountdownControl x:Name="countdownControl" Grid.Row="0" Grid.RowSpan="4" Visibility="Collapsed"></local:CountdownControl>
     </Grid>
 </UserControl>

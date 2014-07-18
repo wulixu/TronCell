@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:ChannelChance.Controls"
+             xmlns:l="clr-namespace:ChannelChance.Common"
              Height="1080" Width="1920" >
     <UserControl.Resources>
         <Storyboard  x:Key="sb1">
@@ -37,7 +38,11 @@
                 </TransformGroup>
             </controls:EllipseAnimControl.RenderTransform>
         </controls:EllipseAnimControl>
-        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="media" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" LoadedBehavior="Manual">
+            <MediaElement.Effect>
+                <l:BrightContrastEffect  Brightness="{StaticResource Brightness}"  Contrast="{StaticResource Contrast}" />
+            </MediaElement.Effect>
+        </MediaElement>
         <!--<Border x:Name="border" Background="#FFECEDFA" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>-->
     </Grid>
 </UserControl>
