@@ -68,11 +68,11 @@ namespace ChannelChance.Kinect
             sensor.SkeletonFrameReady += this.SkeletonsReady;
             kinectSensorManager.TransformSmoothParameters = new TransformSmoothParameters
             {
-                Smoothing = 0.5f,
-                Correction = 0.5f,
+                Smoothing = 0.6f,
+                Correction = 0.4f,
                 Prediction = 0.5f,
-                JitterRadius = 0.05f,
-                MaxDeviationRadius = 0.04f
+                JitterRadius = 0.025f,
+                MaxDeviationRadius = 0.025f
             };
             kinectSensorManager.SkeletonStreamEnabled = true;
             kinectSensorManager.KinectSensorEnabled = true;
@@ -89,13 +89,8 @@ namespace ChannelChance.Kinect
 
         #region Kinect Skeleton processing
 
-        HandRSweepXDetector handRSweepXDetector = new HandRSweepXDetector();
-        HandRSweepYDecector handRSweepYDecector = new HandRSweepYDecector();
-        HandLSweepXDetector handLSweepXDetector = new HandLSweepXDetector();
-        HandLSweepYDetector handLSweepYDetector = new HandLSweepYDetector();
-        HandsRUPDetector handsRUPDetector = new HandsRUPDetector();
-        HandsLUPDetector handsLUPDetector = new HandsLUPDetector();
-        FlyingDetector flyingDetector = new FlyingDetector();
+        HandRSweepXDetector handRSweepDetector = new HandRSweepXDetector();
+        HandLSweepXDetector handLSweepDetector = new HandLSweepXDetector();
 
         private void SkeletonsReady(object sender, SkeletonFrameReadyEventArgs e)
         {
@@ -140,88 +135,30 @@ namespace ChannelChance.Kinect
                             continue;
                         }
 
-                        //右手举了
-                        if (handsRUPDetector.GetstureDetected(p))
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.RightHandsUP
-                            });
-                        }
-                        //左手举了
-                        if (handsLUPDetector.GetstureDetected(p))
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.LeftHandsUP
-                            });
-                        }
-
-                        //right hand move on X
-                        if (handRSweepXDetector.GetstureDetected(p))
+                        ////right hand move
+                        if (handRSweepDetector.GetstureDetected(p))
                         {
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
                                 GestureType = KinectGestureType.RightHandsMove,
-                                ActionStep = Convert.ToInt16(Math.Ceiling(handRSweepXDetector.GestureDistance / handRSweepXDetector.GestureGateDistance)),
-                                Distance = handRSweepXDetector.GestureDistance 
+                                ActionStep = Convert.ToInt16(Math.Ceiling(handRSweepDetector.GestureDistance / handRSweepDetector.GestureGateDistance)),
+                                Distance = handRSweepDetector.GestureDistance
                             });
+                            break;
                         }
 
-                        //left hand move on X
-                        if (handLSweepXDetector.GetstureDetected(p))
+                       
+                        ////////left hand move
+                        if (handLSweepDetector.GetstureDetected(p))
                         {
-
                             this.RaiseEvent(new KinectGestureEventArgs()
                             {
                                 GestureType = KinectGestureType.LeftHandsMove,
-                                ActionStep = - Convert.ToInt16(Math.Ceiling(handLSweepXDetector.GestureDistance / handLSweepXDetector.GestureGateDistance)),
-                                Distance = handLSweepXDetector.GestureGateDistance
+                                ActionStep = -Convert.ToInt16(Math.Ceiling(handLSweepDetector.GestureDistance / handLSweepDetector.GestureGateDistance)),
+                                Distance = handLSweepDetector.GestureGateDistance
                             });
+                            break;
                         }
-
-                        ////right hand move on Y
-                        if (handRSweepYDecector.GetstureDetected(p))
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                            {
-                                GestureType = KinectGestureType.RightHandsMoveY,
-                                ActionStep = Convert.ToInt16(Math.Ceiling(handRSweepYDecector.GestureDistance / handRSweepYDecector.GestureGateDistance)),
-                                Distance = handRSweepYDecector.GestureDistance
-                            });
-                        }
-                        
-
-                        ////left hand move on Y
-                        if (handLSweepYDetector.GetstureDetected(p))
-                        {
-                            this.RaiseEvent(new KinectGestureEventArgs()
-                           {
-                               GestureType = KinectGestureType.LeftHandsMoveY,
-                               ActionStep = Convert.ToInt16(Math.Ceiling(handLSweepYDetector.GestureDistance / handLSweepYDetector.GestureGateDistance)),
-                               Distance = handLSweepYDetector.GestureDistance
-                           });
-                        } 
-                    }
-
-                    //flying
-                    if (flyingDetector.Detected(players))
-                    {
-                        this.RaiseEvent(new KinectGestureEventArgs()
-                        {
-                            GestureType = KinectGestureType.Flying,
-                            ActionStep = 0,
-                            Distance = 0
-                        });
-                    }
-                    else
-                    {
-                        this.RaiseEvent(new KinectGestureEventArgs()
-                        {
-                            GestureType = KinectGestureType.FlyEnd,
-                            ActionStep = 0,
-                            Distance = 0
-                        }); 
                     }
                 }
             }

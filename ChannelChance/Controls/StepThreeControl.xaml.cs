@@ -100,12 +100,32 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
-
+            this.timer.Stop(); this.timer.Start();
+            rightEllipseAnimControl.StopAutoMove();
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeLeftIndex(-Appconfig.ToRorL(count));
+                if (count < 0)
+                    leftEllipseAnimControl.MoveToNext();
+                else
+                    leftEllipseAnimControl.MoveToLast();
+            }
         }
 
         public void RightHandMove(int count)
         {
-
+            this.timer.Stop(); this.timer.Start();
+            leftEllipseAnimControl.StopAutoMove();
+            var length = Math.Abs(count);
+            for (int i = 0; i < length; i++)
+            {
+                ElementAnimControl.ChangeRightIndex(-Appconfig.ToRorL(count));
+                if (count < 0)
+                    rightEllipseAnimControl.MoveToNext();
+                else
+                    rightEllipseAnimControl.MoveToLast();
+            }
         }
 
         public void LeftHandUp(int count)
@@ -126,32 +146,12 @@ namespace ChannelChance.Controls
 
         public void LeftHandsMoveY(int count)
         {
-            this.timer.Stop(); this.timer.Start();
-            rightEllipseAnimControl.StopAutoMove();
-            var length = Math.Abs(count);
-            for (int i = 0; i < length; i++)
-            {
-                ElementAnimControl.ChangeLeftIndex(-Appconfig.ToRorL(count));
-                if (count < 0)
-                    leftEllipseAnimControl.MoveToNext();
-                else
-                    leftEllipseAnimControl.MoveToLast();
-            }
+            
         }
 
         public void RightHandsMoveY(int count)
         {
-            this.timer.Stop(); this.timer.Start();
-            leftEllipseAnimControl.StopAutoMove();
-            var length = Math.Abs(count);
-            for (int i = 0; i < length; i++)
-            {
-                ElementAnimControl.ChangeRightIndex(-Appconfig.ToRorL(count));
-                if (count < 0)
-                    rightEllipseAnimControl.MoveToNext();
-                else
-                    rightEllipseAnimControl.MoveToLast();
-            }
+            
         }
 
         public void Reset()

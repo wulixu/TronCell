@@ -97,12 +97,32 @@ namespace ChannelChance.Controls
 
         public void LeftHandMove(int count)
         {
-
+            if (_leftCount >= 3)
+            {
+                _isMediaPlaying = true;
+                SeesawManager.Instance.HandDirection = HandDirection.L;
+                SeesawManager.Instance.LeftHandTimes++;
+                if (SeesawManager.Instance.CanPlayMP4)
+                    ShowMedia();
+                _leftCount = 0;
+            }
+            if (count > 0)
+                _leftCount++;
         }
 
         public void RightHandMove(int count)
         {
-
+            if (_rightCount >= 3)
+            {
+                _isMediaPlaying = true;
+                SeesawManager.Instance.HandDirection = HandDirection.R;
+                SeesawManager.Instance.RightHandTimes++;
+                if (SeesawManager.Instance.CanPlayMP4)
+                    ShowMedia();
+                _rightCount = 0;
+            }
+            if (count > 0)
+                _rightCount++;
         }
 
         public void LeftHandUp(int count)
@@ -118,33 +138,13 @@ namespace ChannelChance.Controls
         private int _leftCount = 0;
         public void LeftHandsMoveY(int count)
         {
-            if (_leftCount >= 3)
-            {
-                _isMediaPlaying = true;
-                SeesawManager.Instance.HandDirection = HandDirection.L;
-                SeesawManager.Instance.LeftHandTimes++;
-                if (SeesawManager.Instance.CanPlayMP4)
-                    ShowMedia();
-                _leftCount = 0;
-            }
-            if (count > 0)
-                _leftCount++;
+           
         }
 
         private int _rightCount = 0;
         public void RightHandsMoveY(int count)
         {
-           if (_rightCount >= 3)
-            {
-                _isMediaPlaying = true;
-                SeesawManager.Instance.HandDirection = HandDirection.R;
-                SeesawManager.Instance.RightHandTimes++;
-                if (SeesawManager.Instance.CanPlayMP4)
-                    ShowMedia();
-                _rightCount = 0;
-            }
-            if (count > 0)
-                _rightCount++;
+          
         }
         public void Reset()
         {

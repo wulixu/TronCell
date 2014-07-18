@@ -12,34 +12,35 @@ namespace ChannelChance.Kinect
     {
         public HandLSweepYDetector()
         {
-            base.GestureGateDistance = 0.04f;
+            base.Orentation = GestureOrentation.Left;
         }
 
         public override bool GetstureDetected(KinectPlayer p)
         {
-            PlayerJoints startJoints;
-            PlayerJoints nowJoints;
-            Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
+            //PlayerJoints startJoints;
+            //PlayerJoints nowJoints;
+            //Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
 
-            if (nowJoints != null && startJoints != null)
-            {
-                JointData startHandLeft = startJoints.HandLeft;
-                JointData nowHandLeft = nowJoints.HandLeft;
+            //if (nowJoints != null && startJoints != null)
+            //{
+            //    JointData startHandLeft = startJoints.HandLeft;
+            //    JointData nowHandLeft = nowJoints.HandLeft;
 
-                if (startHandLeft.TrackingState == JointTrackingState.Tracked &&
-                    nowHandLeft.TrackingState == JointTrackingState.Tracked &&
-                    nowHandLeft.Z > base.PlayerZDistance &&
-                    p.Z  >  base.PlayerZDistance &&
-                    Math.Abs(nowHandLeft.Y - startHandLeft.Y) > base.GestureGateDistance)
-                {
-                    base.GestureDistance = nowHandLeft.Y - startHandLeft.Y;
-                    p.PlayerJoints.Clear();
-                    return true;
+            //    if (startHandLeft.TrackingState == JointTrackingState.Tracked &&
+            //        nowHandLeft.TrackingState == JointTrackingState.Tracked &&
+            //        nowHandLeft.Z > base.PlayerZDistance &&
+            //        p.Z  >  base.PlayerZDistance &&
+            //        Math.Abs(nowHandLeft.Y - startHandLeft.Y) > base.GestureGateDistance)
+            //    {
+            //        base.GestureDistance = nowHandLeft.Y - startHandLeft.Y;
+            //        p.PlayerJoints.Clear();
+            //        return true;
 
-                }
-            }
+            //    }
+            //}
 
-            return false;
+            //return false;
+            return base.GetstureDetected(p);
         }
     }
 }

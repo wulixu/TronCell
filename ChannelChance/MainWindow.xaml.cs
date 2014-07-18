@@ -115,34 +115,14 @@ namespace ChannelChance
 
             switch (e.GestureType)
             {
-                case KinectGestureType.LeftHandsUP:
-                    _currentControl.LeftHandUp(e.ActionStep);
-                    break;
                 case KinectGestureType.LeftHandsMove:
                     _currentControl.LeftHandMove(e.ActionStep);
-                    break;
-                case KinectGestureType.LeftHandsMoveY:
-                    _currentControl.LeftHandsMoveY(e.ActionStep);
-                    break;
-                case KinectGestureType.RightHandsUP:
-                    _currentControl.RightHandUp(e.ActionStep);
                     break;
                 case KinectGestureType.RightHandsMove:
                     _currentControl.RightHandMove(e.ActionStep);
                     break;
-                case KinectGestureType.RightHandsMoveY:
-                    _currentControl.RightHandsMoveY(e.ActionStep);
-                    break;
-                case KinectGestureType.Fly:
-                    _currentControl.Fly();
-                    break;
-                case KinectGestureType.Flying:
-                    _currentControl.Flying();
-                    break;
-                case KinectGestureType.FlyEnd:
-                    _currentControl.FlyEnd();
-                    break;
             }
+            Console.WriteLine(e.GestureType.ToString() + e.ActionStep.ToString());
         }
 
         void OnSceneOver(object sender, EventArgs e)

@@ -54,8 +54,11 @@ namespace KinectChannel
         public PlayerJoints(Skeleton skeleton)
         {
             //todo:快速修正
-            this.HandLeft = new JointData(skeleton.Joints[JointType.WristLeft]);
-            this.HandRight = new JointData(skeleton.Joints[JointType.WristRight]);
+            this.HandLeft = new JointData(skeleton.Joints[JointType.HandLeft]);
+            this.HandRight = new JointData(skeleton.Joints[JointType.HandRight]);
+
+            this.WristLeft = new JointData(skeleton.Joints[JointType.WristLeft]);
+            this.WristRight = new JointData(skeleton.Joints[JointType.WristRight]); 
 
             this.ElbowLeft = new JointData(skeleton.Joints[JointType.ElbowLeft]);
             this.ElbowRight = new JointData(skeleton.Joints[JointType.ElbowRight]);
@@ -72,6 +75,9 @@ namespace KinectChannel
 
         public JointData ShoulderRight { get; set; }
         public JointData ShoulderLeft { get; set; }
+
+        public JointData WristLeft { get; set; }
+        public JointData WristRight { get; set; }
 
         public DateTime TimeStamp { get; set; }
     }

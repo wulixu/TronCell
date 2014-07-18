@@ -12,37 +12,39 @@ namespace ChannelChance.Kinect
     {
         public HandRSweepXDetector()
         {
+            base.Orentation = GestureOrentation.Right;
         }
 
         public override bool GetstureDetected(KinectPlayer p)
         {
 
-            PlayerJoints startJoints;
-            PlayerJoints nowJoints;
-            Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
+            //PlayerJoints startJoints;
+            //PlayerJoints nowJoints;
+            //Get2Joints(p.PlayerJoints, out startJoints, out nowJoints);
 
-            if (nowJoints != null && startJoints != null)
-            {
-                JointData startHandRight = startJoints.HandRight;
-                JointData nowHandRight = nowJoints.HandRight;
-                JointData nowElbowRight = nowJoints.ElbowRight;
+            //if (nowJoints != null && startJoints != null)
+            //{
+            //    JointData startHandRight = startJoints.HandRight;
+            //    JointData nowHandRight = nowJoints.HandRight;
+            //    JointData nowElbowRight = nowJoints.ElbowRight;
 
-                if (startHandRight.TrackingState == JointTrackingState.Tracked &&
-                    nowHandRight.TrackingState == JointTrackingState.Tracked &&
-                    nowElbowRight.TrackingState == JointTrackingState.Tracked &&
-                    nowHandRight.Z > base.PlayerZDistance &&
-                    p.Z > base.PlayerZDistance &&
-                    nowHandRight.Y - nowElbowRight.Y>-0.1f &&
-                    Math.Abs(nowHandRight.X - startHandRight.X) > base.GestureGateDistance)
-                {
-                    base.GestureDistance = nowHandRight.X - startHandRight.X;
-                    p.PlayerJoints.Clear();
-                    return true;
+            //    if (startHandRight.TrackingState == JointTrackingState.Tracked &&
+            //        nowHandRight.TrackingState == JointTrackingState.Tracked &&
+            //        nowElbowRight.TrackingState == JointTrackingState.Tracked &&
+            //        nowHandRight.Z > base.PlayerZDistance &&
+            //        p.Z > base.PlayerZDistance &&
+            //        nowHandRight.Y - nowElbowRight.Y>-0.1f &&
+            //        Math.Abs(nowHandRight.X - startHandRight.X) > base.GestureGateDistance)
+            //    {
+            //        base.GestureDistance = nowHandRight.X - startHandRight.X;
+            //        p.PlayerJoints.Clear();
+            //        return true;
 
-                }
-            }
+            //    }
+            //}
 
-            return false;
+            //return false;
+            return base.GetstureDetected(p);
         }
     }
 }
